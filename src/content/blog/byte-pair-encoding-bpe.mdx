@@ -1,0 +1,188 @@
+---
+title: 'Byte-Pair Encoding (BPE)'
+description: 'Training a custom Byte-Pair Encoding tokenizer using the Hugging Face library.'
+pubDate: 'Feb 15 2024'
+heroImage: '/blog-placeholder-3.jpg'
+---
+import Bookmark from '../../components/Bookmark.astro'
+
+
+In this post we'll show how to train a custom Byte-Pair Encoding tokenizer on a dataset of 
+domain names using the Hugging Face library.
+
+## What is Byte-Pair Encoding?
+
+BPE is a hybrid tokenization technique used extensively in Natural Language Processing (NLP), 
+notably within large language models like:
+
+- Machine translation systems (Google Translate, etc.)
+- Text generation models (like GPT-3)
+
+It bridges the gap between two common approaches:
+
+- Word-level tokenization: Breaks text into individual words. For example, the string `"The cat sat on the mat"` might become `["The", "cat", "sat", "on", "the", "mat"]`. This is simple but prone to large vocabularies and out-of-vocabulary (OOV) words.
+- Character-level tokenization: Splits text into individual characters. The string above would then become `["T", "h", "e", " ", "c", "a"...]`. Handles OOV words well, but makes it harder for models to grasp word meanings.
+
+BPE seeks the best of both worlds, creating a vocabulary of subword units that balance 
+word-like structures with the ability to handle rare or unseen words.
+
+## How BPE Works
+
+BPE works by iteratively merging frequent pairs of characters or character sequences. 
+You can find a step-by-step example of how to implement the algorithm from scratch in the Hugging Face NLP course.
+
+<Bookmark name="Byte-Pair Encoding tokenization - Hugging Face NLP Course" 
+    url="https://huggingface.co/learn/nlp-course/en/chapter6/5" />
+
+Here's a quick summary of the process:
+
+1. **Initialization:** Your text is split into characters.
+2. **Pair Counting:** The algorithm scans through the text and calculates the frequency of all consecutive byte pairs (character pairs).
+3. **Pair Merging:** The most frequent byte pair is identified and merged into a new symbol (which is not currently in the vocabulary). The corpus is updated by replacing all instances of this frequently occurring pair with the new symbol.
+4. **Iteration:** Steps 2 & 3 are repeated multiple times until either:
+    - A predefined vocabulary size is reached.
+    - No more pairs can be merged meaningfully.
+
+## Benefits of BPE
+- **Manages Vocabulary Size:** Keeps the vocabulary to a reasonable size even when dealing with large text datasets.
+- **Handles Out-of-Vocabulary Words:** Because new words can be broken into previously seen subword units, BPE avoids the OOV problem in purely word-based tokenization.
+- **Context-Sensitivity:** Subword units retain some semantic meaning from the full words they're derived from, aiding in language modeling.
+
+## Training a BPE tokenizer on domain names
+We'll start by downloading a compressed text file (.txt.gz) containing a list of all registered .app domain names from a Hugging Face Datasets repository and save it locally.
+
+```python
+from datasets import DownloadManager
+
+dl_manager = DownloadManager()
+url = 'https://huggingface.co/datasets/jeremygf/domains-app-alpha/resolve/main/app.txt.gz'
+file_path = dl_manager.download(url)
+```
+
+This file simply contains one domain name per line. We can load it into a pandas dataframe.
+
+```python
+import pandas as pd
+
+df = pd.read_csv(file_path, header=None, names=['text'], compression='gzip')
+df['text'] = df['text'].astype(str)
+df.sample(5)
+```
+
+```plaintext
+mixrecord
+freediver
+prompttools
+briefsky
+ringa
+```
+
+A quick exploratory analysis shows that the distribution of the length of the domain names is left-skewed, meaning most documents are shorter, with the number of longer domain names gradually decreasing. There is a peak at a length of 8, and the whole range goes from 1 to 30.
+
+```python
+import seaborn as sns
+
+df['length'] = df['text'].str.len()
+
+g = sns.histplot(df['length'], bins=30)
+g.set_xlabel('Domain Length')
+```
+
+<img src="/images/posts/bpe-graph.png" />
+
+To manage the special tokens of our vocabulary in a practical and structured way, we can define the class `SpecialTokens`. For our purposes, we will use [PAD], [STA], [END] and [UNK]. Here's why these are important:
+
+- **Padding:** When working with textual data, you often need to make sequences the same length before feeding them into machine learning models. The [PAD] token is used to add extra elements to shorter sequences.
+- **Start/End:** The [STA] and [END] tokens help models understand the boundaries of sentences or text segments.
+- **Unknown Words:** Inevitably, you'll encounter words not present in your training vocabulary. The [UNK] token acts as a placeholder for these unknown words.
+
+```python
+class SpecialTokens:
+    PAD = "[PAD]"
+    START = "[STA]"
+    END = "[END]"
+    UNK = "[UNK]"
+    TOKENS = [PAD, START, END, UNK]
+    TUPLES = [(token, i) for i, token in enumerate(TOKENS)]
+```
+
+The 🤗 tokenizers library provides everything necessary to train a BPE tokenizer on a corpus of text. We first need to import the `BpeTrainer` class from the tokenizers library. This class is used to train a BPE tokenizer from scratch.
+
+The `BpeTrainer` is configured to incorporate the special tokens we defined in our `SpecialTokens` class. This ensures padding, start, end, and unknown tokens will be part of our tokenizer's vocabulary. We also set the target vocabulary size to 1000. The BPE algorithm will learn the most frequent byte pairs within your training data up to this limit.
+
+We also need to create an instance of the `Tokenizer` class and specify that it will use the BPE model. Note that at this point, the tokenizer is initialized but not yet trained.
+
+```python
+from tokenizers.trainers import BpeTrainer
+from tokenizers import Tokenizer
+from tokenizers.models import BPE
+
+VOCAB_SIZE = 1000
+
+trainer = BpeTrainer(
+    special_tokens=SpecialTokens.TOKENS,
+    vocab_size=VOCAB_SIZE
+)
+
+tokenizer = Tokenizer(BPE())
+```
+
+We are now ready to train our tokenizer. The `train_from_iterator` method of the Tokenizer object is used to train the BPE tokenizer on an iterator that yields textual data. We specify that the `BpeTrainer` instance (`trainer`) should be used to guide the training process.
+
+```python
+import gzip
+
+with gzip.open(file_path, 'rt') as f:
+    tokenizer.train_from_iterator(f, trainer=trainer)
+```
+
+Let's add important steps to enhance our tokenizer configuration by defining pre-tokenization and post-processing within our workflow.
+
+- The `Whitespace` pre-tokenizer splits text on whitespace characters (spaces, tabs, newlines). In our case, it is simply a convenient way of removing the newline characters.
+- The `TemplateProcessing` class is used to add structures around tokenized outputs. In our case, we use it wrap our sequences with the [STA] and [END] tokens.
+- We also turn on the padding functionality within our tokenizer.
+
+Our tokenizer now includes the trained vocabulary, rules for tokenization (including pre- and post-processing), and any settings like padding. We can save all this information as a json file with the `save` method. Saving your tokenizer allows you to load it easily in other scripts or at a later time without having to retrain it from scratch.
+
+```python
+from tokenizers.pre_tokenizers import Whitespace
+from tokenizers.processors import TemplateProcessing
+
+tokenizer.pre_tokenizer = Whitespace()
+tokenizer.post_processor = TemplateProcessing(
+    single="[STA] $A [END]",
+    special_tokens=SpecialTokens.TUPLES,
+)
+tokenizer.enable_padding(pad_id=tokenizer.token_to_id(SpecialTokens.PAD))
+tokenizer.save("tokenizer.json")
+```
+
+Loading our customized tokenizer into the `PreTrainedTokenizerFast` class will allow us to use it in batched mode on a datasets.Dataset.
+
+```python
+from transformers import PreTrainedTokenizerFast
+
+tokenizer = PreTrainedTokenizerFast(tokenizer_file='tokenizer.json')
+from datasets import Dataset
+
+ds = Dataset.from_pandas(df)
+```
+
+The tokenizer can be applied to the whole dataset using the map function.
+
+```python
+MAX_SEQ_LEN = 20
+
+ds = ds.map(lambda x: {
+    'ids': tokenizer.encode(
+        text=x['text'],
+        truncation=True,
+        max_length=MAX_SEQ_LEN,
+        padding='max_length'
+    )
+})
+```
+
+You can find a notebook with all the code in this post here:
+
+<Bookmark name="transformers/projects/domains/preprocess.ipynb at main · jgeofil/transformers" url="https://github.com/jgeofil/transformers/blob/main/projects/domains/preprocess.ipynb" />
