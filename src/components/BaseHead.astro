@@ -58,20 +58,33 @@ const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<!-- Google Tag Manager -->
-<script>
-  (function (w, d, s, l, i) {
-    w[l] = w[l] || [];
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != "dataLayer" ? "&l=" + l : "";
-    j.async = true;
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-PK6FM4ZJ");
+<!-- Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
+<script type="text/javascript" src="//www.freeprivacypolicy.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light","language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "page_refresh_confirmation_buttons":false,
+  "website_name":"ML Readme",
+  "website_privacy_policy_url":"https://mlread.me/privacy"});
+});
 </script>
+
+<!-- Google Tag Manager -->
+<script type="text/plain" data-cookie-consent="targeting">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PK6FM4ZJ');</script>
 <!-- End Google Tag Manager -->
+
+<noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/">Free Privacy Policy Generator</a></noscript>
+<!-- End Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
 
 <!-- Google AdSense -->
 <script
@@ -82,29 +95,5 @@ const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
 <script
   async
   src="https://fundingchoicesmessages.google.com/i/pub-3060810728368580?ers=1"
-></script><script>
-  (function () {
-    function signalGooglefcPresent() {
-      if (!window.frames["googlefcPresent"]) {
-        if (document.body) {
-          const iframe = document.createElement("iframe");
-          iframe.style =
-            "width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;";
-          iframe.style.display = "none";
-          iframe.name = "googlefcPresent";
-          document.body.appendChild(iframe);
-        } else {
-          setTimeout(signalGooglefcPresent, 0);
-        }
-      }
-    }
-    signalGooglefcPresent();
-  })();
-</script>
-
-<script
-  src="https://app.10xlaunch.ai/widget"
-  data-app-id="e10e5d60-ccf2-44d7-8b6f-4106b646140c"
-  async
-  defer
 ></script>
+
