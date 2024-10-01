@@ -4,6 +4,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import PostCard from '../components/PostCard.astro';
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const storyblokApi = useStoryblokApi();
+const { data } = await storyblokApi.get("cdn/stories/feature", {
+  version: "draft",
+});
+
+const story = data.story;
 ---
 
 <!doctype html>
@@ -16,6 +25,7 @@ import PostCard from '../components/PostCard.astro';
 		<main>
 			<PostCard />
 		</main>
+		<StoryblokComponent blok={story.content} />
 		<Footer />
 	</body>
 </html>
