@@ -19,7 +19,8 @@
     "@spotlightjs/astro": "^2.1.10",
     "astro": "^4.5.16",
     "astro-page-insight": "^0.8.7",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.13",
+    "vercel": "^37.6.3"
   },
   "devDependencies": {
     "postcss-import": "^16.1.0"
