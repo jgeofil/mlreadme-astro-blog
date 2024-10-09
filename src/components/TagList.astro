@@ -1,0 +1,12 @@
+---
+import { getCollection } from "astro:content";
+
+const tags = await getCollection("tag");
+
+---
+<ul>
+{tags.map((tag) => (
+    <li><a href={tag.slug}>{tag.data.name}</a>{tag.data.count}</li>
+
+))}
+</ul>

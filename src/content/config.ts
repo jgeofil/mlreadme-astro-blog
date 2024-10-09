@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z, getEntries, getCollection } from 'astro:content';
 
 const blog = defineCollection({
 	type: 'content',
@@ -10,7 +10,18 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
+		tags: z.array(reference('tag')).optional(),
 	}),
 });
 
-export const collections = { blog };
+const tag = defineCollection({
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1423872976.
+	type: 'content',
+	schema: z.object({
+		name: z.string(),
+		description: z.string(),
+		count: z.number().optional()
+	}),
+})
+
+export const collections = { blog, tag };
