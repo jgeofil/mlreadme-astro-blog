@@ -1,5 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 
+import { glob, file } from 'astro/loaders';
+
+import { parse as parseToml } from "toml";
+
 const blog = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
@@ -13,4 +17,13 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const tags = defineCollection({
+	loader: file("src/data/tags.toml", { parser: (text) => parseToml(text).tags }),
+	schema: z.object({
+		id: z.string(),
+		name: z.string(),
+		description: z.string()
+	})
+})
+
+export const collections = { blog, tags };
