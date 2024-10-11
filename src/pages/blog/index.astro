@@ -1,33 +1,13 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
 import PostCard from '../../components/PostCard.astro';
-
+import Default from '../../layouts/Default.astro';
+import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-
-		</main>
-		<Footer />
-	</body>
-</html>
+<Default>
+	<PostCard {...posts}></PostCard>
+</Default>
