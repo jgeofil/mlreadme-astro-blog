@@ -1,0 +1,19 @@
+[[tags]]
+id = "transformers"
+name = "Transformers"
+description = "Transformer neural network architecture"
+
+[[tags]]
+id = "nlp"
+name = "NLP"
+description = "Natural language processing."
+
+[[tags]]
+id = "tokenization"
+name = "Tokenization"
+description = "Processing of natural language text into atomic token."
+
+[[tag]]
+id = "hugginface"
+name = "Huggingface"
+description = "Machine learning library for large language models."
