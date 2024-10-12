@@ -1,19 +1,23 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 
 import { glob, file } from 'astro/loaders';
 
 import { parse as parseToml } from "toml";
 
 const blog = defineCollection({
-	type: 'content',
-	// Type-check frontmatter using a schema
+	loader: glob({ pattern: "**\/*.mdx", base: "./src/data/blog" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		// Transform string to Date object
+		cover: z.object(
+			{
+				src: z.string(),
+				alt: z.string()
+			}
+		),
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
+		tags: z.array(reference('tags'))
 	}),
 });
 

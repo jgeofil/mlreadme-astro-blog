@@ -1,5 +1,13 @@
 ---
-const {data} =Astro.props;
+
+The code snippet is extracting the `id`, `name`, and `description` properties from the `Astro.props` object using destructuring assignment.
+const {id, name, description} = Astro.props;
+
+const src = "/tags/"+id;
+
 ---
-<h1>{data.name}</h1>
-<p>{data.description}</p>
+
+<a href={src}>
+    <div class="py-2 mr-2">{name}</div>
+</a>
+

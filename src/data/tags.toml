@@ -13,7 +13,22 @@ id = "tokenization"
 name = "Tokenization"
 description = "Processing of natural language text into atomic token."
 
-[[tag]]
-id = "hugginface"
+[[tags]]
+id = "huggingface"
 name = "Huggingface"
 description = "Machine learning library for large language models."
+
+[[tags]]
+id = "decoder"
+name = "Transformer Decoder"
+description = "Decoder part of the transformer architecture."
+
+[[tags]]
+id = "gpt"
+name = "GPT"
+description = "Generative Pre-Trained Transformer"
+
+[[tags]]
+id = "generative"
+name = "Generative"
+description = "Generative machine learning model"
