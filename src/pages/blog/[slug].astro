@@ -1,0 +1,55 @@
+---
+export const prerender = true;
+import { getCollection, getEntries } from 'astro:content';
+import { render } from 'astro:content';
+import FormattedDate from '@components/FormattedDate.astro';
+import Default from '@layouts/Default.astro';
+import Tag from '@components/Tag.astro';
+import { getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+
+	
+}
+
+const post = Astro.props;
+
+const postTags = await Promise.all(post.data.tags.map((tag) => getEntry(tag)));
+
+console.log(postTags)
+const { Content } = await render(post);
+---
+<Default heroImage={post.data.cover}>
+
+	<div class="prose">
+		<div class="title">
+			<div class="date">
+				<FormattedDate date={post.data.pubDate} />
+				{
+					post.data.updatedDate && (
+						<div class="last-updated-on">
+							Last updated on <FormattedDate date={post.data.updatedDate} />
+						</div>
+					)
+				}
+			</div>
+			<h1>{post.data.title}</h1>
+			<div>
+				{
+					postTags.map((tag) => 
+						<Tag {...tag.data} />
+					)
+				}
+			</div>
+			<hr />
+		</div>
+		<Content />
+	</div>
+
+</Default>

@@ -2,10 +2,7 @@
 interface Props {
 	date: Date;
 }
-
 const { date } = Astro.props;
-
-console.log(date)
 ---
 
 <time datetime={date.toISOString()}>
