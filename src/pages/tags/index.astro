@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Tag from '../../components/Tag.astro';
+import Tag from '@components/base/Tag.astro';
 import Default from '../../layouts/Default.astro';
 
 const tags = (await getCollection('tags')).sort((a, b) => a.id.localeCompare(b.id))

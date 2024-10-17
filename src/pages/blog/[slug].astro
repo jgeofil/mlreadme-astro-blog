@@ -2,10 +2,11 @@
 export const prerender = true;
 import { getCollection, getEntries } from 'astro:content';
 import { render } from 'astro:content';
-import FormattedDate from '@components/FormattedDate.astro';
+import FormattedDate from '@components/base/FormattedDate.astro';
 import Default from '@layouts/Default.astro';
-import Tag from '@components/Tag.astro';
+import Tag from '@components/base/Tag.astro';
 import { getEntry } from 'astro:content';
+import PostMetadata from '@components/PostMetadata.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -20,9 +21,8 @@ export async function getStaticPaths() {
 
 const post = Astro.props;
 
-const postTags = await Promise.all(post.data.tags.map((tag) => getEntry(tag)));
 
-console.log(postTags)
+
 const { Content } = await render(post);
 ---
 <Default heroImage={post.data.cover}>
@@ -40,16 +40,12 @@ const { Content } = await render(post);
 				}
 			</div>
 			<h1>{post.data.title}</h1>
-			<div>
-				{
-					postTags.map((tag) => 
-						<Tag {...tag.data} />
-					)
-				}
-			</div>
+			<PostMetadata tags={post.data.tags}></PostMetadata>
 			<hr />
 		</div>
 		<Content />
 	</div>
 
 </Default>
+
+
