@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+import { getEntry } from 'astro:content';
+import Tag from './base/Tag.astro';
+import type { CollectionEntry} from 'astro:content';
+
+type Props = {
+    tags: Partial<CollectionEntry<'tags'>>[]
+}
+
+const {tags} = Astro.props
+
+const postTags = await Promise.all(tags.map((tag: CollectionEntry<'tags'>) => getEntry(tag)));
+
+---
+<div>
+    <div>
+        {
+            postTags.map((tag) => 
+                <Tag {...tag.data} />
+            )
+        }
+    </div>
+</div>
+
+
+---
