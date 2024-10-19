@@ -1,16 +1,25 @@
 ---
 interface Props {
 	date: Date;
+	dateUpdated?: Date;
 }
-const { date } = Astro.props;
----
-
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
+const formatDate = function (date: Date):string {
+	return date.toLocaleDateString('en-us', {
 			year: 'numeric',
 			month: 'short',
 			day: 'numeric',
-		})
+	})
+}
+
+const { date, dateUpdated } = Astro.props;
+
+---
+<div class="text-sm text-neutral">
+	<time datetime={date.toISOString()}><span class="font-extralight">Published: </span>{formatDate(date)}</time>
+	{
+		dateUpdated && (
+		<time datetime={dateUpdated.toISOString()}><span class="font-extralight">Updated: </span> <span class="text-info">{formatDate(dateUpdated)}</span></time>
+		)
 	}
-</time>
+</div>
+

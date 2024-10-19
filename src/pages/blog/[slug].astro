@@ -1,11 +1,8 @@
 ---
 export const prerender = true;
-import { getCollection, getEntries } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { render } from 'astro:content';
-import FormattedDate from '@components/base/FormattedDate.astro';
 import Default from '@layouts/Default.astro';
-import Tag from '@components/base/Tag.astro';
-import { getEntry } from 'astro:content';
 import PostMetadata from '@components/PostMetadata.astro';
 
 export async function getStaticPaths() {
@@ -28,21 +25,12 @@ const { Content } = await render(post);
 <Default heroImage={post.data.cover}>
 
 	<div class="prose">
-		<div class="title">
-			<div class="date">
-				<FormattedDate date={post.data.pubDate} />
-				{
-					post.data.updatedDate && (
-						<div class="last-updated-on">
-							Last updated on <FormattedDate date={post.data.updatedDate} />
-						</div>
-					)
-				}
-			</div>
-			<h1>{post.data.title}</h1>
-			<PostMetadata tags={post.data.tags}></PostMetadata>
-			<hr />
-		</div>
+		<h1>{post.data.title}</h1>
+		
+		<PostMetadata tags={post.data.tags} pubDate={post.data.pubDate} dateUpdated={post.data.updatedDate}></PostMetadata>
+
+		
+		
 		<Content />
 	</div>
 
