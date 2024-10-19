@@ -1,19 +1,26 @@
 ---
 export const prerender = true;
 import { getEntry } from 'astro:content';
-import Tag from './base/Tag.astro';
+import Tag from '@components/base/Tag.astro';
+import FormattedDate from '@components/base/FormattedDate.astro';
 import type { CollectionEntry} from 'astro:content';
 
 type Props = {
-    tags: Partial<CollectionEntry<'tags'>>[]
+    tags: Partial<CollectionEntry<'tags'>>[],
+    pubDate: Date,
+    dateUpdated?: Date
 }
 
-const {tags} = Astro.props
+const {tags, pubDate, dateUpdated} = Astro.props
 
 const postTags = await Promise.all(tags.map((tag: CollectionEntry<'tags'>) => getEntry(tag)));
 
 ---
 <div>
+    <div>
+        <FormattedDate date={pubDate} dateUpdated={dateUpdated} />
+
+    </div>
     <div>
         {
             postTags.map((tag) => 
@@ -22,6 +29,3 @@ const postTags = await Promise.all(tags.map((tag: CollectionEntry<'tags'>) => ge
         }
     </div>
 </div>
-
-
----
