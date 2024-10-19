@@ -10,11 +10,14 @@ export default defineConfig({
   adapter: vercel({
     edgeMiddleware: true,
   }),
+  root: './',
   output: 'server',
   server: { port: 3000, host: true },
   integrations: [
     mdx(),
     sitemap(),
-    tailwind()
+    tailwind({
+      applyBaseStyles: false,
+    })
   ]
 });
