@@ -1,0 +1,29 @@
+Config:
+  - changed-files:
+    - any-glob-to-any-file: ['*.mjs', '*.json']
+Source:
+  - changed-files:
+    - any-glob-to-any-file: src/**
+Public:
+  - changed-files:
+    - any-glob-to-any-file: public/**
+Components:
+  - changed-files:
+    - any-glob-to-any-file: src/components/**
+Layouts:
+  - changed-files:
+    - any-glob-to-any-file: src/layouts/**
+Pages:
+  - changed-files:
+    - any-glob-to-any-file: src/pages/**/*.astro
+Styles:
+  - changed-files:
+    - any-glob-to-any-file: src/styles/**
+Content:
+  - changed-files:
+    - any-glob-to-any-file: [src/data/**, src/content/*]
+Markdown:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.md'
+Release:
+  - base-branch: 'main'
