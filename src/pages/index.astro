@@ -4,19 +4,11 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import PostCard from '../components/PostCard.astro';
-
+import General from '@layouts/General.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<PostCard />
-		</main>
-		<Footer />
-	</body>
-</html>
+<General title={SITE_TITLE}, description={SITE_DESCRIPTION}>
+
+	<PostCard />
+
+</General>

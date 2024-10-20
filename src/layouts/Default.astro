@@ -23,7 +23,7 @@ const { title, description, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		<main class="ms:container mx-auto md:max-w-xl px-6">
             {heroImage && (<HeroImage {...heroImage}></HeroImage>)}
             <h1>{title}</h1>
             <i>{description}</i>

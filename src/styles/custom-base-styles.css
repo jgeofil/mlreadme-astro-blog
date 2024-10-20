@@ -1,21 +1,40 @@
 
 @layer base {
+    main {
+        @apply font-body
+    }
     h1 {
-        @apply text-3xl font-bold;
+        @apply text-4xl font-bold py-2;
     }
     h2 {
-        @apply text-xl font-bold;
+        @apply text-3xl font-bold py-2;
     }
     h3 {
-        @apply text-lg font-bold;
+        @apply text-2xl font-bold py-1;
     }
     h4 {
-        @apply text-lg font-semibold;
+        @apply text-lg font-semibold pt-1;
     }
     h5 {
-        @apply text-lg;
+        @apply text-lg pt-1;
+    }
+
+    h1,h2,h3,h4,h5 {
+        @apply font-display
     }
     
+    b, strong {
+        @apply font-bold
+    }
+
+    a {
+        @apply text-accent
+    }
+
+    blockquote {
+        @apply ml-6 border-l-8 border-l-slate-400 pl-2
+    }
+
     ul,ol{
         @apply ml-4
     }
@@ -25,5 +44,24 @@
     li li {
         @apply list-dash;
     }
-    
+    p {
+        @apply pb-2 
+    }
+    pre:has(code) {
+        @apply my-3 p-4 text-left rounded-lg
+    }
+    pre:has(code) span {
+        @apply font-mono text-xs 
+    }
+    code {
+        @apply font-mono text-sm decoration-solid bg-transparent decoration-stone-400
+    }
+
+    div.hero-image img {
+        @apply rounded-xl drop-shadow-xl
+    }
+
+    .gridImage {
+        @apply rounded-xl drop-shadow-xl
+    }
 }

@@ -9,7 +9,7 @@ export default {
 				"primary": '#0000ff',
 				"secondary": '#ff0000',
 				"tertiary": '#00ff00',
-				"accent": '#00ff00',
+				"accent": '#0000ff',
 				"neutral": '#808080',
 				"neutral-focus": '#353535',
 				"info": '#003e8e',
@@ -18,6 +18,12 @@ export default {
 				"error": '#ff0000',
 
 			},
+			fontFamily: {
+				mono: ['IBM Plex Mono'],
+				display: ['Exo'],
+				body: ['IBM Plex Sans'],
+			},
+
 			listStyleType: {
 				dash: '\"‒\"',
 				bull:'\"⁃\"',
@@ -25,8 +31,7 @@ export default {
 				dot:'\"⋅\"',
 				tilde:'\"~\"',
 				carret:'\">\"',
-			},
-			content: ({theme}) => theme('spacing')
+			}
 		},
 	},
 	plugins: [],
