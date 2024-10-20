@@ -16,12 +16,11 @@ const {tags, pubDate, dateUpdated} = Astro.props
 const postTags = await Promise.all(tags.map((tag: CollectionEntry<'tags'>) => getEntry(tag)));
 
 ---
-<div>
+<div class="pb-4 ">
     <div>
         <FormattedDate date={pubDate} dateUpdated={dateUpdated} />
-
     </div>
-    <div>
+    <div class="pt-2">
         {
             postTags.map((tag) => 
                 <Tag {...tag.data} />
