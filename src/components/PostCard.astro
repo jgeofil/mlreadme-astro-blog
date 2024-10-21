@@ -15,9 +15,9 @@ const posts = (await getCollection('blog')).sort(
 			<li class="first:col-span-2 list-none">
 				<a  href={`/blog/${post.id}/`}>
 					
-					<img class="gridImage" width={720} height={360} src={post.data.cover.src} alt="" />
-					<div class="text-center">
-						<p class:list={index==0?"text-3xl":"text-lg"}>{post.data.title}</p>
+					<img class="gridImage" src={post.data.cover.src} alt="" />
+					<div class="text-center p-4">
+						<p class:list={[index==0?"text-3xl":"text-lg", "font-semibold"]}>{post.data.title}</p>
 						<FormattedDate date={post.data.pubDate} />
 					</div>	
 					

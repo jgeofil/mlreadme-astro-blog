@@ -12,6 +12,9 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
+
+//Import Mixpanel SDK
+import mixpanel from "mixpanel-browser";
 ---
 
 <!-- Global Metadata -->
@@ -56,3 +59,11 @@ const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-W3Z34DZF');</script>
   <!-- End Google Tag Manager -->
+
+{mixpanel.init("e3c3d55f43870be10b31b39512659f6a", {
+  debug: true,
+  track_pageview: true,
+  persistence: "localStorage",
+})
+}
+   
