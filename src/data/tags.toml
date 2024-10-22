@@ -2,33 +2,40 @@
 id = "transformers"
 name = "Transformers"
 description = "Transformer neural network architecture"
+color = "red"
 
 [[tags]]
 id = "nlp"
 name = "NLP"
 description = "Natural language processing."
+color = "yellow"
 
 [[tags]]
 id = "tokenization"
 name = "Tokenization"
 description = "Processing of natural language text into atomic token."
+color = "blue"
 
 [[tags]]
 id = "huggingface"
 name = "Huggingface"
 description = "Machine learning library for large language models."
+color = "green"
 
 [[tags]]
 id = "decoder"
 name = "Transformer Decoder"
 description = "Decoder part of the transformer architecture."
+color = "orange"
 
 [[tags]]
 id = "gpt"
 name = "GPT"
 description = "Generative Pre-Trained Transformer"
+color = "pink"
 
 [[tags]]
 id = "generative"
 name = "Generative"
 description = "Generative machine learning model"
+color = "purple"

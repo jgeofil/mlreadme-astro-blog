@@ -1,13 +1,13 @@
 ---
-const {id, name, description} = Astro.props;
-
+export const prerender = true
+const {id, name, description, color} = Astro.props;
 const src = "/tags/"+id;
-
+const colorStyle = "tag-isolate text-xs font-medium inline-flex items-start rounded-md px-2.5 py-0.5 text-sm " + color;
+console.log(color)
 ---
 
-<a class="group inline-flex items-start rounded-sm mr-2 px-2 py-1 ring-1 
-    ring-gray-300 hover:bg-blue-100/" href={src}>
-    <div class="text-gray-800  group-hover:text-blue-700 text-xs font-medium">{name}</div>
-    <div hidden>{description}</div>
-</a>
 
+<a class="invisible-link" href={src}>
+    
+</a>
+<p class:list={[colorStyle]}>{name}</p>
