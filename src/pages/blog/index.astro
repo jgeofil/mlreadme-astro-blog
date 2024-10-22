@@ -8,6 +8,6 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<General>
+<General title="Blog" description='Blog post index'>
 	<PostCard {...posts}></PostCard>
 </General>
