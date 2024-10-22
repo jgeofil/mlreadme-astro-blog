@@ -9,7 +9,7 @@ const posts = (await getCollection('blog')).sort(
 
 
 <section class="pt-6">
-	<ul class="inline-grid grid-cols-2 grid-rows-8">
+	<ul class="inline-grid grid-cols-2 grid-rows-auto">
 		{
 			posts.map((post, index) => (
 			<li class="first:col-span-2 list-none">

@@ -1,19 +1,29 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+
 	theme: {
 		extend: {
 			colors:{
+
 				"primary": '#0000ff',
 				"secondary": '#ff0000',
 				"tertiary": '#00ff00',
 				"accent": '#0000ff',
-				"neutral": '#808080',
-				"neutral-focus": '#353535',
+				"neutral": {
+					"DEFAULT": '#202020',
+					"dark": '#202020',
+					"light": '#f9fafb',
+					"xlight": '#ffffff',
+					"focus": '#353535'
+				},
 				"info": '#003e8e',
 				"success": '#008ca8',
 				"warning": '#ff0000',
 				"error": '#ff0000',
+
+				
 
 			},
 			fontFamily: {
