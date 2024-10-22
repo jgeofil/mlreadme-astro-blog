@@ -1,10 +1,11 @@
 ---
-const {tagline="Section 1", center="c"} = Astro.props
+const { tagline = 'Section 1', center = 'c' } = Astro.props
 
-const text = `<span class="px-5 pr-6 ${center=="c"?"shrink-0":""}">${tagline}</span>`
+const text = `<span class="px-5 pr-6 ${center == 'c' ? 'shrink-0' : ''}">${tagline}</span>`
 ---
+
 <span class="flex items-center">
-    {(center=='r' || center=='c')?<span class="h-px flex-1 bg-black"></span>:""}
-    <span set:html={text}></span>
-    {(center=='l' || center=='c')?<span class="h-px flex-1 bg-black"></span>:""}
+	{center == 'r' || center == 'c' ? <span class="h-px flex-1 bg-black" /> : ''}
+	<span set:html={text} />
+	{center == 'l' || center == 'c' ? <span class="h-px flex-1 bg-black" /> : ''}
 </span>

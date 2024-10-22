@@ -1,48 +1,61 @@
 ---
 export const prerender = true
-const today = new Date();
+const today = new Date()
 
-const {links = [
-	{name: "About us", href:"/about"},
-	{name: "Contact us", href:"/contact"},
-	{name: "Privacy policy", href:"/privacy"},
-	{name: "Investor relations", href:"/invest", off: true},
-]} = Astro.props;
-
+const {
+	links = [
+		{ name: 'About us', href: '/about' },
+		{ name: 'Contact us', href: '/contact' },
+		{ name: 'Privacy policy', href: '/privacy' },
+		{ name: 'Investor relations', href: '/invest', off: true }
+	]
+} = Astro.props
 ---
 
-<footer class="flex mx-auto lg:max-w-5xl">
-	<div class="container px-6 py-12 mx-auto">
-		<div class="grid grid-cols-1 gap-4 text-center lg:grid-cols-3 lg:gap-6 grid-rows-auto">
-			<div class="float-left col-span-1 pb-2 border-2 h-34">
+<footer class="mx-auto flex lg:max-w-5xl">
+	<div class="container mx-auto px-6 py-12">
+		<div class="grid-rows-auto grid grid-cols-1 gap-4 text-center lg:grid-cols-3 lg:gap-6">
+			<div class="h-34 col-span-1 float-left border-2 pb-2">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
-					<input class="p-2 m-2 border border-blue-300 rounded-md shadow" type="email" required="true">
-					<button class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl">Subscribe</button>
+					<input
+						class="m-2 rounded-md border border-blue-300 p-2 shadow"
+						type="email"
+						required="true"
+					/>
+					<button
+						class="m-2 rounded-md border border-blue-300 fill-blue-200 p-2 shadow hover:border-blue-700 hover:drop-shadow-2xl"
+						>Subscribe</button
+					>
 				</form>
 			</div>
-			<div class="border-2 h-34 lg:col-span-2">
-				<div class="inline-grid grid-cols-2 my-2 divide-x-2">
+			<div class="h-34 border-2 lg:col-span-2">
+				<div class="my-2 inline-grid grid-cols-2 divide-x-2">
 					<div>
 						<div class="social-links"></div>
 					</div>
 					<div class="">
 						<ul class="text-left">
-							{links.map((link) => 
-								!link.off && <li class="list-none ">	
-									<a class="neutral-link" href={link.href}>{link.name}</a>
-								</li>
-							)}
+							{
+								links.map(
+									(link) =>
+										!link.off && (
+											<li class="list-none">
+												<a class="neutral-link" href={link.href}>
+													{link.name}
+												</a>
+											</li>
+										)
+								)
+							}
 						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="h-16 p-3 border-2 lg:col-span-3">
+			<div class="h-16 border-2 p-3 lg:col-span-3">
 				&copy; {today.getFullYear()} Jeremy Georges-Filteau. All rights reserved.
 			</div>
 		</div>
-		
-		
 	</div>
 </footer>
 <style>

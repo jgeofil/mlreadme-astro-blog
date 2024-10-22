@@ -1,39 +1,34 @@
 ---
-export const prerender = true;
-import { getCollection } from 'astro:content';
-import { render } from 'astro:content';
-import General from '@layouts/General.astro';
-import PostMetadata from '@components/PostMetadata.astro';
+export const prerender = true
+import { getCollection } from 'astro:content'
+import { render } from 'astro:content'
+import General from '@layouts/General.astro'
+import PostMetadata from '@components/PostMetadata.astro'
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	
+	const posts = await getCollection('blog')
+
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: post,
-	}));
-
-	
+		props: post
+	}))
 }
 
-const post = Astro.props;
+const post = Astro.props
 
-
-
-const { Content } = await render(post);
+const { Content } = await render(post)
 ---
-<General heroImage={post.data.cover}>
 
+<General heroImage={post.data.cover}>
 	<div class="prose">
 		<h1>{post.data.title}</h1>
-		
-		<PostMetadata tags={post.data.tags} pubDate={post.data.pubDate} dateUpdated={post.data.updatedDate}></PostMetadata>
 
-		
-		
+		<PostMetadata
+			tags={post.data.tags}
+			pubDate={post.data.pubDate}
+			dateUpdated={post.data.updatedDate}
+		/>
+
 		<Content />
 	</div>
-
 </General>
-
-
