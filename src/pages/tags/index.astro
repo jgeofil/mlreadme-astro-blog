@@ -1,17 +1,18 @@
 ---
+export const prerender = true
 import { getCollection } from 'astro:content';
 import Tag from '@components/base/Tag.astro';
-import Default from '../../layouts/Default.astro';
+import General from '../../layouts/General.astro';
 
 const tags = (await getCollection('tags')).sort((a, b) => a.id.localeCompare(b.id))
 
 ---
-<Default>
+<General title="Tags" description='Blog post tags.'>
 	<ul>{
 		(tags.map((tag) => 
 			<Tag {...tag}></Tag>
 		))
 		}
 	</ul>
-</Default>
+</General>
 				

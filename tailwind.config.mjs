@@ -6,7 +6,17 @@ export default {
 	theme: {
 		extend: {
 			colors:{
-
+				"red": colors.red,
+				"orange": colors.orange,
+				"yellow": colors.yellow,
+				"green": colors.green,
+				"teal": colors.teal,
+				"blue": colors.blue,
+				"indigo": colors.indigo,
+				"purple": colors.purple,
+				"pink": colors.pink,
+				"white": '#ffffff',
+				"black": '#000000',
 				"primary": '#0000ff',
 				"secondary": '#ff0000',
 				"tertiary": '#00ff00',

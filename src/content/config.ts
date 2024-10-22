@@ -27,7 +27,7 @@ const tags = defineCollection({
 		id: z.string(),
 		name: z.string(),
 		description: z.string(),
-		color: z.string().default('gray').transform((color) => "text-" + color + "-700 bg-" + color + "-100")
+		color: z.string().default('gray').transform((color) => color)
 	})
 })
 

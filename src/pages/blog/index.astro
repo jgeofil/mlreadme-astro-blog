@@ -1,6 +1,6 @@
 ---
 import PostCard from '../../components/PostCard.astro';
-import Default from '../../layouts/Default.astro';
+import General from '../../layouts/General.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -8,6 +8,6 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<Default>
+<General>
 	<PostCard {...posts}></PostCard>
-</Default>
+</General>
