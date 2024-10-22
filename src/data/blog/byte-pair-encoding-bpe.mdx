@@ -4,22 +4,22 @@ title: 'Byte-Pair Encoding (BPE)'
 description: 'Training a custom Byte-Pair Encoding tokenizer using the Hugging Face library.'
 pubDate: 'Feb 15 2024'
 updatedDate: 'Feb 20 2024'
-tags: 
-    - tokenization
-    - huggingface
+tags:
+  - tokenization
+  - huggingface
 cover:
-    src: '/blog-placeholder-3.jpg'
-    alt: 'placeholder'
+  src: '/blog-placeholder-3.jpg'
+  alt: 'placeholder'
 ---
+
 import Bookmark from '../../components/Bookmark.astro'
 
-
-In this post we'll show how to train a custom Byte-Pair Encoding tokenizer on a dataset of 
+In this post we'll show how to train a custom Byte-Pair Encoding tokenizer on a dataset of
 domain names using the Hugging Face library.
 
 ## What is Byte-Pair Encoding?
 
-BPE is a hybrid tokenization technique used extensively in Natural Language Processing (NLP), 
+BPE is a hybrid tokenization technique used extensively in Natural Language Processing (NLP),
 notably within large language models like:
 
 - Machine translation systems (Google Translate, etc.)
@@ -30,16 +30,18 @@ It bridges the gap between two common approaches:
 - Word-level tokenization: Breaks text into individual words. For example, the string `"The cat sat on the mat"` might become `["The", "cat", "sat", "on", "the", "mat"]`. This is simple but prone to large vocabularies and out-of-vocabulary (OOV) words.
 - Character-level tokenization: Splits text into individual characters. The string above would then become `["T", "h", "e", " ", "c", "a"...]`. Handles OOV words well, but makes it harder for models to grasp word meanings.
 
-BPE seeks the best of both worlds, creating a vocabulary of subword units that balance 
+BPE seeks the best of both worlds, creating a vocabulary of subword units that balance
 word-like structures with the ability to handle rare or unseen words.
 
 ## How BPE Works
 
-BPE works by iteratively merging frequent pairs of characters or character sequences. 
+BPE works by iteratively merging frequent pairs of characters or character sequences.
 You can find a step-by-step example of how to implement the algorithm from scratch in the Hugging Face NLP course.
 
-<Bookmark name="Byte-Pair Encoding tokenization - Hugging Face NLP Course" 
-    url="https://huggingface.co/learn/nlp-course/en/chapter6/5" />
+<Bookmark
+	name="Byte-Pair Encoding tokenization - Hugging Face NLP Course"
+	url="https://huggingface.co/learn/nlp-course/en/chapter6/5"
+/>
 
 Here's a quick summary of the process:
 
@@ -47,15 +49,17 @@ Here's a quick summary of the process:
 2. **Pair Counting:** The algorithm scans through the text and calculates the frequency of all consecutive byte pairs (character pairs).
 3. **Pair Merging:** The most frequent byte pair is identified and merged into a new symbol (which is not currently in the vocabulary). The corpus is updated by replacing all instances of this frequently occurring pair with the new symbol.
 4. **Iteration:** Steps 2 & 3 are repeated multiple times until either:
-    - A predefined vocabulary size is reached.
-    - No more pairs can be merged meaningfully.
+   - A predefined vocabulary size is reached.
+   - No more pairs can be merged meaningfully.
 
 ## Benefits of BPE
+
 - **Manages Vocabulary Size:** Keeps the vocabulary to a reasonable size even when dealing with large text datasets.
 - **Handles Out-of-Vocabulary Words:** Because new words can be broken into previously seen subword units, BPE avoids the OOV problem in purely word-based tokenization.
 - **Context-Sensitivity:** Subword units retain some semantic meaning from the full words they're derived from, aiding in language modeling.
 
 ## Training a BPE tokenizer on domain names
+
 We'll start by downloading a compressed text file (.txt.gz) containing a list of all registered .app domain names from a Hugging Face Datasets repository and save it locally.
 
 ```python
@@ -192,4 +196,7 @@ ds = ds.map(lambda x: {
 
 You can find a notebook with all the code in this post here:
 
-<Bookmark name="transformers/projects/domains/preprocess.ipynb at main · jgeofil/transformers" url="https://github.com/jgeofil/transformers/blob/main/projects/domains/preprocess.ipynb" />
+<Bookmark
+	name="transformers/projects/domains/preprocess.ipynb at main · jgeofil/transformers"
+	url="https://github.com/jgeofil/transformers/blob/main/projects/domains/preprocess.ipynb"
+/>

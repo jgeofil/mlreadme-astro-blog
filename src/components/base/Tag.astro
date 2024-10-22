@@ -1,16 +1,20 @@
 ---
 export const prerender = true
-const {id, name, description, color} = Astro.props;
-const src = "/tags/"+id;
+const { id, name, description, color } = Astro.props
+const src = '/tags/' + id
 ---
+
 <a class="invisible-link" href={src}>
-    <p class="tag-colored text-xs font-medium inline-flex items-start rounded-md px-2.5 py-0.5 text-sm">{name}</p>
+	<p
+		class="tag-colored inline-flex items-start rounded-md px-2.5 py-0.5 text-sm text-xs font-medium"
+	>
+		{name}
+	</p>
 </a>
 
-
-<style define:vars={{ textColor: color, backgroundColor: color}}>
-    .tag-colored {
-        color: hsl(from var(--textColor) h 100% 10%);
-        background-color: hsl(from var(--textColor) h 20% 90%);
-    }
+<style define:vars={{ textColor: color, backgroundColor: color }}>
+	.tag-colored {
+		color: hsl(from var(--textColor) h 100% 10%);
+		background-color: hsl(from var(--textColor) h 20% 90%);
+	}
 </style>

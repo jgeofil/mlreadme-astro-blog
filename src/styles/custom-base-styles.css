@@ -1,69 +1,72 @@
-
 @layer base {
-    main {
-        @apply font-body
-    }
-    h1 {
-        @apply text-4xl font-bold py-3;
-    }
-    h2 {
-        @apply text-3xl font-bold py-3;
-    }
-    h3 {
-        @apply text-2xl font-bold py-2;
-    }
-    h4 {
-        @apply text-lg font-semibold py-2;
-    }
-    h5 {
-        @apply text-lg pt-1;
-    }
+	main {
+		@apply font-body;
+	}
+	h1 {
+		@apply py-3 text-4xl font-bold;
+	}
+	h2 {
+		@apply py-3 text-3xl font-bold;
+	}
+	h3 {
+		@apply py-2 text-2xl font-bold;
+	}
+	h4 {
+		@apply py-2 text-lg font-semibold;
+	}
+	h5 {
+		@apply pt-1 text-lg;
+	}
 
-    h1,h2,h3,h4,h5 {
-        @apply font-display
-    }
-    
-    b, strong {
-        @apply font-bold
-    }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		@apply font-display;
+	}
 
-    a {
-        @apply text-accent
-    }
+	b,
+	strong {
+		@apply font-bold;
+	}
 
-    blockquote {
-        @apply ml-6 border-l-8 border-l-slate-400 pl-2
-    }
+	a {
+		@apply text-accent;
+	}
 
-    ul,ol{
-        @apply ml-4
-    }
-    li {
-        @apply ml-2 pb-1 pl-1 list-outside list-dash ;
-    }
-    li li {
-        @apply list-dash;
-    }
-    p {
-        @apply pb-2 
-    }
-    pre:has(code) {
-        @apply my-3 p-4 text-left rounded-lg
-    }
-    pre:has(code) span {
-        @apply font-mono text-xs 
-    }
-    code {
-        @apply font-mono text-sm decoration-solid bg-transparent decoration-stone-400
-    }
+	blockquote {
+		@apply ml-6 border-l-8 border-l-slate-400 pl-2;
+	}
 
-    div.hero-image img {
-        @apply rounded-xl drop-shadow-xl
-    }
+	ul,
+	ol {
+		@apply ml-4;
+	}
+	li {
+		@apply ml-2 list-outside list-dash pb-1 pl-1;
+	}
+	li li {
+		@apply list-dash;
+	}
+	p {
+		@apply pb-2;
+	}
+	pre:has(code) {
+		@apply my-3 rounded-lg p-4 text-left;
+	}
+	pre:has(code) span {
+		@apply font-mono text-xs;
+	}
+	code {
+		@apply bg-transparent font-mono text-sm decoration-stone-400 decoration-solid;
+	}
 
-    .gridImage {
-        @apply rounded-xl drop-shadow-xl
-    }
+	div.hero-image img {
+		@apply rounded-xl drop-shadow-xl;
+	}
 
-    
+	.gridImage {
+		@apply rounded-xl drop-shadow-xl;
+	}
 }

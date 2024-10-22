@@ -1,23 +1,17 @@
+@layer components {
+	.neutral-link {
+		color: theme('colors.neutral.dark');
+		&:hover {
+			color: theme('colors.accent');
+		}
+	}
 
-@layer components{
-    .neutral-link {
-        color: theme('colors.neutral.dark');
-        &:hover {
-            color: theme('colors.accent');
-            
-        }
-    
-    }
+	a.invisible-link {
+		color: unset !important;
+		display: islo;
+	}
 
-    a.invisible-link {
-        color: unset !important;
-        display: islo 
-    }
-
-    .tag-isolate {
-        isolation: isolate;
-    }
-    
+	.tag-isolate {
+		isolation: isolate;
+	}
 }
-
-

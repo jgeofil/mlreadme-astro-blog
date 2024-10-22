@@ -1,34 +1,35 @@
-import { defineCollection, reference, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content'
 
-import { glob, file } from 'astro/loaders';
+import { glob, file } from 'astro/loaders'
 
-import { parse as parseToml } from "toml";
+import { parse as parseToml } from 'toml'
 
 const blog = defineCollection({
-	loader: glob({ pattern: "**\/*.mdx", base: "./src/data/blog" }),
+	loader: glob({ pattern: '**/*.mdx', base: './src/data/blog' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		cover: z.object(
-			{
-				src: z.string(),
-				alt: z.string()
-			}
-		),
+		cover: z.object({
+			src: z.string(),
+			alt: z.string()
+		}),
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(reference('tags'))
-	}),
-});
+	})
+})
 
 const tags = defineCollection({
-	loader: file("src/data/tags.toml", { parser: (text) => parseToml(text).tags }),
+	loader: file('src/data/tags.toml', { parser: (text) => parseToml(text).tags }),
 	schema: z.object({
 		id: z.string(),
 		name: z.string(),
 		description: z.string(),
-		color: z.string().default('gray').transform((color) => color)
+		color: z
+			.string()
+			.default('gray')
+			.transform((color) => color)
 	})
 })
 
-export const collections = { blog, tags };
+export const collections = { blog, tags }

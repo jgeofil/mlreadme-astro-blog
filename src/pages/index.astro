@@ -1,16 +1,14 @@
 ---
 //export const prerender = true
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import PostCard from '../components/PostCard.astro';
-import General from '@layouts/General.astro';
-import HLine from '@components/base/HLine.astro';
-import Avatar from '@components/base/Avatar.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import PostCard from '../components/PostCard.astro'
+import General from '@layouts/General.astro'
+import HLine from '@components/base/HLine.astro'
+import Avatar from '@components/base/Avatar.astro'
 ---
 
-<General title={SITE_TITLE}, description={SITE_DESCRIPTION}>
-
+<General title={SITE_TITLE} , description={SITE_DESCRIPTION}>
 	<PostCard />
-	<HLine></HLine>
-	<Avatar></Avatar>
-
+	<HLine />
+	<Avatar />
 </General>

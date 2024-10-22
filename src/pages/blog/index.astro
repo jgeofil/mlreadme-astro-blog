@@ -1,13 +1,13 @@
 ---
-import PostCard from '../../components/PostCard.astro';
-import General from '../../layouts/General.astro';
-import { getCollection } from 'astro:content';
+import PostCard from '../../components/PostCard.astro'
+import General from '../../layouts/General.astro'
+import { getCollection } from 'astro:content'
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+)
 ---
 
-<General title="Blog" description='Blog post index'>
-	<PostCard {...posts}></PostCard>
+<General title="Blog" description="Blog post index">
+	<PostCard {...posts} />
 </General>
