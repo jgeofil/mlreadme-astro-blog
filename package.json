@@ -9,7 +9,8 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"check": "astro check && astro sync"
+		"check": "astro check && astro sync",
+		"prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
