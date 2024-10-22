@@ -1,8 +1,8 @@
 ---
 export const prerender = true;
 import { getCollection} from 'astro:content';
-import Default from '../../layouts/Default.astro';
-// 1. Generate a new path for every collection entry
+import General from '../../layouts/General.astro';
+
 export async function getStaticPaths() {
   const tags = await getCollection('tags');
   return tags.map(tag => ({
@@ -10,13 +10,13 @@ export async function getStaticPaths() {
     props: { tag },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
-const  {tag}  = Astro.props;
 
+const  {tag}  = Astro.props;
 ---
-<Default>
-  <h1 class="">{tag.data.name}</h1>
+<General title={"Tag | " + tag} description={'List of blog posts with the tag '+tag}>
+
+  <h1>{tag.data.name}</h1>
   <p>{tag.data.description}</p>
 
-</Default>
+</General>
 

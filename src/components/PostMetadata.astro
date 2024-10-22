@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+export const prerender = false;
 import { getEntry } from 'astro:content';
 import Tag from '@components/base/Tag.astro';
 import FormattedDate from '@components/base/FormattedDate.astro';
@@ -23,7 +23,7 @@ const postTags = await Promise.all(tags.map((tag: CollectionEntry<'tags'>) => ge
     <div class="pt-2">
         {
             postTags.map((tag) => 
-                <Tag {...tag.data} />
+                <Tag class={tag.data.color} {...tag.data} />
             )
         }
     </div>

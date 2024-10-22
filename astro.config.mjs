@@ -13,6 +13,9 @@ export default defineConfig({
   root: './',
   output: 'server',
   server: { port: 3000, host: true },
+  build: {
+
+  },
   integrations: [
     mdx(),
     sitemap(),

@@ -2,7 +2,7 @@
 export const prerender = true;
 import { getCollection } from 'astro:content';
 import { render } from 'astro:content';
-import Default from '@layouts/Default.astro';
+import General from '@layouts/General.astro';
 import PostMetadata from '@components/PostMetadata.astro';
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ const post = Astro.props;
 
 const { Content } = await render(post);
 ---
-<Default heroImage={post.data.cover}>
+<General heroImage={post.data.cover}>
 
 	<div class="prose">
 		<h1>{post.data.title}</h1>
@@ -34,6 +34,6 @@ const { Content } = await render(post);
 		<Content />
 	</div>
 
-</Default>
+</General>
 
 

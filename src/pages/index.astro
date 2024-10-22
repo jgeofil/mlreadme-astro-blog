@@ -3,10 +3,12 @@
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import PostCard from '../components/PostCard.astro';
 import General from '@layouts/General.astro';
+import HLine from '@components/base/HLine.astro';
 ---
 
 <General title={SITE_TITLE}, description={SITE_DESCRIPTION}>
 
 	<PostCard />
+	<HLine></HLine>
 
 </General>
