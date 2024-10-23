@@ -20,4 +20,4 @@
 @import 'tailwindcss/utilities';
 @import './custom-utilities.css';
 
-@config "../../tailwind.config.mjs";
+@config "../../tailwind.config.js";
