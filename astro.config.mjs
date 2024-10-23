@@ -20,5 +20,10 @@ export default defineConfig({
 		tailwind({
 			applyBaseStyles: false
 		})
-	]
+	],
+	image: {
+		domains: [
+			"https://cdn.simpleicons.org"
+		] 
+	},
 })

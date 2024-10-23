@@ -1,5 +1,6 @@
 ---
-export const prerender = true
+import Icon from "./base/Icon.astro"
+
 const today = new Date()
 
 const {
@@ -8,14 +9,19 @@ const {
 		{ name: 'Contact us', href: '/contact' },
 		{ name: 'Privacy policy', href: '/privacy' },
 		{ name: 'Investor relations', href: '/invest', off: true }
+	],
+	socials = [
+		{name: 'github', color: false},
+		{name: 'x', color: false},
+		{name: 'medium', color: false}
 	]
 } = Astro.props
 ---
 
-<footer class="mx-auto flex lg:max-w-5xl">
-	<div class="container mx-auto px-6 py-12">
-		<div class="grid-rows-auto grid grid-cols-1 gap-4 text-center lg:grid-cols-3 lg:gap-6">
-			<div class="h-34 col-span-1 float-left border-2 pb-2">
+<footer class="w-full h-full bg-neutral-100">
+	<div id="main-container" class="container mx-auto px-6 pt-12">
+		<div class="grid-rows-auto grid grid-cols-1 gap-4 text-center lg:grid-cols-4 lg:gap-6">
+			<div class="h-34 col-span-2 float-left  pb-2">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
 					<input
@@ -29,12 +35,16 @@ const {
 					>
 				</form>
 			</div>
-			<div class="h-34 border-2 lg:col-span-2">
-				<div class="my-2 inline-grid grid-cols-2 divide-x-2">
+			<div class="h-34  lg:col-span-2">
+				<div class="my-2 grid grid-cols-2 auto-cols-max width-full">
 					<div>
-						<div class="social-links"></div>
+						<div class="flex justify-evenly">
+							{	
+								socials.map((soc) => <Icon server:defer name={soc.name} color={soc.color}></Icon>)
+							}
+						</div>
 					</div>
-					<div class="">
+					<div>
 						<ul class="text-left">
 							{
 								links.map(
@@ -52,24 +62,10 @@ const {
 					</div>
 				</div>
 			</div>
-			<div class="h-16 border-2 p-3 lg:col-span-3">
+			<div class="h-16  p-3 lg:col-span-4">
 				&copy; {today.getFullYear()} Jeremy Georges-Filteau. All rights reserved.
 			</div>
 		</div>
 	</div>
 </footer>
-<style>
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>
+
