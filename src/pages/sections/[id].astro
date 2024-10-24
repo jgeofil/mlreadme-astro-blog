@@ -1,0 +1,20 @@
+---
+export const prerender = true
+import { getCollection } from 'astro:content'
+import General from '../../layouts/General.astro'
+
+export async function getStaticPaths() {
+	const sections = await getCollection('sections')
+	return sections.map((section) => ({
+		params: { id: section.id },
+		props: { section }
+	}))
+}
+
+const { section } = Astro.props
+---
+
+<General title={'Section | ' + section} description={'List of blog posts in the ' + section + ' secton.'}>
+	<h1>{section.data.name}</h1>
+	<p>{section.data.description}</p>
+</General>

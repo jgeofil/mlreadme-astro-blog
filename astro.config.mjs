@@ -3,6 +3,8 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import vercel from '@astrojs/vercel/serverless'
 import tailwind from '@astrojs/tailwind'
+import { getViteConfig } from 'astro/config';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,11 +21,12 @@ export default defineConfig({
 		sitemap(),
 		tailwind({
 			applyBaseStyles: false
-		})
+		}),
+		//spotlightjs()
 	],
 	image: {
 		domains: [
 			"https://cdn.simpleicons.org"
 		] 
-	},
+	}
 })
