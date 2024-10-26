@@ -19,12 +19,13 @@ const post = Astro.props
 const { Content } = await render(post)
 ---
 
-<General heroImage={post.data.cover}>
-	<div class="prose">
+<General title={post.data.title} description={post.data.description}}>
+	<div class="">
 		<h1>{post.data.title}</h1>
 
 		<PostMetadata
 			tags={post.data.tags}
+			sections={post.data.sections}
 			pubDate={post.data.pubDate}
 			dateUpdated={post.data.updatedDate}
 		/>

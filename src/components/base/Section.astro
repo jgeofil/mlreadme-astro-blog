@@ -1,9 +1,9 @@
 ---
-export const prerender = true
+
 const { id, name, description, parent=false} = Astro.props
 const src = '/sections/' + id
 ---
-<li class="inline-flex items-start">
+
 <a  href={src}>
 	<span>
 		{name}
@@ -12,4 +12,4 @@ const src = '/sections/' + id
 <div>
 	{description}
 </div>
-</li>
+
