@@ -8,5 +8,5 @@ const tags = (await getCollection('tags')).sort((a, b) => a.id.localeCompare(b.i
 ---
 
 <General title="Tags" description="Blog post tags.">
-	<ul>{tags.map((tag) => <Tag {...tag} />)}</ul>
+	{tags.map((tag) => <Tag {...tag.data} />)}
 </General>
