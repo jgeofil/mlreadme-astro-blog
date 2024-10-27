@@ -1,6 +1,6 @@
 ---
-import PostCard from '../../components/PostCard.astro'
-import General from '../../layouts/General.astro'
+import PostCard from '@components/utilities/PostCard.astro'
+import General from '@layouts/General.astro'
 import { getCollection } from 'astro:content'
 
 const posts = (await getCollection('blog')).sort(
@@ -9,5 +9,11 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <General title="Blog" description="Blog post index">
-	<PostCard {...posts} />
+<div class="grid grid-cols-2 gap-4 my-5">
+	{
+		posts.map((post)=> <PostCard {...post}></PostCard>)
+	}
+</div>	
+
+
 </General>

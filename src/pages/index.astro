@@ -1,11 +1,14 @@
 ---
-//export const prerender = true
+//export const prerender = false
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
-import PostCard from '../components/PostCard.astro'
+import PostCard from '@components/utilities/HeroCard.astro'
 import General from '@layouts/General.astro'
-import HLine from '@components/base/HLine.astro'
-import Avatar from '@components/base/Avatar.astro'
+//import { supabase } from 'src/data/db/supabase';
+
 ---
+
+
+
 
 <General title={SITE_TITLE} , description={SITE_DESCRIPTION}>
 	<PostCard />
