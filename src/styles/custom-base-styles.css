@@ -32,7 +32,7 @@
 	}
 
 	a {
-		@apply text-accent;
+		color: unset;
 	}
 
 	blockquote {
@@ -66,7 +66,4 @@
 		@apply rounded-xl drop-shadow-xl;
 	}
 
-	.gridImage {
-		@apply rounded-xl drop-shadow-xl;
-	}
 }

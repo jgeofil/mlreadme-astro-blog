@@ -1,5 +1,5 @@
 @layer components {
-	.neutral-link {
+	a {
 		color: theme('colors.neutral.dark');
 		&:hover {
 			color: theme('colors.accent');

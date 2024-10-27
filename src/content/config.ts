@@ -15,6 +15,8 @@ const blog = defineCollection({
 			alt: z.string()
 		}),
 		pubDate: z.coerce.date(),
+		author: z.string().optional(),
+		draft: z.boolean().optional(),
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(reference('tags')),
 		sections: reference('sections')
