@@ -1,0 +1,12 @@
+on: workflow_dispatch
+
+jobs:
+  manual-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: TODO to Issue
+        uses: alstr/todo-to-issue-action@v5
+      
+
+      
+            
