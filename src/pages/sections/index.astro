@@ -9,7 +9,9 @@ const sections = (await getCollection('sections')).sort((a, b) => a.id.localeCom
 ---
 
 <General title="Sections" description="Blog post sections.">
-	{
-		sections.map((section) => <Section {...section.data} />)
-	}
+
+		{
+			sections.map((section) => <Section  {...section.data} />)
+		}
+
 </General>

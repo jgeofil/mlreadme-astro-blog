@@ -8,12 +8,10 @@ const posts = (await getCollection('blog')).sort(
 )
 ---
 
-<General title="Blog" description="Blog post index">
+<General  title="Blog" description="Blog post index">
 <div class="grid grid-cols-2 gap-4 my-5">
 	{
 		posts.map((post)=> <PostCard {...post}></PostCard>)
 	}
 </div>	
-
-
 </General>

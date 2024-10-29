@@ -2,21 +2,33 @@
 export const prerender = true
 import { getEntry } from 'astro:content'
 import Tag from '@components/base/Tag.astro'
-import FormattedDate from '@components/base/FormattedDate.astro'
-import type { CollectionEntry } from 'astro:content'
+import { formatDate } from '@utils/format'
 import { getEntries } from 'astro:content'
 
-const { tags, sections, pubDate, dateUpdated } = Astro.props
+const { title, tags, sections, pubDate, dateUpdated, foreword } = Astro.props
 const postTags = await getEntries<'tags'>(tags)
 const sectionData = await getEntry('sections', sections.id)
 ---
 
-<div class="pb-4">
-	<div class="pb-2">{sectionData.data.name}</div>
-	<div>
-		<FormattedDate date={pubDate} dateUpdated={dateUpdated} />
+<div class="w-screen h-auto mx-auto mb-6 bg-gradient-to-r from-slate-200 to-lime-100">
+	<div class="px-6 py-8 mx-auto md:container md:max-w-5xl">
+		<h1>{title}</h1>
+		<div class="text-xs contents">
+			<div class="block">{formatDate(pubDate)}</div>{dateUpdated && <div class="block">{"Updated: "+formatDate(dateUpdated)}</div>}
+		</div>
+		<div class="block py-2">{sectionData.data.name}</div>
 	</div>
-	<div class="pt-2">
-		{postTags.map((tag) => <Tag class={tag.data.color} {...tag.data} />)}
+	
+</div>
+<div class="px-6 py-2 mx-auto my-6 md:container md:max-w-5xl">
+	<div class="flex flex-col">
+		<p class="text-lg font-light">{foreword}</p>
+	</div>
+	<div class="flex flex-col">
+		<div class="block">
+			{postTags.map((tag) => <Tag class={tag.data.color} {...tag.data} />)}
+		</div>
 	</div>
 </div>
+
+

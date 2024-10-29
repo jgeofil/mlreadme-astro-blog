@@ -1,13 +1,10 @@
 ---
-export const prerender = false
-import { getCollection, getEntries, getEntry } from 'astro:content'
+import {getEntries, getEntry } from 'astro:content'
 import {formatDate} from "@utils/format"
 import Avatar from '@components/base/Avatar.astro'
 import Tag from '@components/base/Tag.astro'
 
 const {id, data} = Astro.props;
-
-console.log(data)
 
 const postTags = await getEntries<'tags'>(data.tags)
 const section = await getEntry('sections', data.sections.id)
