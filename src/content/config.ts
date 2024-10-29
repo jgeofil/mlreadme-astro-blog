@@ -1,4 +1,4 @@
-import { defineCollection, reference, z } from 'astro:content'
+import { defineCollection, reference, z, type CollectionEntry } from 'astro:content'
 
 import { glob, file } from 'astro/loaders'
 
@@ -19,7 +19,8 @@ const blog = defineCollection({
 		draft: z.boolean().optional(),
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(reference('tags')),
-		sections: reference('sections')
+		sections: reference('sections'),
+		foreword: z.string(),
 	})
 })
 
@@ -36,7 +37,7 @@ const tags = defineCollection({
 	})
 })
 
-const parseNames = (sections) => {
+const parseNames = (sections: CollectionEntry<'sections'>[]) => {
 	return sections.map((section) => ({
 	  ...section, // Copy existing properties
 	  name: _.startCase(section.id.replace('-', ' ')) // Add the 'name' property

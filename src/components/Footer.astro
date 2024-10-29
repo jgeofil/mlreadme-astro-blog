@@ -3,6 +3,16 @@ import Icon from "./base/Icon.astro"
 
 const today = new Date()
 
+interface Link {
+	name: string,
+	href: string,
+	off?: boolean
+}
+interface Social {
+	name: string,
+	color: string
+}
+
 const {
 	links = [
 		{ name: 'About us', href: '/about' },
@@ -19,28 +29,28 @@ const {
 ---
 
 <footer class="w-full h-full bg-neutral-100">
-	<div id="main-container" class="container mx-auto px-6 pt-12">
-		<div class="grid-rows-auto grid grid-cols-1 gap-4 text-center lg:grid-cols-4 lg:gap-6">
-			<div class="h-34 col-span-2 float-left  pb-2">
+	<div id="main-container" class="container px-6 pt-12 mx-auto">
+		<div class="grid grid-cols-1 gap-4 text-center grid-rows-auto lg:grid-cols-4 lg:gap-6">
+			<div class="float-left col-span-2 pb-2 h-34">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
 					<input
-						class="m-2 rounded-md border border-blue-300 p-2 shadow"
+						class="p-2 m-2 border border-blue-300 rounded-md shadow"
 						type="email"
 						required="true"
 					/>
 					<button
-						class="m-2 rounded-md border border-blue-300 fill-blue-200 p-2 shadow hover:border-blue-700 hover:drop-shadow-2xl"
+						class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl"
 						>Subscribe</button
 					>
 				</form>
 			</div>
-			<div class="h-34  lg:col-span-2">
-				<div class="my-2 grid grid-cols-2 auto-cols-max width-full">
+			<div class="h-34 lg:col-span-2">
+				<div class="grid grid-cols-2 my-2 auto-cols-max width-full">
 					<div>
 						<div class="flex justify-evenly">
 							{	
-								socials.map((soc) => <Icon server:defer name={soc.name} color={soc.color}></Icon>)
+								socials.map((soc: Social) => <Icon server:defer name={soc.name} color={soc.color}></Icon>)
 							}
 						</div>
 					</div>
@@ -48,7 +58,7 @@ const {
 						<ul class="text-left">
 							{
 								links.map(
-									(link) =>
+									(link: Link) =>
 										!link.off && (
 											<li class="list-none">
 												<a class="neutral-link" href={link.href}>
@@ -62,7 +72,7 @@ const {
 					</div>
 				</div>
 			</div>
-			<div class="h-16  p-3 lg:col-span-4">
+			<div class="h-16 p-3 lg:col-span-4">
 				&copy; {today.getFullYear()} Jeremy Georges-Filteau. All rights reserved.
 			</div>
 		</div>
