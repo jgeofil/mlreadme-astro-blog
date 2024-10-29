@@ -1,5 +1,5 @@
 ---
-export const prerender = true
+export const prerender = false
 import { getEntry } from 'astro:content'
 import Tag from '@components/base/Tag.astro'
 import { formatDate } from '@utils/format'
@@ -10,7 +10,7 @@ const postTags = await getEntries<'tags'>(tags)
 const sectionData = await getEntry('sections', sections.id)
 ---
 
-<div class="w-screen h-auto mx-auto mb-6 bg-gradient-to-r from-slate-200 to-lime-100">
+<div class="w-screen h-auto mx-auto mb-6">
 	<div class="px-6 py-8 mx-auto md:container md:max-w-5xl">
 		<h1>{title}</h1>
 		<div class="text-xs contents">
@@ -31,4 +31,9 @@ const sectionData = await getEntry('sections', sections.id)
 	</div>
 </div>
 
-
+<style lang='scss'>
+	@use 'sass:math';
+	.radient {
+		background-image: url(https://grainy-gradients.vercel.app/noise.svg), radial-gradient(at left top, rgb(50, 100, math.random(255)), rgb(50, 200, math.random(255)), rgb(50, 150, math.random(255)))
+	}
+</style>

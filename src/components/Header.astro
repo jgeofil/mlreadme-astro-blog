@@ -1,6 +1,7 @@
 ---
 import HeaderLink from '@components/base/HeaderLink.astro'
 import { TYPEFACE } from '../consts'
+import Theme from './base/Theme.astro'
 ---
 <header>
 	<nav>
@@ -16,7 +17,8 @@ import { TYPEFACE } from '../consts'
 				<HeaderLink href="/tags">Tags</HeaderLink>
 				<HeaderLink href="/about">About</HeaderLink>
 			</div>
-	</div>
+			<Theme></Theme>
+		</div>
 
 	</nav>
 	<slot></slot>
