@@ -4,9 +4,10 @@ import { glob, file } from 'astro/loaders'
 
 import { parse as parseToml } from 'toml'
 import _ from 'lodash'
+import { blogLoader } from './loader'
 
 const blog = defineCollection({
-	loader: glob({ pattern: '**/*.mdx', base: './src/data/blog' }),
+	loader: blogLoader({ pattern: '**/*.mdx', base: './src/data/blog' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -16,7 +17,7 @@ const blog = defineCollection({
 		}),
 		pubDate: z.coerce.date(),
 		author: z.string().optional(),
-		draft: z.boolean().optional(),
+		draft: z.boolean().default(false),
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(reference('tags')),
 		sections: reference('sections'),
