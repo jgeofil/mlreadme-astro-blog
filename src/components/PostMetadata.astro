@@ -10,7 +10,7 @@ const postTags = await getEntries<'tags'>(tags)
 const sectionData = await getEntry('sections', sections.id)
 ---
 
-<div class="w-screen h-auto mx-auto mb-6">
+<div class="w-screen h-auto mx-auto mb-6 radient2">
 	<div class="px-6 py-8 mx-auto md:container md:max-w-5xl">
 		<h1>{title}</h1>
 		<div class="text-xs contents">
@@ -35,5 +35,10 @@ const sectionData = await getEntry('sections', sections.id)
 	@use 'sass:math';
 	.radient {
 		background-image: url(https://grainy-gradients.vercel.app/noise.svg), radial-gradient(at left top, rgb(50, 100, math.random(255)), rgb(50, 200, math.random(255)), rgb(50, 150, math.random(255)))
+	}
+	.radient2 {
+		/* Gradient in Hex */
+		background-image: radial-gradient(at right bottom, #013668 0%, 30%, #789a8a 60%, 80%, #ffffff 100%);
+
 	}
 </style>
