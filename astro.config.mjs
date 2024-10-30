@@ -12,7 +12,7 @@ export default defineConfig({
 	}),
 	root: './',
 	output: 'server',
-	server: { port: 3000, host: true },
+	server: { port: import.meta.env.PORT, host: '0.0.0.0' },
 	build: {},
 	integrations: [
 		mdx(),
