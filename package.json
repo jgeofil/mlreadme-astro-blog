@@ -1,43 +1,47 @@
 {
-	"name": "@example/blog",
-	"type": "module",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro build && astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"check": "astro check && astro sync",
-		"prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
-	},
-	"dependencies": {
-		"@astrojs/check": "^0.9.4",
-		"@astrojs/mdx": "^4.0.0-beta.2",
-		"@astrojs/rss": "^4.0.8",
-		"@astrojs/sitemap": "^3.2.0",
-		"@astrojs/tailwind": "^5.1.2",
-		"@astrojs/ts-plugin": "^1.10.2",
-		"@astrojs/vercel": "^8.0.0-beta.2",
-		"@spotlightjs/spotlight": "^2.5.0",
-		"@supabase/supabase-js": "^2.45.6",
-		"astro": "^5.0.0-beta.5",
-		"autoprefixer": "^10.4.20",
-		"lodash": "^4.17.21",
-		"mixpanel-browser": "^2.55.1",
-		"prettier": "^3.3.3",
-		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.6.8",
-		"sass": "^1.80.4",
-		"tailwindcss": "^3.4.13",
-		"toml": "^3.0.0",
-		"typescript": "^5.6.3",
-		"vercel": "^32.3.0"
-	},
-	"devDependencies": {
-		"@types/lodash": "^4.17.12",
-		"@types/mixpanel-browser": "^2.50.1",
-		"postcss-import": "^16.1.0"
-	}
+  "name": "@example/blog",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro build && astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check && astro sync",
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.0.0-beta.2",
+    "@astrojs/rss": "^4.0.8",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/tailwind": "^5.1.2",
+    "@astrojs/ts-plugin": "^1.10.2",
+    "@astrojs/vercel": "^8.0.0-beta.2",
+    "@spotlightjs/spotlight": "^2.5.0",
+    "@supabase/supabase-js": "^2.45.6",
+    "astro": "^5.0.0-beta.5",
+    "autoprefixer": "^10.4.20",
+    "lodash": "^4.17.21",
+    "mixpanel-browser": "^2.55.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "sass": "^1.80.4",
+    "tailwindcss": "^3.4.13",
+    "toml": "^3.0.0",
+    "vercel": "^32.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.2",
+    "@types/lodash": "^4.17.12",
+    "@types/mixpanel-browser": "^2.50.1",
+    "@types/node": "^22.8.6",
+    "checkly": "latest",
+    "postcss-import": "^16.1.0",
+    "ts-node": "latest",
+    "typescript": "latest"
+  }
 }

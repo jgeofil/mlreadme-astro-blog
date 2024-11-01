@@ -11,6 +11,7 @@
 			"@utils/*": ["src/utils/*"]
 		},
 		"allowJs": true,
+		"verbatimModuleSyntax": false
 	},
 	"plugins": [
 		{
