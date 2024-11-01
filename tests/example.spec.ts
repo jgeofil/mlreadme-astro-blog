@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 const TARGET_URL = process.env.TARGET_URL || 'http://localhost:3000';
+
 test('test', async ({ page }) => {
   await page.goto(TARGET_URL);
   await expect(page.getByRole('link', { name: 'ML Readme' })).toBeVisible();
