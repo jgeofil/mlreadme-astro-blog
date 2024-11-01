@@ -29,4 +29,8 @@ pnpm-debug.log*
 
 .vercel
 
-hyperui/** 
+hyperui/**
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
