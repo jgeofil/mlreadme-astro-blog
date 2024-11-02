@@ -22,6 +22,7 @@
     "@astrojs/vercel": "^8.0.0-beta.2",
     "@spotlightjs/spotlight": "^2.5.0",
     "@supabase/supabase-js": "^2.45.6",
+    "@vercel/speed-insights": "^1.0.14",
     "astro": "^5.0.0-beta.5",
     "autoprefixer": "^10.4.20",
     "lodash": "^4.17.21",
