@@ -1,6 +1,5 @@
 import { defineConfig} from 'checkly'
 import { Frequency, RetryStrategyBuilder  } from 'checkly/constructs'
-import { PROJECT_NAME, REPO_URL } from 'src/consts.ts'
 
 export default defineConfig({
  projectName: 'mlreadme-astro-blog',
