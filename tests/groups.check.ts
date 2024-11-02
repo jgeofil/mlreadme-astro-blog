@@ -8,6 +8,7 @@ const BASE_URL = 'mlread.me'
 ​
 export const groupPreview = new CheckGroup('group-browser-dev', {
   name: 'preview-group',
+  locations: ['ca-central-1'],
   tags: ['preview', 'website'],
   // You can use group-level environment vars to point each group's checks to the right target URL
   environmentVariables: [{ key: 'TARGET_URL', value: 'https://development-mlreadme.vercel.app' }],
@@ -17,6 +18,7 @@ export const groupPreview = new CheckGroup('group-browser-dev', {
 
 export const groupProd = new CheckGroup('group-browser-prod', {
   name: 'production-group',
+  locations: ['us-east-1', 'eu-west-1', 'ca-central-1', 'ap-east-1'],
   tags: ['production', 'website'],
   // You can use group-level environment vars to point each group's checks to the right target URL
   environmentVariables: [ { key: 'TARGET_URL', value: `https://${BASE_URL}` }],
