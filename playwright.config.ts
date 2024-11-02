@@ -31,7 +31,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     extraHTTPHeaders: {
-      'x-vercel-protection-bypass': import.meta.env?import.meta.env.VERCEL_AUTOMATION_BYPASS_SECRET:process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+      'x-vercel-protection-bypass': process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
       'x-vercel-set-bypass-cookie': 'true'
     }
   },

@@ -11,7 +11,7 @@ export const groupPreview = new CheckGroup('group-browser-dev', {
   locations: ['us-east-1', 'eu-west-1'],
   tags: ['mac', 'preview'],
   // You can use group-level environment vars to point each group's checks to the right target URL
-  environmentVariables: [ { key: 'TARGET_URL', value: 'http://localhost:3000' }],
+  environmentVariables: [{ key: 'TARGET_URL', value: 'https://mlreadme-astro-blog.vercel.app' }],
   apiCheckDefaults: {},
   concurrency: 100,
   //alertChannels

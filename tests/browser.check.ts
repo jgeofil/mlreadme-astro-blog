@@ -11,7 +11,7 @@ const specFiles = files.filter((filename) => {
 ​
 // This is the list of environments and their matching group; it can be extended easily
 const environments = [
-	//{ name: 'preview', group: groupPreview },
+	{ name: 'preview', group: groupPreview },
 	{ name: 'production', group: groupProd },
 ];
 ​
