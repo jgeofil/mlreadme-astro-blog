@@ -15,10 +15,19 @@ export default defineConfig({
    tags: ['website'],
    checkMatch: '**/tests/**/*.check.ts',
    ignoreDirectoriesMatch: [],
+
    browserChecks: {
      frequency: Frequency.EVERY_10M,
      testMatch: '**/tests/**/*.spec.ts',
    },
+
+   playwrightConfig: {
+     use: {
+       extraHTTPHeaders: {
+         'x-vercel-set-bypass-cookie': 'true',
+       },
+     },
+   }
  },
  cli: {
    runLocation: 'eu-west-1',
