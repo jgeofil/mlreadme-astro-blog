@@ -10,7 +10,7 @@ export const groupPreview = new CheckGroup('group-browser-dev', {
   name: 'preview-group',
   tags: ['preview', 'website'],
   // You can use group-level environment vars to point each group's checks to the right target URL
-  environmentVariables: [{ key: 'TARGET_URL', value: 'https://mlreadme.vercel.app' }],
+  environmentVariables: [{ key: 'TARGET_URL', value: 'https://development-mlreadme.vercel.app' }],
   concurrency: 100,
   //alertChannels
 })
