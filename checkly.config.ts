@@ -12,7 +12,7 @@ export default defineConfig({
    runtimeId: '2022.10',
    frequency: Frequency.EVERY_5M,
    locations: ['us-east-1', 'eu-west-1'],
-   tags: ['website'],
+   tags: ['website', 'api'],
    checkMatch: '**/tests/**/*.check.ts',
    ignoreDirectoriesMatch: [],
 
