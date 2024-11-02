@@ -11,8 +11,8 @@ const specFiles = files.filter((filename) => {
 ​
 // This is the list of environments and their matching group; it can be extended easily
 const environments = [
-	{ name: 'preview', group: groupPreview },
-	{ name: 'production', group: groupProd },
+	{ name: 'preview-env', group: groupPreview },
+	{ name: 'production-env', group: groupProd },
 ];
 ​
 // Here we create a new browser check for each environment x testspec combination

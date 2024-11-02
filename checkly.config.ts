@@ -1,5 +1,5 @@
-import { defineConfig } from 'checkly'
-import { Frequency } from 'checkly/constructs'
+import { defineConfig} from 'checkly'
+import { Frequency, RetryStrategyBuilder  } from 'checkly/constructs'
 import { PROJECT_NAME, REPO_URL } from 'src/consts.ts'
 
 export default defineConfig({
@@ -10,11 +10,15 @@ export default defineConfig({
    activated: true,
    muted: false,
    runtimeId: '2022.10',
-   frequency: Frequency.EVERY_5M,
-   locations: ['us-east-1', 'eu-west-1'],
-   tags: ['website', 'api'],
+   frequency: Frequency.EVERY_1H,
+   locations: ['us-east-1', 'eu-west-1', 'ca-central-1', 'ap-east-1'],
    checkMatch: '**/tests/**/*.check.ts',
    ignoreDirectoriesMatch: [],
+   retryStrategy: RetryStrategyBuilder.linearStrategy({
+        baseBackoffSeconds: 30,
+        maxRetries: 2,
+        sameRegion: false,
+    }),
 
    browserChecks: {
      frequency: Frequency.EVERY_2H,
