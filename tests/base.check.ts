@@ -16,7 +16,7 @@ new ApiCheck('base-api-check', {
   }
 })
 
-new ApiCheck('base-api-check', {
+new ApiCheck('base-www-api-check', {
   name: 'base-www',
   activated: true,
   request: {
