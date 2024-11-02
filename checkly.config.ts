@@ -17,15 +17,16 @@ export default defineConfig({
    ignoreDirectoriesMatch: [],
 
    browserChecks: {
-     frequency: Frequency.EVERY_10M,
+     frequency: Frequency.EVERY_2H,
      testMatch: '**/tests/**/*.spec.ts',
    },
 
    playwrightConfig: {
      use: {
-       extraHTTPHeaders: {
-         'x-vercel-set-bypass-cookie': 'true',
-       },
+        extraHTTPHeaders: {
+            'x-vercel-protection-bypass': process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+            'x-vercel-set-bypass-cookie': 'true'
+        }
      },
    }
  },

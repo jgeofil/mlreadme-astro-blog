@@ -15,3 +15,15 @@ new ApiCheck('base-api-check', {
     ],
   }
 })
+
+new ApiCheck('base-api-check', {
+  name: 'base-www',
+  activated: true,
+  request: {
+    method: 'GET',
+    url: 'https://wwww.mlread.me',
+    assertions: [
+      AssertionBuilder.statusCode().equals(200)
+    ],
+  }
+})
