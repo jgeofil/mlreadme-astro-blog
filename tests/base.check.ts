@@ -21,7 +21,7 @@ new ApiCheck('base-www-api-check', {
   activated: true,
   request: {
     method: 'GET',
-    url: 'https://wwww.mlread.me',
+    url: 'https://www.mlread.me',
     assertions: [
       AssertionBuilder.statusCode().equals(200)
     ],
