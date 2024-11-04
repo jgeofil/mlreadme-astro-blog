@@ -1,11 +1,23 @@
 ---
+export const prerender = true;
+import fetchMeta from 'fetch-meta-tags';
+
 interface Props {
-	name: string;
 	url: string;
-	description: string;
 }
 
-const { name, url, description } = Astro.props;
+const {url} = Astro.props;
+const result = await fetchMeta(url);
 ---
 
-<a href={url}>{name}</a>
+<a href={result.url} class="my-4 not-prose text-inherit flex gap-10 border-[1px] px-4 py-4 border-black/20 rounded-lg">
+    <img class="hidden object-cover rounded-lg md:block w-36 h-36" src={result.image ?? result.icon} alt={result.image}/>
+    <div class="flex flex-col overflow-hidden prose gap-y-2">
+        <strong class="">{result.title}</strong>
+        <p class="h-10 overflow-hidden text-sm text-ellipsis">{result.description}</p>
+        <div class="flex items-center gap-2">
+            <img class="object-cover w-4 h-4 rounded" src={result.icon} alt={result.icon}/>
+            <div class="text-sm underline">{result.url}</div>
+        </div>
+    </div>
+</a>
