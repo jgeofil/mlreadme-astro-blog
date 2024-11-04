@@ -26,6 +26,11 @@ const posts = (await getCollection('blog')).sort(
 
 
 <style>
+	section {
+		max-width: 1024px;
+		margin-top: 2em;
+		padding: 0 1rem;
+	}
 	
 	ul {
 		display: flex;
@@ -85,6 +90,7 @@ const posts = (await getCollection('blog')).sort(
 			text-align: center;
 		}
 		li:first-child {
+			margin-top: 2em;
 			margin-bottom: 0;
 		}
 		li:first-child .title {
