@@ -9,7 +9,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://mlread.me',
   adapter: vercel(),
-  output: 'server',
+  output: 'static',
   server: { port: 3000, host: true },
   integrations: [
     mdx(),
