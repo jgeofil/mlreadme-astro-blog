@@ -1,7 +1,7 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
+
 import "../styles/global.css";
+
 
 interface Props {
   title: string;
@@ -9,9 +9,10 @@ interface Props {
   image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
+const { title, description, image = "/blog-placeholder-2.jpg"} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -62,9 +63,7 @@ const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js"></script> <!-- End cookieyes banner -->
 
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-W3Z34DZF');</script>
+<script define:vars={{TAGGIN_SERVER}}>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=`${TAGGIN_SERVER}/gtm.js?id=`+i+dl;f.parentNode.insertBefore(j,f);})(window, document, 'script', 'dataLayer', 'GTM-W3Z34DZF');
+</script>
   <!-- End Google Tag Manager -->
