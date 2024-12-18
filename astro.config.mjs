@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 import tailwind from '@astrojs/tailwind';
 
@@ -9,7 +9,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://mlread.me',
   adapter: vercel(),
-  output: 'hybrid',
+  output: 'server',
   server: { port: 3000, host: true },
   integrations: [
     mdx(),
