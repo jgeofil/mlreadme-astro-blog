@@ -1,12 +1,17 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE_SHORT } from '../consts';
+const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 ---
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3Z34DZF"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<!-- End Google Tag Manager (noscript) -->
+<noscript>
+  <iframe 
+    src={`${TAGGIN_SERVER}/ns.html?id=GTM-W3Z34DZF`}
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden"
+  ></iframe>
+</noscript>
 
 <header>
 	<nav>
