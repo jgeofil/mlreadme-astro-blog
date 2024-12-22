@@ -242,7 +242,6 @@ We are now ready to start training an instance of our Generative Transformer Dec
 
 ### Masked loss and metrics
 
-Since the target sequences have various lengths and are padded, it is important to apply a padding mask when calculating the loss and metrics. Masking ensures padding tokens don't corrupt our calculations.
 
 ```python
 def masked_loss(label, pred):

@@ -2,8 +2,4 @@
     "prettier.useTabs": true,
     "editor.indentSize": "tabSize",
     "prettier.tabWidth": 4,
-    "docwriter.style": "Doxygen",
-    
-    "css.lint.unknownAtRules": "ignore"
-    
 }
