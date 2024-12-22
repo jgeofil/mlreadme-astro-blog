@@ -1,3 +1,185 @@
-body {
-    
+@layer base {
+	main {
+		@apply font-body;
+	}
+	h1 {
+		@apply py-3 text-4xl font-bold;
+	}
+	h2 {
+		@apply py-3 text-3xl font-bold;
+	}
+	h3 {
+		@apply py-2 text-2xl font-bold;
+	}
+	h4 {
+		@apply py-2 text-lg font-semibold;
+	}
+	h5 {
+		@apply pt-1 text-lg;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		@apply font-display;
+	}
+
+	b,
+	strong {
+		@apply font-bold;
+	}
+
+	a {
+		color: unset;
+	}
+
+	blockquote {
+		@apply ml-6 border-l-8 border-l-slate-400 pl-2;
+	}
+
+	ul,
+	ol {
+		@apply ml-4;
+	}
+	li {
+		@apply ml-2 list-outside list-dash pb-1 pl-1;
+	}
+	li li {
+		@apply list-dash;
+	}
+	p {
+		@apply pb-2;
+	}
+	pre:has(code) {
+		@apply my-3 rounded-lg p-4 text-left;
+	}
+	pre:has(code) span {
+		@apply font-mono text-xs;
+	}
+	code {
+		@apply bg-transparent font-mono text-sm decoration-stone-400 decoration-solid;
+	}
+
+	div.hero-image img {
+		@apply rounded-xl drop-shadow-xl;
+	}
+
+	/* Color Theme Swatches in Hex */
+.Pieblogs-1-hex { color: #132761; }
+.Pieblogs-2-hex { color: #134BF2; }
+.Pieblogs-3-hex { color: #94ECF5; }
+.Pieblogs-4-hex { color: #EAF205; }
+.Pieblogs-5-hex { color: #F2F2F2; }
+
+/* Color Theme Swatches in RGBA */
+.Pieblogs-1-rgba { color: rgba(19, 39, 97, 1); }
+.Pieblogs-2-rgba { color: rgba(19, 75, 242, 1); }
+.Pieblogs-3-rgba { color: rgba(148, 236, 245, 1); }
+.Pieblogs-4-rgba { color: rgba(234, 242, 5, 1); }
+.Pieblogs-5-rgba { color: rgba(242, 242, 242, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Pieblogs-1-hsla { color: hsla(224, 67, 22, 1); }
+.Pieblogs-2-hsla { color: hsla(224, 89, 51, 1); }
+.Pieblogs-3-hsla { color: hsla(185, 82, 77, 1); }
+.Pieblogs-4-hsla { color: hsla(62, 95, 48, 1); }
+.Pieblogs-5-hsla { color: hsla(0, 0, 94, 1); }
+
+
+/* Color Theme Swatches in Hex */
+.color-theme_chrome_KaWRtsa5gQ-1-hex { color: #E9F2ED; }
+.color-theme_chrome_KaWRtsa5gQ-2-hex { color: #41D983; }
+.color-theme_chrome_KaWRtsa5gQ-3-hex { color: #0F698C; }
+.color-theme_chrome_KaWRtsa5gQ-4-hex { color: #104025; }
+.color-theme_chrome_KaWRtsa5gQ-5-hex { color: #8FA699; }
+
+/* Color Theme Swatches in RGBA */
+.color-theme_chrome_KaWRtsa5gQ-1-rgba { color: rgba(232, 242, 237, 1); }
+.color-theme_chrome_KaWRtsa5gQ-2-rgba { color: rgba(65, 216, 131, 1); }
+.color-theme_chrome_KaWRtsa5gQ-3-rgba { color: rgba(14, 105, 140, 1); }
+.color-theme_chrome_KaWRtsa5gQ-4-rgba { color: rgba(16, 63, 36, 1); }
+.color-theme_chrome_KaWRtsa5gQ-5-rgba { color: rgba(142, 165, 153, 1); }
+
+/* Color Theme Swatches in HSLA */
+.color-theme_chrome_KaWRtsa5gQ-1-hsla { color: hsla(146, 25, 93, 1); }
+.color-theme_chrome_KaWRtsa5gQ-2-hsla { color: hsla(146, 66, 55, 1); }
+.color-theme_chrome_KaWRtsa5gQ-3-hsla { color: hsla(196, 80, 30, 1); }
+.color-theme_chrome_KaWRtsa5gQ-4-hsla { color: hsla(146, 59, 15, 1); }
+.color-theme_chrome_KaWRtsa5gQ-5-hsla { color: hsla(146, 11, 60, 1); }
+
+
+/* Color Theme Swatches in Hex */
+.startup-NAPKIN-Contrast-1-hex { color: #012C40; }
+.startup-NAPKIN-Contrast-2-hex { color: #00708C; }
+.startup-NAPKIN-Contrast-3-hex { color: #DAEBF2; }
+.startup-NAPKIN-Contrast-4-hex { color: #FF404C; }
+.startup-NAPKIN-Contrast-5-hex { color: #1CA5B8; }
+
+/* Color Theme Swatches in RGBA */
+.startup-NAPKIN-Contrast-1-rgba { color: rgba(1, 43, 63, 1); }
+.startup-NAPKIN-Contrast-2-rgba { color: rgba(0, 112, 140, 1); }
+.startup-NAPKIN-Contrast-3-rgba { color: rgba(218, 235, 242, 1); }
+.startup-NAPKIN-Contrast-4-rgba { color: rgba(255, 63, 76, 1); }
+.startup-NAPKIN-Contrast-5-rgba { color: rgba(27, 165, 183, 1); }
+
+/* Color Theme Swatches in HSLA */
+.startup-NAPKIN-Contrast-1-hsla { color: hsla(199, 96, 12, 1); }
+.startup-NAPKIN-Contrast-2-hsla { color: hsla(191, 100, 27, 1); }
+.startup-NAPKIN-Contrast-3-hsla { color: hsla(196, 48, 90, 1); }
+.startup-NAPKIN-Contrast-4-hsla { color: hsla(356, 100, 62, 1); }
+.startup-NAPKIN-Contrast-5-hsla { color: hsla(186, 73, 41, 1); }
+
+
+/* Color Theme Swatches in Hex */
+.startup-club-1-hex { color: #FFFFFF; }
+.startup-club-2-hex { color: #E3E3E3; }
+.startup-club-3-hex { color: #80F393; }
+.startup-club-4-hex { color: #0041F8; }
+.startup-club-5-hex { color: #212121; }
+
+/* Color Theme Swatches in RGBA */
+.startup-club-1-rgba { color: rgba(255, 255, 255, 1); }
+.startup-club-2-rgba { color: rgba(227, 227, 227, 1); }
+.startup-club-3-rgba { color: rgba(128, 243, 147, 1); }
+.startup-club-4-rgba { color: rgba(0, 65, 248, 1); }
+.startup-club-5-rgba { color: rgba(33, 33, 33, 1); }
+
+/* Color Theme Swatches in HSLA */
+.startup-club-1-hsla { color: hsla(0, 0, 100, 1); }
+.startup-club-2-hsla { color: hsla(0, 0, 89, 1); }
+.startup-club-3-hsla { color: hsla(129, 82, 72, 1); }
+.startup-club-4-hsla { color: hsla(224, 100, 48, 1); }
+.startup-club-5-hsla { color: hsla(0, 0, 12, 1); }
+
+
+/* Color Theme Swatches in Hex */
+.Crevasse-1-hex { color: #B4BEC9; }
+.Crevasse-2-hex { color: #159A9C; }
+.Crevasse-3-hex { color: #002333; }
+.Crevasse-4-hex { color: #DEEFE7; }
+.Crevasse-5-hex { color: #FFFFFF; }
+
+/* Color Theme Swatches in RGBA */
+.Crevasse-1-rgba { color: rgba(179, 189, 200, 1); }
+.Crevasse-2-rgba { color: rgba(20, 154, 156, 1); }
+.Crevasse-3-rgba { color: rgba(0, 35, 51, 1); }
+.Crevasse-4-rgba { color: rgba(221, 239, 230, 1); }
+.Crevasse-5-rgba { color: rgba(255, 255, 255, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Crevasse-1-hsla { color: hsla(211, 16, 74, 1); }
+.Crevasse-2-hsla { color: hsla(180, 76, 34, 1); }
+.Crevasse-3-hsla { color: hsla(198, 100, 10, 1); }
+.Crevasse-4-hsla { color: hsla(151, 34, 90, 1); }
+.Crevasse-5-hsla { color: hsla(0, 0, 100, 1); }
+
+.grad1 {
+    background-image: linear-gradient(to right, #8394D9 0%, 25.148123765635287%, #AAFF66 51.02040816326531%, 73.46938775510205%, #152E42 100%);
+}
+.grad2 {
+    background-image: linear-gradient(to right, rgba(131, 148, 217, 1) 0%, 25.148123765635287%, rgba(170, 255, 102, 1) 51.02040816326531%, 73.46938775510205%, rgba(21, 46, 66, 1) 100%);
+}
+
 }

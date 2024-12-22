@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content'
+import { formatDate } from '@utils/format'
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+)
+---
+
+<section class="pt-6">
+	<ul class="inline-grid grid-cols-2 grid-rows-auto">
+		{
+			posts.map((post, index) => (
+				<li class="list-none first:col-span-2">
+					<a href={`/blog/${post.id}/`}>
+						<img class="mx-auto rounded-xl drop-shadow-xl" src={post.data.cover.src} alt="" />
+						<div class="p-4 text-center align-items:center">
+							
+							<p class:list={[index == 0 ? 'text-3xl' : 'text-lg', 'font-semibold']}>
+								{post.data.title}
+							</p>
+							<span>{formatDate(post.data.pubDate)}</span>
+						</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</section>

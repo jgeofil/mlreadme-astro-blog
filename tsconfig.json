@@ -1,6 +1,21 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "compilerOptions": {
-    "strictNullChecks": true
-  }
+	"extends": "astro/tsconfigs/base",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@base/*": ["src/components/base/*"],
+			"@layouts/*": ["src/layouts/*"], 
+			"@utils/*": ["src/utils/*"]
+		},
+		"allowJs": true,
+		"verbatimModuleSyntax": false
+	},
+	"plugins": [
+		{
+			"name": "@astrojs/ts-plugin"
+		}
+	]
 }

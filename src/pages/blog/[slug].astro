@@ -1,0 +1,25 @@
+---
+export const prerender = true
+import { getCollection } from 'astro:content'
+import { render } from 'astro:content'
+import General from '@layouts/General.astro'
+import PostMetadata from '@components/PostMetadata.astro'
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog')
+
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post
+	}))
+}
+
+const post = Astro.props
+
+const { Content } = await render(post)
+---
+
+<General title={post.data.title} description={post.data.description}>
+		<PostMetadata slot="head-slot" {...post.data}/>
+		<Content/>
+</General>

@@ -1,30 +1,81 @@
 ---
-const today = new Date();
+import Icon from "./base/Icon.astro"
+
+const today = new Date()
+
+interface Link {
+	name: string,
+	href: string,
+	off?: boolean
+}
+interface Social {
+	name: string,
+	color: string
+}
+
+const {
+	links = [
+		{ name: 'About us', href: '/about' },
+		{ name: 'Contact us', href: '/contact' },
+		{ name: 'Privacy policy', href: '/privacy' },
+		{ name: 'Investor relations', href: '/invest', off: true }
+	],
+	socials = [
+		{name: 'github', color: false},
+		{name: 'x', color: false},
+		{name: 'medium', color: false}
+	]
+} = Astro.props
 ---
 
-<footer>
-	&copy; {today.getFullYear()} Jeremy Georges-Filteau. All rights reserved.
-	<div class="social-links"></div>
-	<a href="/privacy">Privacy Policy></a>
+<footer class="w-full h-full bg-neutral-100">
+	<div id="main-container" class="container px-6 pt-12 mx-auto">
+		<div class="grid grid-cols-1 gap-4 text-center grid-rows-auto lg:grid-cols-4 lg:gap-6">
+			<div class="float-left col-span-2 pb-2 h-34">
+				<h4>Subscribe to our newsletter</h4>
+				<form>
+					<input
+						class="p-2 m-2 border border-blue-300 rounded-md shadow"
+						type="email"
+						required="true"
+					/>
+					<button
+						class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl"
+						>Subscribe</button
+					>
+				</form>
+			</div>
+			<div class="h-34 lg:col-span-2">
+				<div class="grid grid-cols-2 my-2 auto-cols-max width-full">
+					<div>
+						<div class="flex justify-evenly">
+							{	
+								socials.map((soc: Social) => <Icon server:defer name={soc.name} color={soc.color}></Icon>)
+							}
+						</div>
+					</div>
+					<div>
+						<ul class="text-left">
+							{
+								links.map(
+									(link: Link) =>
+										!link.off && (
+											<li class="list-none">
+												<a class="neutral-link" href={link.href}>
+													{link.name}
+												</a>
+											</li>
+										)
+								)
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="h-16 p-3 lg:col-span-4">
+				&copy; {today.getFullYear()} Jeremy Georges-Filteau. All rights reserved.
+			</div>
+		</div>
+	</div>
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>
+

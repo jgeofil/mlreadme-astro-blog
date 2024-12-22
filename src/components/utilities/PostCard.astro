@@ -1,0 +1,42 @@
+---
+import {getEntries, getEntry } from 'astro:content'
+import {formatDate} from "@utils/format"
+import Avatar from '@components/base/Avatar.astro'
+import Tag from '@components/base/Tag.astro'
+
+const {id, data} = Astro.props;
+
+const postTags = await getEntries<'tags'>(data.tags)
+const section = await getEntry('sections', data.sections.id)
+---
+
+<div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md">
+    <img class="object-cover w-full h-64" src={data.cover.src} alt="" />
+    
+    <div class="p-6">
+        <div>
+            <a href=`/sections/${section.id}`>
+            <span class="text-xs font-light text-blue-600 uppercase">{section.data.name}</span>
+            </a>
+            <a href={`/blog/${id}/`} class:list={[
+                    "block mt-2 text-xl font-semibold text-gray-800 transition-colors",
+                    "duration-300 transform hover:text-gray-600 hover:underline"
+                ]} tabindex="0" role="link">{data.title}</a>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                {data.description}
+            </p>
+            <div class="pb-2 ">
+                {postTags.map((tag) => <Tag class={tag.data.color} {...tag.data} />)}
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="flex">
+                <Avatar class="inline-flex"></Avatar>
+            </div>
+            <div class="inline-block float-right mx-2 mb-4 text-xs text-gray-600">
+                {formatDate(data.pubDate)}
+            </div>
+        </div>
+    </div>
+    </a>
+</div>

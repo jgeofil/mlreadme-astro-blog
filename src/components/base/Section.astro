@@ -1,0 +1,15 @@
+---
+
+const { id, name, description, parent=false} = Astro.props
+const src = '/sections/' + id
+---
+
+<a  href={src}>
+	<span class:list={[{"font-semibold": parent}]}>
+		{name}
+	</span>
+</a>
+<div>
+	{description}
+</div>
+

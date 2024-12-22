@@ -1,34 +1,25 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import PostCard from '../components/PostCard.astro';
+//export const prerender = false
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import PostCard from '@components/utilities/HeroCard.astro'
+import General from '@layouts/General.astro'
+//import { supabase } from 'src/data/db/supabase';
 
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Machine learning and AI</h1>
-		
+<General title={SITE_TITLE} , description={SITE_DESCRIPTION}>
+	<h1>Machine learning and AI</h1>
+
 			<h2>Python tutorials in tensorflow, huggingface examples, and research articles summarized.</h2>
 			<br>
 			<p>Welcome to ML Readme, your comprehensive destination for insightful, hands-on tutorials and guides on machine learning, artificial intelligence, and related technologies. Our mission is to empower developers, data scientists, and enthusiasts to deepen their understanding of these cutting-edge fields and stay ahead in the rapidly evolving world of AI.
-			</p>	
+			</p>
 			<p>
 			Whether you're a seasoned professional looking to refine your skills or a beginner eager to learn, our in-depth, step-by-step guides and real-world examples cater to a wide range of skill levels. From Python coding tutorials and research article summaries to explorations of popular AI frameworks and libraries, we strive to provide valuable, engaging content that helps you make the most of your learning journey.
-			</p>	
+			</p>
 			At ML Readme, we believe in the power of knowledge sharing and community building. Join us as we demystify complex AI concepts, share practical tips and tricks, and help you unlock your full potential in the world of machine learning. Start exploring our blog today and let's grow together!
 			</p>
-			<br>
-			<PostCard/>
-		</main>
-		<Footer />
-	</body>
-</html>
+	<h2>Latest blog posts</h2>
+	<PostCard />
+
+</General>

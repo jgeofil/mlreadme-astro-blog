@@ -1,0 +1,41 @@
+[[sections]]
+id = "machine-learning"
+description = "Machine learning is a subfield of artificial intelligence that uses algorithms trained on data sets to create models that enable machines to perform tasks that would otherwise only be possible for humans, such as categorizing images, analyzing data, or predicting price fluctuations."
+
+[[sections]]
+id = "data-science"
+description = "Data science combines math and statistics, specialized programming, advanced analytics, artificial intelligence (AI) and machine learning with specific subject matter expertise to uncover actionable insights hidden in an organization's data. These insights can be used to guide decision making and strategic planning."
+
+# Level two
+
+[[sections]]
+id = "data-analysis"
+description = "Data Analysis is the process of systematically applying statistical and/or logical techniques to describe and illustrate, condense and recap, and evaluate data."
+parent = "data-science"
+
+[[sections]]
+id = "data-visualization"
+description = "Data visualization is the process of using visual elements like charts, graphs, or maps to represent data. It translates complex, high-volume, or numerical data into a visual representation that is easier to process. Data visualization tools improve and automate the visual communication process for accuracy and detail."
+parent = "data-science"
+
+
+[[sections]]
+id = "natural-language-processing"
+description = "Natural language processing (NLP) is a branch of artificial intelligence (AI) that enables computers to comprehend, generate, and manipulate human language. Natural language processing has the ability to interrogate the data with natural language text or voice."
+parent = "machine-learning"
+
+[[sections]]
+id = "supervised-learning"
+description = "Supervised learning (SL) is a paradigm in machine learning where input objects (for example, a vector of predictor variables) and a desired output value (also known as a human-labeled supervisory signal) train a model. "
+parent = "machine-learning"
+
+[[sections]]
+id = "unsupervised-learning"
+description = "Unsupervised learning in artificial intelligence is a type of machine learning that learns from data without human supervision."
+parent = "machine-learning"
+
+# Level three
+[[sections]]
+id = "large-language-models"
+description = "A large language model (LLM) is a type of artificial intelligence (AI) program that can recognize and generate text, among other tasks."
+parent = "nlp"

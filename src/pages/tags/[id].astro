@@ -1,0 +1,22 @@
+---
+export const prerender = true
+import { getCollection } from 'astro:content'
+import General from '../../layouts/General.astro'
+
+export async function getStaticPaths() {
+	const tags = await getCollection('tags')
+	return tags.map((tag) => ({
+		params: { id: tag.id },
+		props: { tag }
+	}))
+}
+
+const { tag } = Astro.props
+---
+
+<General title={'Tag | ' + tag} description={'List of blog posts with the tag ' + tag}>
+
+		<h1>{tag.data.name}</h1>
+		<p>{tag.data.description}</p>
+
+</General>

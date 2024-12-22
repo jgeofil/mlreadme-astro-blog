@@ -1,0 +1,17 @@
+---
+
+import { getCollection } from 'astro:content'
+import Section from '@components/base/Section.astro'
+import General from '../../layouts/General.astro'
+
+const sections = (await getCollection('sections')).sort((a, b) => a.id.localeCompare(b.id))
+
+---
+
+<General title="Sections" description="Blog post sections.">
+
+		{
+			sections.map((section) => <Section  {...section.data} />)
+		}
+
+</General>

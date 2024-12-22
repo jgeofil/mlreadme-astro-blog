@@ -1,3 +1,20 @@
-body{
-    
+@layer components {
+	a {
+		color: theme('colors.neutral.dark');
+		&:hover {
+			color: theme('colors.accent');
+		}
+	}
+
+	a.invisible-link {
+		color: unset !important;
+		display: islo;
+	}
+
+	.tag-isolate {
+		isolation: isolate;
+	}
+
+	
+
 }
