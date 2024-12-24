@@ -12,14 +12,13 @@ export function blogLoader(params: { pattern: string; base: string }): Loader {
 
 			await globLoader.load(loaderContext)
 
-			const entries = loaderContext.store.entries().forEach(([id, entry]) => {
-				if (entry.data.draft && production) {
-					loaderContext.logger.info(`Skipping draft post ${id}`)
-					loaderContext.store.delete(id)
-				}
-			})
+			return loaderContext.store.entries().forEach(([id, entry]) => {
+   				if (entry.data.draft && production) {
+   					loaderContext.logger.info(`Skipping draft post ${id}`)
+   					loaderContext.store.delete(id)
+   				}
+   			});
 
-			return entries
 		}
 	}
 }
