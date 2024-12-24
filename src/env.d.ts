@@ -8,9 +8,7 @@ interface ImportMetaEnv {
 	readonly SUPABASE_URL: string
 	readonly SUPABASE_KEY: string
 	readonly SUPABASE_DB_URL: string
-	readonly SUPABASE_AUTH_SERVICE_ROLE_KEY: string
-	readonly SUPABASE_AUTH_JWT_SECRET: string
-	readonly SUPABASE_AUTH_ANON_KEY: string
+	readonly SUPABASE_ANON_KEY: string
 }
 
 interface ImportMeta {
