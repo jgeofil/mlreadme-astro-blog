@@ -7,8 +7,10 @@
 		"paths": {
 			"@components/*": ["src/components/*"],
 			"@base/*": ["src/components/base/*"],
-			"@layouts/*": ["src/layouts/*"], 
-			"@utils/*": ["src/utils/*"]
+			"@layouts/*": ["src/layouts/*"],
+			"@utils/*": ["src/utils/*"],
+			"@blocks/*": ["src/components/blocks/*"],
+			"@db/*": ["src/db/*"],
 		},
 		"allowJs": true,
 		"verbatimModuleSyntax": false
