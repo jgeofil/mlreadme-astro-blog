@@ -20,6 +20,6 @@ const { Content } = await render(post)
 ---
 
 <General title={post.data.title} description={post.data.description}>
-		<PostMetadata slot="head-slot" {...post.data}/>
-		<Content/>
+	<PostMetadata slot="head-slot" {...post.data} />
+	<Content />
 </General>

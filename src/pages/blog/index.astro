@@ -3,15 +3,11 @@ import PostCard from '@components/utilities/PostCard.astro'
 import General from '@layouts/General.astro'
 import { getCollection } from 'astro:content'
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-)
+const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
 ---
 
-<General  title="Blog" description="Blog post index">
-<div class="grid grid-cols-2 gap-4 my-5">
-	{
-		posts.map((post)=> <PostCard {...post}></PostCard>)
-	}
-</div>	
+<General title="Blog" description="Blog post index">
+	<div class="my-5 grid grid-cols-2 gap-4">
+		{posts.map((post) => <PostCard {...post} />)}
+	</div>
 </General>
