@@ -1,12 +1,11 @@
 ---
 import HeaderLink from '@components/base/HeaderLink.astro'
 import { TYPEFACE } from '../consts'
-import { SITE_TITLE_SHORT } from '../consts';
-const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 ---
+
 <header>
 	<nav>
-		<div class="flex flex-wrap items-center mx-auto place-items-center">
+		<div class="mx-auto flex flex-wrap place-items-center items-center">
 			<a class="relative items-center pl-6" href="/">
 				<span class="text-lg font-semibold">{TYPEFACE}</span>
 			</a>
@@ -14,33 +13,11 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 			<div class="relative mx-auto place-self-center">
 				<HeaderLink href="/">Home</HeaderLink>
 				<HeaderLink href="/blog">Blog</HeaderLink>
-				<HeaderLink href="/sections">Sections</HeaderLink>
+				<!-- <HeaderLink href="/sections">Sections</HeaderLink>-->
 				<HeaderLink href="/tags">Tags</HeaderLink>
 				<HeaderLink href="/about">About</HeaderLink>
 			</div>
-
-
-<noscript>
-  <iframe
-    src={`${TAGGIN_SERVER}/ns.html?id=GTM-W3Z34DZF`}
-    height="0"
-    width="0"
-    style="display:none;visibility:hidden"
-  ></iframe>
-</noscript>
-
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE_SHORT}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-		<div class="social-links">
-
 		</div>
 	</nav>
-	<slot></slot>
+	<slot />
 </header>
-
-

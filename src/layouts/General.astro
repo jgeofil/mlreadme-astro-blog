@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
-
+import BaseHead from '@components/BaseHead.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+import GTM from '@blocks/GTM.astro'
 interface Props {
 	title: string
 	description: string
@@ -16,14 +16,14 @@ const { title, description } = Astro.props
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body class="flex flex-col h-screen">
+	<body class="flex h-screen flex-col">
+		<GTM />
 		<Header>
-			<slot name="head-slot"></slot>
+			<slot name="head-slot" />
 		</Header>
-		<main class="px-6 mx-auto md:container md:max-w-5xl">
+		<main class="mx-auto px-6 md:container md:max-w-5xl">
 			<slot />
 		</main>
 		<Footer />
 	</body>
 </html>
- 
