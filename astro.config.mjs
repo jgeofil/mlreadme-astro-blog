@@ -13,7 +13,7 @@ export default defineConfig({
 		maxDuration: 60,
 		isr: true
 	}),
-	output: 'server',
+	output: 'static',
 	server: { port: 3000, host: true },
 	integrations: [mdx(), sitemap(), tailwind(), sentry(), spotlightjs()]
 })

@@ -1,6 +1,7 @@
 ---
 import Icon from './base/Icon.astro'
-import { supabase } from '@db/supabase'
+import { supabase, type Socials } from '@db/supabase'
+import Social from './utilities/Social.astro'
 const today = new Date()
 
 interface Link {
@@ -8,43 +9,33 @@ interface Link {
 	href: string
 	off?: boolean
 }
-interface Social {
-	name: string
-	color: string
-}
 
 const {
 	links = [
 		{ name: 'About us', href: '/about' },
 		{ name: 'Contact us', href: '/contact', off: true },
 		{ name: 'Privacy policy', href: '/privacy' }
-	],
-	socials = [
-		{ name: 'github', color: false },
-		{ name: 'x', color: false },
-		{ name: 'medium', color: false }
 	]
 } = Astro.props
 
-const { data, error } = await supabase.from('socials').select()
-console.log(data, error)
+const { data, error } = await supabase.from('socials').select().returns<Socials[]>()
 ---
 
-<footer class="h-full w-full bg-neutral-100">
-	<div id="main-container" class="container mx-auto px-6 pt-12">
-		<div class="grid-rows-auto grid grid-cols-1 gap-4 text-center lg:grid-cols-4 lg:gap-6">
-			<div class="h-34 col-span-2 float-left pb-2">
+<footer class="w-full h-full bg-neutral-100">
+	<div id="main-container" class="container px-6 pt-12 mx-auto">
+		<div class="grid grid-cols-1 gap-4 text-center grid-rows-auto lg:grid-cols-4 lg:gap-6">
+			<div class="float-left col-span-2 pb-2 h-34">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
-					<input class="m-2 rounded-md border border-blue-300 p-2 shadow" type="email" required="true" />
-					<button class="m-2 rounded-md border border-blue-300 fill-blue-200 p-2 shadow hover:border-blue-700 hover:drop-shadow-2xl">Subscribe</button>
+					<input class="p-2 m-2 border border-blue-300 rounded-md shadow" type="email" required="true" />
+					<button class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl">Subscribe</button>
 				</form>
 			</div>
 			<div class="h-34 lg:col-span-2">
-				<div class="width-full my-2 grid auto-cols-max grid-cols-2">
+				<div class="grid grid-cols-2 my-2 width-full auto-cols-max">
 					<div>
 						<div class="flex justify-evenly">
-							{socials.map((soc: Social) => <Icon name={soc.name} color={soc.color} />)}
+							{data.map((soc: Socials) => <Social social={soc} />)}
 						</div>
 					</div>
 					<div>

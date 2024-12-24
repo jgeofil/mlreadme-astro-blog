@@ -7,7 +7,7 @@
 		"dev": "astro dev",
 		"start": "dev",
 		"clean": "rm -rf .astro dist",
-		"build": "clean  && astro build",
+		"build": "bun clean  && astro build",
 		"preview": "astro preview",
 		"sync": "bun run clean && astro sync",
 		"lint": "astro check",
