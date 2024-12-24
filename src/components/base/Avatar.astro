@@ -6,8 +6,8 @@ const { fname = 'Jeremy Georges-Filteau', src = defSrc, alt = '' } = Astro.props
 ---
 
 <div class="flex items-stretch gap-4">
-	<img src={src} alt={alt} class="object-cover w-8 h-8 rounded-full aspect-square" />
+	<img src={src} alt={alt} class="aspect-square h-8 w-8 rounded-full object-cover" />
 	<div>
-		<span class="text-gray-900 text-sm/tight">{fname}</span>
+		<span class="text-sm/tight text-gray-900">{fname}</span>
 	</div>
 </div>

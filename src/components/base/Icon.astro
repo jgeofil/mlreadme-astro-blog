@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
-    
-const {height=36, width=36, name, color=false, src} = Astro.props;
-const col = color?'/'+String(color):''
+import { Image } from 'astro:assets'
+
+const { height = 36, width = 36, name, color = false } = Astro.props
+const col = color ? '/' + String(color) : ''
 ---
-<div class="rounded-full p-2">
-<a href={src}>
-    <Image height={height} width={width} src=`https://cdn.simpleicons.org/${name}${col}` alt=`Icon ${name}` />
-</a>
+
+<div class="p-2 rounded-full">
+	<Image height={height} width={width} src=`https://cdn.simpleicons.org/${name}${col}` alt=`Icon ${name}` />
 </div>

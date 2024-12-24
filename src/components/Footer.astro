@@ -1,31 +1,24 @@
 ---
-import Icon from "./base/Icon.astro"
-
+import Icon from './base/Icon.astro'
+import { supabase, type Socials } from '@db/supabase'
+import Social from './utilities/Social.astro'
 const today = new Date()
 
 interface Link {
-	name: string,
-	href: string,
+	name: string
+	href: string
 	off?: boolean
-}
-interface Social {
-	name: string,
-	color: string
 }
 
 const {
 	links = [
 		{ name: 'About us', href: '/about' },
-		{ name: 'Contact us', href: '/contact' },
-		{ name: 'Privacy policy', href: '/privacy' },
-		{ name: 'Investor relations', href: '/invest', off: true }
-	],
-	socials = [
-		{name: 'github', color: false},
-		{name: 'x', color: false},
-		{name: 'medium', color: false}
+		{ name: 'Contact us', href: '/contact', off: true },
+		{ name: 'Privacy policy', href: '/privacy' }
 	]
 } = Astro.props
+
+const { data, error } = await supabase.from('socials').select().returns<Socials[]>()
 ---
 
 <footer class="w-full h-full bg-neutral-100">
@@ -34,24 +27,15 @@ const {
 			<div class="float-left col-span-2 pb-2 h-34">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
-					<input
-						class="p-2 m-2 border border-blue-300 rounded-md shadow"
-						type="email"
-						required="true"
-					/>
-					<button
-						class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl"
-						>Subscribe</button
-					>
+					<input class="p-2 m-2 border border-blue-300 rounded-md shadow" type="email" required="true" />
+					<button class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl">Subscribe</button>
 				</form>
 			</div>
 			<div class="h-34 lg:col-span-2">
-				<div class="grid grid-cols-2 my-2 auto-cols-max width-full">
+				<div class="grid grid-cols-2 my-2 width-full auto-cols-max">
 					<div>
 						<div class="flex justify-evenly">
-							{	
-								socials.map((soc: Social) => <Icon server:defer name={soc.name} color={soc.color}></Icon>)
-							}
+							{data.map((soc: Socials) => <Social social={soc} />)}
 						</div>
 					</div>
 					<div>
@@ -78,4 +62,3 @@ const {
 		</div>
 	</div>
 </footer>
-

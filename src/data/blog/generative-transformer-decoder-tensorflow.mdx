@@ -1,6 +1,8 @@
 ---
 title: 'Building a Generative Transformer Decoder in TensorFlow: A Step-by-Step Guide'
-description: 'Learn how to implement a generative transformer decoder model in TensorFlow using a domain name dataset. Improve your understanding of transformers and generative models with this comprehensive tutorial.'
+description:
+  'Learn how to implement a generative transformer decoder model in TensorFlow using a domain name dataset. Improve your understanding of transformers and generative models with
+  this comprehensive tutorial.'
 pubDate: 'Feb 22 2024'
 sections: 'large-language-models'
 tags:
@@ -9,13 +11,14 @@ tags:
   - 'generative'
   - 'decoder'
 cover:
-  src: '/images/posts/gpt-cover.jpg'
+  src: 'public/images/posts/gpt-cover.jpg'
   alt: 'placeholder'
-foreword: "This post documents my process implementing a generative transformer decoder model in TensorFlow in an effort to learn more about this architecture. We will be using a dataset of domain name as an example application to train the model."
+foreword:
+  'This post documents my process implementing a generative transformer decoder model in TensorFlow in an effort to learn more about this architecture. We will be using a dataset
+  of domain name as an example application to train the model.'
 ---
 
 import Bookmark from '../../components/Bookmark.astro'
-
 
 ## Data pre-processing
 
@@ -34,7 +37,8 @@ ds = ds['train']
 
 ### Target shifting
 
-The model needs to be fed slightly shifted target sequences. For example, if the correct domain name is "example" during training, the input might be [STA]exampl and the target would be example. This is called "teacher forcing."
+The model needs to be fed slightly shifted target sequences. For example, if the correct domain name is "example" during training, the input might be [STA]exampl and the target
+would be example. This is called "teacher forcing."
 
 We can use the map method to produce input and target sequences. Here, x['ids'] contains the tokenized sequences as arrays of numerical IDs representing individual tokens.
 
@@ -47,7 +51,8 @@ ds = ds.map(lambda x: {
 ds_dict = ds.train_test_split(test_size=0.1)
 ```
 
-To prepare a TensorFlow dataset, we use the DataCollator class from the Hugging Face Transformers library. A data collator is responsible for assembling your data samples into batches as needed for the model's training or evaluation.
+To prepare a TensorFlow dataset, we use the DataCollator class from the Hugging Face Transformers library. A data collator is responsible for assembling your data samples into
+batches as needed for the model's training or evaluation.
 
 ```python
 BATCH = 256
@@ -78,17 +83,20 @@ tf_test = ds_dict['test'].to_tf_dataset(
 
 ## Building a Generative Transformer Decoder Model
 
-Let's break down how generative transformer decoder models work. The primary goal of a generative transformer decoder model is to predict the next element (e.g., word, character, or any other token) in a sequence given the previous elements. They achieve this through a combination of powerful mechanisms from the Transformer architecture.
+Let's break down how generative transformer decoder models work. The primary goal of a generative transformer decoder model is to predict the next element (e.g., word, character,
+or any other token) in a sequence given the previous elements. They achieve this through a combination of powerful mechanisms from the Transformer architecture.
 
 ### Positional encoding
 
-Unlike recurrent models (RNNs, LSTMs), Transformers don't have an inherent sense of sequence order. Positional encodings inject information about the relative positions of tokens into the input representations, which helps the model understand the sequence's structure.
+Unlike recurrent models (RNNs, LSTMs), Transformers don't have an inherent sense of sequence order. Positional encodings inject information about the relative positions of tokens
+into the input representations, which helps the model understand the sequence's structure.
 
 The original paper uses the following formula for calculating the positional encoding:
 
 <img src="/images/posts/pos-encoding.png" />
 
-This implementation uses sinusoids with varying wavelengths to represent positional information. The different depths `i` create different frequencies of sine and cosine waves, giving the model a richer way to "understand" the relative positions of tokens.
+This implementation uses sinusoids with varying wavelengths to represent positional information. The different depths `i` create different frequencies of sine and cosine waves,
+giving the model a richer way to "understand" the relative positions of tokens.
 
 ```python
 import numpy as np
@@ -108,7 +116,8 @@ def positional_encoding(length, depth):
     return tf.cast(pos_encoding, dtype=tf.float32)
 ```
 
-The token sequences have to be converted to vectors using a standard embedding layer. The positional encoding array is added to the input token embeddings before being fed into the Transformer model.
+The token sequences have to be converted to vectors using a standard embedding layer. The positional encoding array is added to the input token embeddings before being fed into the
+Transformer model.
 
 ```python
 class PositionalEmbedding(tf.keras.layers.Layer):
@@ -128,18 +137,22 @@ class PositionalEmbedding(tf.keras.layers.Layer):
 
 ### Causal self-attention
 
-Self-attention allows the transformer decoder to focus on different parts of the partially generated sequence. An important aspect of the decoder architecture is causal making in the attention mechanism. This means the model can only attend to past tokens, not future ones. This prevents "cheating" by seeing what the correct next token should be. Because we are not making use of an encoder component, the cross-attention portion of the decoder is omitted.
+Self-attention allows the transformer decoder to focus on different parts of the partially generated sequence. An important aspect of the decoder architecture is causal making in
+the attention mechanism. This means the model can only attend to past tokens, not future ones. This prevents "cheating" by seeing what the correct next token should be. Because we
+are not making use of an encoder component, the cross-attention portion of the decoder is omitted.
 
 ### Multi-headed attention
 
-The model contains multiple instances of the attention mechanism. Each "head" within the attention mechanism can focus on different aspects of the input sequence, enabling it to capture complex patterns and relationships within the partially generated sequence.
+The model contains multiple instances of the attention mechanism. Each "head" within the attention mechanism can focus on different aspects of the input sequence, enabling it to
+capture complex patterns and relationships within the partially generated sequence.
 
 Let's break down the code for the `CausalSelfAttention` layer class. The constructor takes two parameters:
 
 - `num_heads`: The number of attention heads in the multi-head attention mechanism.
 - `embedding_dim`: The dimensionality of the input embeddings.
 
-With these parameters, we instantiate a `MultiHeadAttention` layer, the core of the self-attention mechanism. A `LayerNormalization` object is also created for stabilizing the attention mechanism's output.
+With these parameters, we instantiate a `MultiHeadAttention` layer, the core of the self-attention mechanism. A `LayerNormalization` object is also created for stabilizing the
+attention mechanism's output.
 
 The `call` method defines what happens when the layer is called on an input `x`.
 
@@ -171,7 +184,8 @@ class CausalSelfAttention(tf.keras.layers.Layer):
 
 ### Feed-Forward Networks
 
-After the attention layers, feed-forward networks independently process each token's representation. This adds further non-linear transformations to enhance the model's expressive power.
+After the attention layers, feed-forward networks independently process each token's representation. This adds further non-linear transformations to enhance the model's expressive
+power.
 
 ```python
 class FeedForward(tf.keras.layers.Layer):
@@ -210,7 +224,8 @@ class DecoderLayer(tf.keras.layers.Layer):
 
 ### Putting it all together
 
-To build a full Transformer decoder, we need to stack multiple instances of the `DecoderLayer`. The final layer of the decoder is a dense layer with the same size as your vocabulary. The output is a probability distribution over the entire vocabulary. The token with the highest probability is typically chosen as the next prediction.
+To build a full Transformer decoder, we need to stack multiple instances of the `DecoderLayer`. The final layer of the decoder is a dense layer with the same size as your
+vocabulary. The output is a probability distribution over the entire vocabulary. The token with the highest probability is typically chosen as the next prediction.
 
 ```python
 class TransformerDecoder(tf.keras.Model):
@@ -241,7 +256,6 @@ class TransformerDecoder(tf.keras.Model):
 We are now ready to start training an instance of our Generative Transformer Decoder model.
 
 ### Masked loss and metrics
-
 
 ```python
 def masked_loss(label, pred):
@@ -309,8 +323,8 @@ model.fit(
 )
 ```
 
-Inference
-Once our model is trained, we can use it to generate domain names. The keras_nlp library provides convenient utilities for text generation
+Inference Once our model is trained, we can use it to generate domain names. The keras_nlp library provides convenient utilities for text generation
+
 ```python
 prompt = ''
 prompt_length = len(tokenizer.encode(prompt))-1
@@ -340,11 +354,16 @@ Here are some example domain names generated by the model:
 - `car` `e` `er` `w` `iz` `ard`
 
 ## Resources
+
 You can find a notebook with all the code in this post here:
 
 <Bookmark name="Byte-Pair Encoding (BPE)" url="https://mlread.me/blog/byte-pair-encoding-bpe" />
-<Bookmark name="Neural machine translation with a Transformer and Keras | Text | TensorFlow" url="https://www.tensorflow.org/text/tutorials/transformer?ref=mlread.me#the_embedding_and_positional_encoding_layer" />
-<Bookmark name="Neural machine translation with a Transformer and Keras | Text | TensorFlow" 
-url="https://www.tensorflow.org/text/tutorials/transformer?ref=mlread.me#set_up_the_loss_and_metrics" />
+<Bookmark
+	name="Neural machine translation with a Transformer and Keras | Text | TensorFlow"
+	url="https://www.tensorflow.org/text/tutorials/transformer?ref=mlread.me#the_embedding_and_positional_encoding_layer"
+/>
+<Bookmark
+	name="Neural machine translation with a Transformer and Keras | Text | TensorFlow"
+	url="https://www.tensorflow.org/text/tutorials/transformer?ref=mlread.me#set_up_the_loss_and_metrics"
+/>
 <Bookmark name="Keras documentation: GPT text generation from scratch with KerasNLP" url="https://keras.io/examples/generative/text_generation_gpt/" />
-

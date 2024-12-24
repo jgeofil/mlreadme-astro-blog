@@ -1,10 +1,7 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import '../styles/global.css'
-import SpeedInsights from '@vercel/speed-insights/astro';
+import SpeedInsights from '@vercel/speed-insights/astro'
 import mixpanel from 'mixpanel-browser'
-
 
 interface Props {
 	title: string
@@ -14,7 +11,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const { title, description, image = '/blog-placeholder-2.jpg' } = Astro.props
-const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
+const TAGGIN_SERVER = 'https://server-side-tagging-iefkv43amq-uc.a.run.app'
 ---
 
 <!-- Global Metadata -->
@@ -36,7 +33,7 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
-<meta property="og:site_name" content="ML Readme Blog | Machine Learning and AI">
+<meta property="og:site_name" content="ML Readme Blog | Machine Learning and AI" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
@@ -48,19 +45,23 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!--Alpine JS -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+<script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
 
 <!-- Start cookieyes banner -->
-<script
-	is:inline
-	id="cookieyes"
-	type="text/javascript"
-	src="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js"></script>
+<script is:inline id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js"></script>
 <!-- End cookieyes banner -->
 
 <!-- Google Tag Manager -->
-<script define:vars={{TAGGIN_SERVER}}>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=`${TAGGIN_SERVER}/gtm.js?id=`+i+dl;f.parentNode.insertBefore(j,f);})(window, document, 'script', 'dataLayer', 'GTM-W3Z34DZF');
+<script is:inline define:vars={{ TAGGIN_SERVER }}>
+	;(function (w, d, s, l, i) {
+		w[l] = w[l] || []
+		w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+		var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s),
+			dl = l != 'dataLayer' ? '&l=' + l : ''
+		j.async = true
+		j.src = `${TAGGIN_SERVER}/gtm.js?id=` + i + dl
+		f.parentNode.insertBefore(j, f)
+	})(window, document, 'script', 'dataLayer', 'GTM-W3Z34DZF')
 </script>
-  <!-- End Google Tag Manager -->
-
+<!-- End Google Tag Manager -->

@@ -2,6 +2,8 @@
 export const prerender = true
 import { getCollection } from 'astro:content'
 import General from '../../layouts/General.astro'
+import Section from '../../components/base/Section.astro'
+import PostCard from '@components/utilities/PostCard.astro'
 
 export async function getStaticPaths() {
 	const sections = await getCollection('sections')
@@ -12,11 +14,47 @@ export async function getStaticPaths() {
 }
 
 const { section } = Astro.props
+
+// Get child sections
+const allSections = await getCollection('sections')
+const childSections = allSections.filter((s) => s.data.parent === section.id)
+
+// Get blog posts for this section
+const allPosts = await getCollection('blog')
+const sectionPosts = allPosts.filter((post) => post.data.sections.id === section.id).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
-<General title={'Section | ' + section} description={'List of blog posts in the ' + section + ' secton.'}>
+<General title={`Section | ${section.data.name}`} description={`List of blog posts in the ${section.data.name} section.`}>
+	<div class="mx-auto max-w-4xl">
+		<section>
+			<h1>{section.data.name}</h1>
+			<p>{section.data.description}</p>
+		</section>
 
-		<h1>{section.data.name}</h1>
-		<p>{section.data.description}</p>
+		{
+			sectionPosts.length > 0 && (
+				<section>
+					<h2>Posts in this section</h2>
+					<ul class="grid grid-cols-2 gap-2">
+						{sectionPosts.map((post) => (
+							<PostCard {...post} class="col-span-1" />
+						))}
+					</ul>
+				</section>
+			)
+		}
 
+		{
+			childSections.length > 0 && (
+				<div>
+					<h2 class="mb-4 text-2xl font-bold">Subsections</h2>
+					<div class="space-y-6">
+						{childSections.map((childSection) => (
+							<Section {...childSection.data} />
+						))}
+					</div>
+				</div>
+			)
+		}
+	</div>
 </General>

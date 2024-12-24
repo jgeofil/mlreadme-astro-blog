@@ -2,7 +2,7 @@
 export const prerender = true
 import { getCollection } from 'astro:content'
 import General from '../../layouts/General.astro'
-
+import PostCard from '@components/utilities/PostCard.astro'
 export async function getStaticPaths() {
 	const tags = await getCollection('tags')
 	return tags.map((tag) => ({
@@ -12,11 +12,26 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.props
+
+const allPosts = await getCollection('blog')
+const posts = allPosts.filter((post) => post.data.tags.map((t) => t.id).includes(tag.id))
 ---
 
 <General title={'Tag | ' + tag} description={'List of blog posts with the tag ' + tag}>
-
+	<section>
 		<h1>{tag.data.name}</h1>
 		<p>{tag.data.description}</p>
-
+		{
+			posts.length > 0 && (
+				<section>
+					<h2>Posts in this section</h2>
+					<ul class="grid grid-cols-2 gap-2">
+						{posts.map((post) => (
+							<PostCard {...post} class="col-span-1" />
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</section>
 </General>
