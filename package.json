@@ -38,7 +38,7 @@
 		"vercel": "^39.2.2"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.48.2",
+		"@playwright/test": "^1.49.1",
 		"@types/bun": "^1.1.14",
 		"@types/lodash": "^4.17.13",
 		"@types/mixpanel-browser": "^2.50.1",
