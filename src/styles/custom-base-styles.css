@@ -1,4 +1,8 @@
 @layer base {
+	:root,
+	html {
+		@apply font-body;
+	}
 	main {
 		@apply font-body;
 	}
@@ -19,16 +23,16 @@
 		@apply py-3 text-4xl font-bold;
 	}
 	h2 {
-		@apply py-3 text-3xl font-bold;
+		@apply py-3 text-3xl font-semibold;
 	}
 	h3 {
-		@apply py-2 text-2xl font-bold;
+		@apply py-2 text-2xl font-medium;
 	}
 	h4 {
-		@apply py-2 text-lg font-semibold;
+		@apply py-2 text-lg font-medium;
 	}
 	h5 {
-		@apply pt-1 text-lg;
+		@apply pt-1 text-lg font-normal italic;
 	}
 
 	h1,

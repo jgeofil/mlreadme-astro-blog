@@ -11,6 +11,7 @@
 			"@utils/*": ["src/utils/*"],
 			"@blocks/*": ["src/components/blocks/*"],
 			"@db/*": ["src/db/*"],
+			"@styles/*": ["src/styles/*"],
 		},
 		"allowJs": true,
 		"verbatimModuleSyntax": false
