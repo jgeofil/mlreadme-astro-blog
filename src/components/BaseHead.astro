@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css'
 import SpeedInsights from '@vercel/speed-insights/astro'
-import mixpanel from 'mixpanel-browser'
+//import mixpanel from 'mixpanel-browser'
 
 interface Props {
 	title: string
@@ -45,10 +45,12 @@ const TAGGIN_SERVER = 'https://server-side-tagging-iefkv43amq-uc.a.run.app'
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!--Alpine JS -->
-<script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+<!--- <script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>-->
 
 <!-- Start cookieyes banner -->
-<script is:inline id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js"></script>
+<link rel="preload" href="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js" as="script" />
+
 <!-- End cookieyes banner -->
 
 <!-- Google Tag Manager -->
