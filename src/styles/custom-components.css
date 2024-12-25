@@ -8,10 +8,6 @@
 
 	a.invisible-link {
 		color: unset !important;
-		display: islo;
-	}
-
-	.tag-isolate {
-		isolation: isolate;
+		font-family: theme('fontFamily.body');
 	}
 }
