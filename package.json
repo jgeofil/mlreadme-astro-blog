@@ -29,7 +29,7 @@
 		"@types/fetch-meta-tags": "^1.0.4",
 		"@vercel/speed-insights": "^1.1.0",
 		"astro": "^5.1.1",
-		"bufferutil": "^4.0.8",
+		"bufferutil": "^4.0.9",
 		"fetch-meta-tags": "^1.0.12",
 		"lightningcss": "^1.28.2",
 		"sharp": "^0.33.5",
