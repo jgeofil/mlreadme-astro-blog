@@ -22,7 +22,7 @@
 		"@astrojs/mdx": "^4.0.3",
 		"@astrojs/rss": "^4.0.10",
 		"@astrojs/sitemap": "^3.2.1",
-		"@astrojs/tailwind": "^5.1.4",
+		"@astrojs/tailwind": "^6.0.0",
 		"@astrojs/ts-plugin": "^1.10.4",
 		"@astrojs/vercel": "^8.0.1",
 		"@supabase/supabase-js": "^2.47.10",
