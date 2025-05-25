@@ -1,0 +1,19 @@
+name: Merge PR
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, labeled, unlabeled]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || github.event.label.name == 'experiment' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: bobvanderlinden/combine-pull-requests@v4
+        with:
+          label: merge
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
