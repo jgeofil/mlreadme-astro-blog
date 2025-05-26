@@ -7,7 +7,7 @@
 		"dev": "astro dev",
 		"start": "dev",
 		"clean": "rm -rf .astro dist",
-		"build": "bun clean  && astro build",
+		"build": "astro build",
 		"build:css": "NODE_ENV=production tailwindcss -o src/tailwind.css -m",
 		"preview": "astro preview",
 		"sync": "bun run clean && astro sync",
