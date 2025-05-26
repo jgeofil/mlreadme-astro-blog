@@ -47,7 +47,7 @@
 		"cssnano": "^7.0.6",
 		"postcss-import": "^16.1.0",
 		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.6.9",
+		"prettier-plugin-tailwindcss": "^0.6.11",
 		"sass-embedded": "^1.83.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.7.2"
