@@ -26,5 +26,13 @@ pnpm-debug.log*
 
 .history
 
-
+.vercel/**
 .vercel
+
+hyperui/**
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.vercel/project.json
+.env*.local

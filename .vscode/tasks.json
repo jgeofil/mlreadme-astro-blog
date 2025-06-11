@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "bun",
+			"script": "prettier --write .",
+			"problemMatcher": [
+				"$eslint-compact"
+			],
+			"label": "bun: format",
+			"detail": "bun run prettier --write . - package.json"
+		}
+	]
+}

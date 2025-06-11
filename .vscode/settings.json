@@ -2,4 +2,5 @@
     "prettier.useTabs": true,
     "editor.indentSize": "tabSize",
     "prettier.tabWidth": 4,
+    "pieces.cloudCapabilities": "Blended",
 }

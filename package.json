@@ -1,31 +1,63 @@
 {
-  "name": "@example/blog",
-  "type": "module",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^3.1.8",
-    "@astrojs/rss": "^4.0.9",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.2",
-    "@astrojs/vercel": "^7.8.2",
-    "@spotlightjs/astro": "^2.1.11",
-    "astro": "^4.16.7",
-    "astro-page-insight": "^0.8.7",
-    "fetch-meta-tags": "^1.0.12",
-
-    "tailwindcss": "^3.4.14",
-    "vercel": "^37.14.0"
-
-  },
-  "devDependencies": {
-    "postcss-import": "^16.1.0"
-  }
+	"name": "@mlreadme/blog",
+	"type": "module",
+	"version": "0.9.0",
+	"private": true,
+	"scripts": {
+		"dev": "astro dev",
+		"start": "dev",
+		"clean": "rm -rf .astro dist",
+		"build": "bun clean  && astro build",
+		"build:css": "NODE_ENV=production tailwindcss -o src/tailwind.css -m",
+		"preview": "astro preview",
+		"sync": "bun run clean && astro sync",
+		"lint": "astro check",
+		"format": "prettier --write .",
+		"check": "format && lint",
+		"test": "playwright test",
+		"test:ui": "playwright test --ui"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/mdx": "^4.0.3",
+		"@astrojs/rss": "^4.0.10",
+		"@astrojs/sitemap": "^3.2.1",
+		"@astrojs/tailwind": "^5.1.4",
+		"@astrojs/ts-plugin": "^1.10.4",
+		"@astrojs/vercel": "^8.0.1",
+		"@supabase/supabase-js": "^2.47.10",
+		"@types/fetch-meta-tags": "^1.0.4",
+		"@vercel/speed-insights": "^1.1.0",
+		"astro": "^5.1.1",
+		"bufferutil": "^4.0.8",
+		"fetch-meta-tags": "^1.0.12",
+		"lightningcss": "^1.28.2",
+		"sharp": "^0.33.5",
+		"tailwindcss": "^3.4.17",
+		"toml": "^3.0.0",
+		"utf-8-validate": "^6.0.5",
+		"vercel": "^39.2.2"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.49.1",
+		"@types/bun": "^1.1.14",
+		"@types/lodash": "^4.17.13",
+		"autoprefixer": "^10.4.20",
+		"checkly": "^4.15.0",
+		"cssnano": "^7.0.6",
+		"postcss-import": "^16.1.0",
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-tailwindcss": "^0.6.9",
+		"sass-embedded": "^1.83.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.2"
+	},
+	"trustedDependencies": [
+		"@parcel/watcher",
+		"@sentry/cli",
+		"@vercel/speed-insights",
+		"esbuild",
+		"sharp",
+		"yarn"
+	]
 }
