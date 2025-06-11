@@ -14,8 +14,6 @@
 		"lint": "astro check",
 		"format": "prettier --write .",
 		"check": "format && lint",
-		"test": "playwright test",
-		"test:ui": "playwright test --ui"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
@@ -39,7 +37,6 @@
 		"vercel": "^39.4.2"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.52.0",
 		"@types/bun": "^1.2.15",
 		"@types/lodash": "^4.17.17",
 		"autoprefixer": "^10.4.21",
