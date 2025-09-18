@@ -1,12 +1,19 @@
 ---
 interface HeroImage {
-	src: string
-	alt: string
+	src?: string
+	alt?: string
 	width?: number
 	height?: number
 }
 
-const { src, alt, width = 1020, height = 510 } = Astro.props
+const {
+	src: defaultSrc,
+	alt: defaultAlt,
+	width = 1020,
+	height = 510,
+} = Astro.props
+const { bannerConfig } = Astro.locals
+const { src, alt } = { ...{ src: defaultSrc, alt: defaultAlt }, ...bannerConfig }
 ---
 
 <div class="hero-image">
