@@ -2,6 +2,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
+	readonly PUBLIC_STATSIG_CLIENT_KEY: string
 	readonly PUBLIC_API_KEY: string
 	readonly GA_TRACKING_ID?: string
 	readonly PUBLIC_TAGGIN_SERVER?: string // your example
