@@ -5,7 +5,7 @@ interface ImportMetaEnv {
 	readonly PUBLIC_STATSIG_CLIENT_KEY: string
 	readonly PUBLIC_API_KEY: string
 	readonly GA_TRACKING_ID?: string
-	readonly PUBLIC_TAGGIN_SERVER?: string // your example
+readonly PUBLIC_STATSIG_CLIENT_KEY: string // Statsig client key for session replay and feature flags
 	readonly SUPABASE_URL: string
 	readonly SUPABASE_KEY: string
 	readonly SUPABASE_DB_URL: string
