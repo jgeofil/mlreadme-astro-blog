@@ -9,3 +9,21 @@ At ML Readme, we believe in the power of knowledge sharing and community buildin
 
 ## Astro blog 
 Source code for the website in the Astro framework.
+
+## Statsig Integration
+This project uses [Statsig](https://statsig.com/) for feature flagging and dynamic configuration. The integration is handled by a middleware that runs on the Vercel edge.
+
+### Configuration
+The Statsig integration requires the following environment variables to be set:
+- `STATSIG_SERVER_API_KEY`: Your Statsig server secret key.
+- `EXPERIMENTATION_CONFIG`: The Edge Config connection string from Vercel.
+- `EXPERIMENTATION_CONFIG_ITEM_KEY`: The Edge Config item key from Vercel.
+
+These variables should be set in your Vercel project settings. For local development, you can create a `.env.local` file in the root of the project and add the variables there.
+
+### Usage
+The middleware checks for the following feature flags:
+- `show_new_header`: A feature gate to control the visibility of a new header.
+- `banner_config`: A dynamic config to control the content of the banner.
+
+These flags can be configured in the Statsig console. The values are passed to the Astro components via `Astro.locals`.
