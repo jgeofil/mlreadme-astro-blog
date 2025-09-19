@@ -3,6 +3,7 @@ import BaseHead from '@components/BaseHead.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import GTM from '@blocks/GTM.astro'
+import StatsigProvider from '@components/StatsigProvider';
 interface Props {
 	title: string
 	description: string
@@ -22,7 +23,9 @@ const { title, description } = Astro.props
 			<slot name="head-slot" />
 		</Header>
 		<main class="mx-auto px-6 md:container md:max-w-5xl">
-			<slot />
+			<StatsigProvider client:load>
+				<slot />
+			</StatsigProvider>
 		</main>
 		<Footer />
 	</body>

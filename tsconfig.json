@@ -1,24 +1,89 @@
 {
-	"extends": "astro/tsconfigs/base",
-	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": ["dist"],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@components/*": ["src/components/*"],
-			"@base/*": ["src/components/base/*"],
-			"@layouts/*": ["src/layouts/*"],
-			"@utils/*": ["src/utils/*"],
-			"@blocks/*": ["src/components/blocks/*"],
-			"@db/*": ["src/db/*"],
-			"@styles/*": ["src/styles/*"],
-		},
-		"allowJs": true,
-		"verbatimModuleSyntax": false
-	},
-	"plugins": [
-		{
-			"name": "@astrojs/ts-plugin"
-		}
-	]
+  "extends": "astro/tsconfigs/base",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@base/*": [
+        "src/components/base/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@blocks/*": [
+        "src/components/blocks/*"
+      ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
+    },
+    "allowJs": true,
+    "verbatimModuleSyntax": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "plugins": [
+    {
+      "name": "@astrojs/ts-plugin"
+    }
+  ]
+{
+  "extends": "astro/tsconfigs/base",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@base/*": [
+        "src/components/base/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@blocks/*": [
+        "src/components/blocks/*"
+      ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
+    },
+    "allowJs": true,
+    "verbatimModuleSyntax": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "plugins": [
+    {
+      "name": "@astrojs/ts-plugin"
+    }
+  ]
 }
