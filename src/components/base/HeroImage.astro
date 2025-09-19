@@ -16,6 +16,7 @@ const { bannerConfig } = Astro.locals
 const { src, alt } = { ...{ src: defaultSrc, alt: defaultAlt }, ...bannerConfig }
 ---
 
-<div class="hero-image">
+	src: defaultSrc = '',
+	alt: defaultAlt = '',
 	{src && <img width={width} height={height} src={src} alt={alt} />}
 </div>
