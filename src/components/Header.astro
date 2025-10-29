@@ -1,6 +1,8 @@
 ---
 import HeaderLink from '@components/base/HeaderLink.astro'
 import { TYPEFACE } from '../consts'
+
+const { showNewHeader } = Astro.locals
 ---
 
 <header>
@@ -19,5 +21,6 @@ import { TYPEFACE } from '../consts'
 			</div>
 		</div>
 	</nav>
+	{showNewHeader && <div class="text-center bg-blue-200 p-2">New Header from Statsig!</div>}
 	<slot />
 </header>
