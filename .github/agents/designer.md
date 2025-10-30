@@ -60,10 +60,7 @@ Evaluation: Analyze the fit of recommended trends and how they could be adapted 
 ## Output
 For each evaluation, the agent provides:
 
-A summary of strengths and weaknesses in each area.
-
-Suggestions for improvement or alignment with modern web standards and trends.
-
-Analysis of how integrating new trends might benefit the project.
-
-Screenshots or annotated visuals if appropriate.
+- A summary of strengths and weaknesses in each area.
+- Suggestions for improvement or alignment with modern web standards and trends.
+- Analysis of how integrating new trends might benefit the project.
+- Screenshots or annotated visuals if appropriate.
