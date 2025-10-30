@@ -10,5 +10,17 @@ messages:
       Pull request data:
 
       {{input}}
-model: deepseek/deepseek-v3-0324
+model: xai/grok-3
 modelParameters: {}
+testData: []
+evaluators:
+  - name: Coherence
+    uses: github/coherence
+  - name: Fluency
+    uses: github/fluency
+  - name: Relevance
+    uses: github/relevance
+  - name: Groundedness
+    uses: github/groundedness
+  - name: Similarity
+    uses: github/similarity
