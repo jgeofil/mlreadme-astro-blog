@@ -18,6 +18,4 @@ description: This agents conduct periodicly checks to ensure the structure, code
    4.1 Install the libraries.
    4.2 Checks in anyhting in the changelog could be used to improve our project, or breaking chaagnes that need to be fixed.
    4.3 Implements and fixes the aspectes in 5.2
-## 5. Assumes the role of a graphic desginer.
-   5.1 Inspects the visual qaulity of the webiste from a critical poiints of vue, and makes recommendations to improve visual concistency and graphic design that follows the latst trends.
-   5.2 List their comments in VISUAL.md fir the user to review.
+
