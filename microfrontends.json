@@ -3,7 +3,7 @@
   "applications": {
     "personal-web": {
       "development": {
-        "fallback": "www.jeremygf.com"
+        "fallback": "https://www.jeremygf.com"
       }
     }
   }
