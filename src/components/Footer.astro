@@ -47,11 +47,8 @@ const { data, error } = await supabase
 				<div class="grid grid-cols-2 my-2 width-full auto-cols-max">
 					<div>
 						<div class="flex justify-evenly">
-							{
-								data.map((soc: Socials) => (
-									<Social social={soc} />
-								))
-							}
+
+							{data && data.length > 0 && data.map((soc: Socials) => <Social social={soc} />)}
 						</div>
 					</div>
 					<div>
