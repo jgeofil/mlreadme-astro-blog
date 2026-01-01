@@ -13,7 +13,8 @@ export default defineConfig({
 		maxDuration: 60,
 		isr: true
 	}),
-	output: 'static',
+	output: 'hybrid',
+	security: { checkOrigin: true },
 	server: { port: 3000, host: true },
 	integrations: [mdx(), sitemap(), tailwind(
 		{ applyBaseStyles: false, configFile: "./config/tailwind.config.js" }
