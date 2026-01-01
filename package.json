@@ -43,7 +43,7 @@
 		"@types/bun": "^1.1.14",
 		"@types/lodash": "^4.17.16",
 		"autoprefixer": "^10.4.20",
-		"checkly": "^4.15.0",
+		"checkly": "^6.9.7",
 		"cssnano": "^7.1.2",
 		"postcss-import": "^16.1.0",
 		"prettier-plugin-astro": "^0.14.1",
