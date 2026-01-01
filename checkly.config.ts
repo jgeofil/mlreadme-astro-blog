@@ -21,7 +21,7 @@ export default defineConfig({
 
 		browserChecks: {
 			frequency: Frequency.EVERY_2H,
-			testMatch: '**/tests/**/*.spec.ts'
+			testMatch: '**/tests/e2e/**/*.spec.ts'
 		},
 
 		playwrightConfig: {
