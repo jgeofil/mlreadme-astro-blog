@@ -1,9 +1,10 @@
-import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.SUPABASE_URL
-const supabaseKey = import.meta.env.SUPABASE_ANON_KEY
+import { createClient } from "@supabase/supabase-js";
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = import.meta.env.SUPABASE_URL;
+const supabaseKey = import.meta.env.SUPABASE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -157,4 +158,5 @@ export type CompositeTypes<
 		? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
 		: never
 
+export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
