@@ -1,0 +1,4 @@
+## 2024-05-15 - Enhancing Newsletter Form and Social Links Accessibility
+
+**Learning:** Found common patterns in component-based apps where icon-only links and inputs lack accessible names. Specifically, `input type="email"` elements are often missing `aria-label` or `placeholder` attributes, and `required="true"` should simply be `required`. Icon-only links often rely on adjacent text or the icon itself, which isn't always exposed correctly to screen readers.
+**Action:** Consistently add `aria-label` and `placeholder` to standalone inputs (like newsletter signups). For icon-only social links, use the social network's name as both `aria-label` and `title`, and ensure proper keyboard focus states. Wait, also need to consider test flakiness due to strict mode matching duplicate elements. Always use `exact: true` or scoped locators when testing common UI elements like site titles.
