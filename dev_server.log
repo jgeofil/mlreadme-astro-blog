@@ -1,0 +1,15 @@
+$ astro dev
+08:57:23 [types] Generated 1ms
+08:57:24 [content] Syncing content
+08:57:24 [feed-loader] Loading posts
+08:57:24 [content] Synced content
+08:57:24 [vite] Port 3000 is in use, trying another one...
+
+ astro  v5.18.1 ready in 1286 ms
+
+┃ Local    http://localhost:3001/
+┃ Network  http:08:57:29 [200] / 277ms
+08:57:29 [200] /_image 214ms
+08:57:29 [200] /_image 276ms
+08:57:29 [200] /_image 352ms
+error: script "dev" exited with code 143
