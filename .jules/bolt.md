@@ -1,0 +1,3 @@
+## 2024-05-18 - Astro `<Image>` Default Loading Behavior Optimization
+**Learning:** Astro's `<Image>` component defaults to `loading="lazy"` and `decoding="async"`. While excellent for overall page weight and scrolling performance, this delays the loading of above-the-fold images, negatively impacting the Largest Contentful Paint (LCP) metric.
+**Action:** Always explicitly set `loading="eager"` and `fetchpriority="high"` on the main banner image and any prominent above-the-fold hero images to ensure optimal LCP and user experience.
