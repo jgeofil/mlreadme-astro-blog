@@ -1,0 +1,4 @@
+## 2024-05-24 - [Astro set:html XSS in Shared Components]
+**Vulnerability:** Found a Cross-Site Scripting (XSS) vulnerability in `src/components/base/HLine.astro` where the `tagline` and `title` props were unsafely interpolated into an HTML string and rendered using Astro's `set:html`.
+**Learning:** Astro's `set:html` directive bypasses its default XSS protection and HTML escaping. When shared components use it to render props (like headers or taglines), they become vulnerable if that data ever comes from user input (e.g., from a CMS, database, or URL params). Even if currently used with static strings, it's a dormant security risk that violates defense in depth.
+**Prevention:** Avoid `set:html` unless absolutely necessary (e.g., rendering markdown). Instead, use standard JSX/Astro syntax for dynamic variable interpolation, which safely HTML-escapes content by default.
