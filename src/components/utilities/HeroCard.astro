@@ -1,24 +1,40 @@
 ---
-import { getCollection } from 'astro:content'
-import { formatDate } from '@utils/format'
-import { Image } from 'astro:assets'
-const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+import { getCollection } from "astro:content";
+import { formatDate } from "@utils/format";
+import { Image } from "astro:assets";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+);
 ---
 
 <section class="pt-6">
-	<ul class="grid-rows-auto inline-grid grid-cols-2">
-		{
-			posts.map((post, index) => (
-				<li class="list-none first:col-span-2">
-					<a href={`/blog/${post.id}/`}>
-						<Image class="mx-auto rounded-xl drop-shadow-xl" src={post.data.cover.src} alt={post.data.cover.alt} />
-						<div class="align-items:center p-4 text-center">
-							<p class:list={[index == 0 ? 'text-3xl' : 'text-lg', 'font-semibold']}>{post.data.title}</p>
-							<span>{formatDate(post.data.pubDate)}</span>
-						</div>
-					</a>
-				</li>
-			))
-		}
-	</ul>
+  <ul class="grid-rows-auto inline-grid grid-cols-2">
+    {
+      posts.map((post, index) => (
+        <li class="list-none first:col-span-2">
+          <a href={`/blog/${post.id}/`}>
+            {/* ⚡ Bolt: LCP optimization - Load the first card's cover image eagerly since it's above-the-fold */}
+            <Image
+              class="mx-auto rounded-xl drop-shadow-xl"
+              src={post.data.cover.src}
+              alt={post.data.cover.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchpriority={index === 0 ? "high" : "auto"}
+            />
+            <div class="align-items:center p-4 text-center">
+              <p
+                class:list={[
+                  index == 0 ? "text-3xl" : "text-lg",
+                  "font-semibold",
+                ]}
+              >
+                {post.data.title}
+              </p>
+              <span>{formatDate(post.data.pubDate)}</span>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </section>
