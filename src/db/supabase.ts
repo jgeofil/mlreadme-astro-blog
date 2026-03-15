@@ -160,3 +160,25 @@ export type CompositeTypes<
 
 export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
+
+// Cache for socials query to avoid redundant requests on SSR pages
+let cachedSocials: { data: Socials[] | null; error: any | null } | null = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 60 * 1000; // 1 minute
+
+export async function getCachedSocials() {
+	const now = Date.now();
+	if (cachedSocials && (now - lastFetchTime < CACHE_TTL)) {
+		return cachedSocials;
+	}
+
+	const result = await supabase
+		.from("socials")
+		.select()
+		.returns<Socials[]>();
+
+	cachedSocials = result;
+	lastFetchTime = now;
+
+	return result;
+}
