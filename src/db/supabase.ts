@@ -6,6 +6,28 @@ const supabaseKey = import.meta.env.SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
+// In-memory cache for SSR pages to prevent redundant Supabase calls
+// This is critical because SSR pages like index.astro run shared components (like Footer.astro)
+// on every request, executing the same queries over and over again.
+const queryCache = new Map<string, { data: any; error: any; timestamp: number }>();
+const CACHE_TTL_MS = 60 * 1000; // 60 seconds
+
+export async function getCachedSocials(): Promise<{ data: Socials[] | null; error: any }> {
+	const cacheKey = "socials_all";
+	const now = Date.now();
+
+	const cached = queryCache.get(cacheKey);
+	if (cached && (now - cached.timestamp < CACHE_TTL_MS)) {
+		return { data: cached.data, error: cached.error };
+	}
+
+	const { data, error } = await supabase.from("socials").select().returns<Socials[]>();
+
+	queryCache.set(cacheKey, { data, error, timestamp: now });
+
+	return { data, error };
+}
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
 export type Database = {

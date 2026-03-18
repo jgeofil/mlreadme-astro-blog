@@ -1,0 +1,3 @@
+## 2024-03-18 - SSR Subcomponents Trigger Redundant Database Queries
+**Learning:** In Astro, when a page has `export const prerender = false` (making it SSR), all of its components are evaluated on every request. If a shared component (like a Footer or Header) makes direct database queries (e.g., Supabase `.from()`), this results in redundant database calls for every page load, creating a severe performance bottleneck.
+**Action:** Always implement an in-memory caching layer with a TTL (e.g., in `src/db/supabase.ts`) for queries used by shared components on SSR pages to mitigate unnecessary database load and improve response times.

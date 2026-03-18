@@ -1,6 +1,6 @@
 ---
 import Icon from "./base/Icon.astro";
-import { supabase, type Socials } from "@db/supabase";
+import { getCachedSocials, type Socials } from "@db/supabase";
 import Social from "./utilities/Social.astro";
 const today = new Date();
 
@@ -18,10 +18,7 @@ const {
 	],
 } = Astro.props;
 
-const { data, error } = await supabase
-	.from("socials")
-	.select()
-	.returns<Socials[]>();
+const { data, error } = await getCachedSocials();
 ---
 
 <footer class="w-full h-full bg-neutral-100">
