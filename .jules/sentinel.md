@@ -1,0 +1,4 @@
+## 2026-03-19 - Avoid using set:html with string interpolation in Astro components
+**Vulnerability:** XSS (Cross-Site Scripting) vulnerability potential due to using `set:html` attribute combined with string interpolation (`<span class="${dynamic}">${text}</span>`).
+**Learning:** `set:html` bypasses Astro's built-in HTML escaping. When combined with string interpolation of unescaped variables like a `tagline` prop, it opens up a critical XSS vector if the input comes from an untrusted source.
+**Prevention:** Use standard Astro JSX element structure and dynamic classes (e.g., `<span class={dynamic}>{text}</span>`) to ensure proper HTML escaping of variable content by Astro's compiler.
