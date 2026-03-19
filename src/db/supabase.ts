@@ -1,4 +1,3 @@
-
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.SUPABASE_URL;
@@ -6,157 +5,226 @@ const supabaseKey = import.meta.env.SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
+// Cache for socials since shared components (like Footer) run this query on every request
+// for SSR pages (e.g., export const prerender = false)
+const socialsCache: {
+  data: Socials[] | null;
+  timestamp: number;
+  promise: Promise<{ data: Socials[] | null; error: any }> | null;
+} = {
+  data: null,
+  timestamp: 0,
+  promise: null,
+};
 
-export type Database = {
-	public: {
-		Tables: {
-			categories: {
-				Row: {
-					children: number[] | null
-					created_at: string
-					description: string | null
-					id: number
-					name: string | null
-					top: boolean | null
-				}
-				Insert: {
-					children?: number[] | null
-					created_at?: string
-					description?: string | null
-					id?: number
-					name?: string | null
-					top?: boolean | null
-				}
-				Update: {
-					children?: number[] | null
-					created_at?: string
-					description?: string | null
-					id?: number
-					name?: string | null
-					top?: boolean | null
-				}
-				Relationships: []
-			}
-			socials: {
-				Row: {
-					color: string
-					created_at: string
-					id: number
-					name: string
-					profile: string | null
-					url: string | null
-				}
-				Insert: {
-					color: string
-					created_at?: string
-					id?: number
-					name: string
-					profile?: string | null
-					url?: string | null
-				}
-				Update: {
-					color?: string
-					created_at?: string
-					id?: number
-					name?: string
-					profile?: string | null
-					url?: string | null
-				}
-				Relationships: []
-			}
-		}
-		Views: {
-			[_ in never]: never
-		}
-		Functions: {
-			[_ in never]: never
-		}
-		Enums: {
-			[_ in never]: never
-		}
-		CompositeTypes: {
-			[_ in never]: never
-		}
-	}
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+export async function getCachedSocials() {
+  const now = Date.now();
+
+  // If we have valid cached data, return it
+  if (socialsCache.data && now - socialsCache.timestamp < CACHE_TTL) {
+    return { data: socialsCache.data, error: null };
+  }
+
+  // If a fetch is already in progress, wait for it
+  if (socialsCache.promise) {
+    return socialsCache.promise;
+  }
+
+  // Otherwise, start a new fetch
+  socialsCache.promise = supabase
+    .from("socials")
+    .select()
+    .then(({ data, error }) => {
+      if (!error && data) {
+				socialsCache.data = data as Socials[];
+        socialsCache.timestamp = Date.now();
+      }
+      socialsCache.promise = null;
+			return { data: data as Socials[] | null, error };
+		}) as Promise<{ data: Socials[] | null; error: any }>;
+
+  return socialsCache.promise;
 }
 
-type PublicSchema = Database[Extract<keyof Database, 'public'>]
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
+export type Database = {
+  public: {
+    Tables: {
+      categories: {
+        Row: {
+          children: number[] | null;
+          created_at: string;
+          description: string | null;
+          id: number;
+          name: string | null;
+          top: boolean | null;
+        };
+        Insert: {
+          children?: number[] | null;
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name?: string | null;
+          top?: boolean | null;
+        };
+        Update: {
+          children?: number[] | null;
+          created_at?: string;
+          description?: string | null;
+          id?: number;
+          name?: string | null;
+          top?: boolean | null;
+        };
+        Relationships: [];
+      };
+      socials: {
+        Row: {
+          color: string;
+          created_at: string;
+          id: number;
+          name: string;
+          profile: string | null;
+          url: string | null;
+        };
+        Insert: {
+          color: string;
+          created_at?: string;
+          id?: number;
+          name: string;
+          profile?: string | null;
+          url?: string | null;
+        };
+        Update: {
+          color?: string;
+          created_at?: string;
+          id?: number;
+          name?: string;
+          profile?: string | null;
+          url?: string | null;
+        };
+        Relationships: [];
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
+  };
+};
+
+type PublicSchema = Database[Extract<keyof Database, "public">];
 
 export type Tables<
-	PublicTableNameOrOptions extends keyof (PublicSchema['Tables'] & PublicSchema['Views']) | { schema: keyof Database },
-	TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-		? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] & Database[PublicTableNameOrOptions['schema']]['Views'])
-		: never = never
+  PublicTableNameOrOptions extends
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-	? (Database[PublicTableNameOrOptions['schema']]['Tables'] & Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
-			Row: infer R
-		}
-		? R
-		: never
-	: PublicTableNameOrOptions extends keyof (PublicSchema['Tables'] & PublicSchema['Views'])
-		? (PublicSchema['Tables'] & PublicSchema['Views'])[PublicTableNameOrOptions] extends {
-				Row: infer R
-			}
-			? R
-			: never
-		: never
+  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R;
+    }
+    ? R
+    : never
+  : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R;
+      }
+      ? R
+      : never
+    : never;
 
 export type TablesInsert<
-	PublicTableNameOrOptions extends keyof PublicSchema['Tables'] | { schema: keyof Database },
-	TableName extends PublicTableNameOrOptions extends { schema: keyof Database } ? keyof Database[PublicTableNameOrOptions['schema']]['Tables'] : never = never
+  PublicTableNameOrOptions extends
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-	? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-			Insert: infer I
-		}
-		? I
-		: never
-	: PublicTableNameOrOptions extends keyof PublicSchema['Tables']
-		? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
-				Insert: infer I
-			}
-			? I
-			: never
-		: never
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I;
+    }
+    ? I
+    : never
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I;
+      }
+      ? I
+      : never
+    : never;
 
 export type TablesUpdate<
-	PublicTableNameOrOptions extends keyof PublicSchema['Tables'] | { schema: keyof Database },
-	TableName extends PublicTableNameOrOptions extends { schema: keyof Database } ? keyof Database[PublicTableNameOrOptions['schema']]['Tables'] : never = never
+  PublicTableNameOrOptions extends
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-	? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
-			Update: infer U
-		}
-		? U
-		: never
-	: PublicTableNameOrOptions extends keyof PublicSchema['Tables']
-		? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
-				Update: infer U
-			}
-			? U
-			: never
-		: never
+  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U;
+    }
+    ? U
+    : never
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U;
+      }
+      ? U
+      : never
+    : never;
 
 export type Enums<
-	PublicEnumNameOrOptions extends keyof PublicSchema['Enums'] | { schema: keyof Database },
-	EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database } ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums'] : never = never
+  PublicEnumNameOrOptions extends
+    | keyof PublicSchema["Enums"]
+    | { schema: keyof Database },
+  EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
-	? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
-	: PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
-		? PublicSchema['Enums'][PublicEnumNameOrOptions]
-		: never
+  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never;
 
 export type CompositeTypes<
-	PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes'] | { schema: keyof Database },
-	CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-		schema: keyof Database
-	}
-		? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
-		: never = never
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
 > = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-	? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
-	: PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
-		? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
-		: never
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never;
 
-export type Categories = Tables<'categories'>
-export type Socials = Tables<'socials'>
+export type Categories = Tables<"categories">;
+export type Socials = Tables<"socials">;
