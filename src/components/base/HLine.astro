@@ -1,11 +1,10 @@
 ---
-const { tagline = 'Section 1', center = 'c' } = Astro.props
-
-const text = `<span class="px-5 pr-6 ${center == 'c' ? 'shrink-0' : ''}">${tagline}</span>`
+// Security Enhancement: Removed set:html to prevent XSS vulnerability with unescaped tagline prop
+const { tagline = "Section 1", center = "c" } = Astro.props;
 ---
 
 <span class="flex items-center">
-	{center == 'r' || center == 'c' ? <span class="h-px flex-1 bg-black" /> : ''}
-	<span set:html={text} />
-	{center == 'l' || center == 'c' ? <span class="h-px flex-1 bg-black" /> : ''}
+  {center == "r" || center == "c" ? <span class="h-px flex-1 bg-black" /> : ""}
+  <span class={`px-5 pr-6 ${center == "c" ? "shrink-0" : ""}`}>{tagline}</span>
+  {center == "l" || center == "c" ? <span class="h-px flex-1 bg-black" /> : ""}
 </span>
