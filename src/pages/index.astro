@@ -8,7 +8,7 @@ import banner from 'public/images/banner.png'
 ---
 
 <General title={SITE_TITLE} , description={SITE_DESCRIPTION}>
-	<Image class="w-screen" slot="head-slot" src={banner} quality="max" , alt="ML Readme Logo" />
+	<Image class="w-screen" slot="head-slot" src={banner} quality="max" loading="eager" fetchpriority="high" alt="ML Readme Logo" />
 	<section class="flex flex-col">
 		<h1>Machine learning and AI</h1>
 

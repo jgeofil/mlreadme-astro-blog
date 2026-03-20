@@ -160,3 +160,42 @@ export type CompositeTypes<
 
 export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
+
+// In-memory cache for socials
+let cachedSocials: Socials[] | null = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 60000; // 60 seconds
+let fetchSocialsPromise: Promise<{ data: Socials[] | null; error: any }> | null = null;
+
+/**
+ * Fetches socials from Supabase with an in-memory cache and promise deduplication.
+ * Prevents "stampeding herd" issues on SSR pages with shared components like Footer.
+ */
+export async function getSocials(): Promise<{ data: Socials[] | null; error: any }> {
+	const now = Date.now();
+
+	if (cachedSocials && now - lastFetchTime < CACHE_TTL) {
+		return { data: cachedSocials, error: null };
+	}
+
+	if (!fetchSocialsPromise) {
+		// Promise.resolve wrapper because supabase query returns PromiseLike, not a real Promise
+		fetchSocialsPromise = Promise.resolve(supabase
+			.from("socials")
+			.select())
+			.then(({ data, error }) => {
+				if (data) {
+					cachedSocials = data;
+					lastFetchTime = Date.now();
+				}
+				fetchSocialsPromise = null;
+				return { data, error };
+			})
+			.catch((error) => {
+				fetchSocialsPromise = null;
+				return { data: null, error };
+			});
+	}
+
+	return fetchSocialsPromise;
+}
