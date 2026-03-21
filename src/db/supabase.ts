@@ -160,3 +160,40 @@ export type CompositeTypes<
 
 export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
+
+// In-memory caching for socials query to prevent stampeding herds on SSR pages
+let socialsCache: Socials[] | null = null;
+let socialsCacheTimestamp: number = 0;
+let socialsPromise: Promise<{ data: Socials[] | null; error: any }> | null = null;
+
+const CACHE_TTL = 1000 * 60 * 5; // 5 minutes
+
+export async function getCachedSocials() {
+	const now = Date.now();
+
+	// Return cached data if valid
+	if (socialsCache && (now - socialsCacheTimestamp < CACHE_TTL)) {
+		return { data: socialsCache, error: null };
+	}
+
+	// Deduplicate in-flight promises
+	if (socialsPromise) {
+		return socialsPromise;
+	}
+
+	// Fetch data and cache promise
+	socialsPromise = Promise.resolve(supabase
+		.from("socials")
+		.select()
+		.returns<Socials[]>())
+		.then(({ data, error }) => {
+			if (data && !error) {
+				socialsCache = data;
+				socialsCacheTimestamp = Date.now();
+			}
+			socialsPromise = null; // Clear promise once resolved
+			return { data, error };
+		});
+
+	return socialsPromise;
+}

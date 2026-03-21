@@ -1,0 +1,3 @@
+## 2024-05-20 - Prevent Stampeding Herds on SSR Shared Components
+**Learning:** Shared components (like Footer.astro) executed during Server-Side Rendering (SSR) pages trigger separate concurrent component-level database queries (e.g. `supabase.from("socials")`). Without promise deduplication, this triggers multiple redundant queries to the database simultaneously before the first query can resolve and populate a cache.
+**Action:** When adding caching to SSR database queries (like Supabase operations), always cache the *in-flight promise* alongside the final data to ensure concurrent calls await the single initial request instead of duplicating work.
