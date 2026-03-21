@@ -208,18 +208,16 @@ export async function getCachedSocials() {
   }
 
   // Fetch data and cache promise
-	socialsPromise = Promise.resolve(supabase
-    .from("socials")
-    .select()
-		.returns<Socials[]>())
-    .then(({ data, error }) => {
-      if (data && !error) {
-        socialsCache = data;
-        socialsCacheTimestamp = Date.now();
-      }
-      socialsPromise = null; // Clear promise once resolved
-      return { data, error };
-    });
+  socialsPromise = Promise.resolve(
+    supabase.from("socials").select().returns<Socials[]>(),
+  ).then(({ data, error }) => {
+    if (data && !error) {
+      socialsCache = data;
+      socialsCacheTimestamp = Date.now();
+    }
+    socialsPromise = null; // Clear promise once resolved
+    return { data, error };
+  });
 
   return socialsPromise;
 }
