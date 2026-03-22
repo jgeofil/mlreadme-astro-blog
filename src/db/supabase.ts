@@ -36,6 +36,10 @@ export async function getCachedSocials() {
       }
       socialsPromise = null;
       return { data, error };
+    })
+    .catch((err) => {
+      socialsPromise = null;
+      return { data: null, error: err };
     }) as Promise<any>;
 
   return socialsPromise;
