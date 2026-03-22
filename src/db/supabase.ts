@@ -25,22 +25,23 @@ export async function getCachedSocials() {
     return socialsPromise;
   }
 
-  socialsPromise = supabase
-    .from("socials")
-    .select()
-    .returns<Socials[]>()
-    .then(({ data, error }) => {
-      if (!error && data) {
-        cachedSocials = data;
-        socialsCacheTime = Date.now();
-      }
-      socialsPromise = null;
-      return { data, error };
-    })
-    .catch((err) => {
-      socialsPromise = null;
-      return { data: null, error: err };
-    }) as Promise<any>;
+  socialsPromise = Promise.resolve(
+    supabase
+      .from("socials")
+      .select()
+      .returns<Socials[]>()
+      .then(({ data, error }) => {
+        if (!error && data) {
+          cachedSocials = data;
+          socialsCacheTime = Date.now();
+        }
+        socialsPromise = null;
+        return { data, error };
+      })
+  ).catch((err) => {
+    socialsPromise = null;
+    return { data: null, error: err };
+  });
 
   return socialsPromise;
 }
