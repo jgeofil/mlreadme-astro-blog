@@ -1,0 +1,3 @@
+## 2025-03-09 - In-Memory Cache for Supabase in Shared SSR Components
+**Learning:** Shared components (like Footer.astro) rendered on Server-Side Rendered (SSR) pages execute their Supabase queries on every request. This can cause redundant database queries and "stampeding herd" issues when multiple concurrent requests hit the SSR endpoint before the first query resolves.
+**Action:** Always implement an in-memory caching layer with promise deduplication (caching the in-flight promise itself) and a Time-To-Live (TTL) inside the `src/db/supabase.ts` database client logic to shield the database from spikes in SSR traffic.

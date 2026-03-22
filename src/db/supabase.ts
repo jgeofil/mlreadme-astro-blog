@@ -8,6 +8,44 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
+// --- Caching layer for SSR ---
+let cachedSocials: any = null;
+let socialsCacheTime = 0;
+const SOCIALS_CACHE_TTL = 60 * 1000; // 60 seconds
+let socialsPromise: Promise<any> | null = null;
+
+export async function getCachedSocials() {
+  const now = Date.now();
+  if (cachedSocials && now - socialsCacheTime < SOCIALS_CACHE_TTL) {
+    return { data: cachedSocials, error: null };
+  }
+
+  // Deduplicate in-flight requests (prevent stampeding herd)
+  if (socialsPromise) {
+    return socialsPromise;
+  }
+
+  socialsPromise = Promise.resolve(
+    supabase
+      .from("socials")
+      .select()
+      .returns<Socials[]>()
+      .then(({ data, error }) => {
+        if (!error && data) {
+          cachedSocials = data;
+          socialsCacheTime = Date.now();
+        }
+        socialsPromise = null;
+        return { data, error };
+      })
+  ).catch((err) => {
+    socialsPromise = null;
+    return { data: null, error: err };
+  });
+
+  return socialsPromise;
+}
+
 export type Database = {
 	public: {
 		Tables: {
