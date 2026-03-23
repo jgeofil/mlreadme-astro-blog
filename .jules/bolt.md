@@ -1,3 +1,0 @@
-## 2024-03-23 - Prevent SSR Database Query Stampeding Herds
-**Learning:** In Astro SSR pages (like index.astro), shared components (like Footer) executing raw Supabase queries can lead to a 'stampeding herd' effect under load where concurrent requests spawn multiple identical un-cached database queries before the first one resolves.
-**Action:** Implemented promise deduplication and a 1-minute TTL in-memory caching wrapper (`getCachedSocials`) around the `supabase.from()` calls used by shared components. Always consider caching the in-flight Promise itself, not just the eventual data response, to properly protect the database from concurrent request spikes.
