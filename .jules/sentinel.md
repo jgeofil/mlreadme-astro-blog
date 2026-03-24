@@ -1,0 +1,4 @@
+## 2024-05-14 - XSS Vulnerability in Astro Templates via set:html
+**Vulnerability:** A Cross-Site Scripting (XSS) vulnerability was found in an Astro component where `set:html` was used with string interpolation.
+**Learning:** `set:html` inherently bypasses Astro's default HTML escaping, and directly passing interpolated template strings (like `<span class="${dynamic}">${text}</span>`) containing user-controlled props exposes the application to XSS attacks if those props are not sanitized.
+**Prevention:** Avoid `set:html` where possible. Prefer standard Astro/JSX component structure and rely on dynamic classes (`<span class={dynamic}>{text}</span>`) which automatically handle proper escaping and structure.
