@@ -1,0 +1,16 @@
+$ astro dev
+09:08:29 [types] Generated 1ms
+09:08:30 [content] Syncing content
+09:08:30 [feed-loader] Loading posts
+09:08:30 [content] Synced content
+
+ astro  v5.18.1 ready in 1510 ms
+
+┃ Local    http://localhost:3000/
+┃ Network  http://192.168.0.2:3000/
+
+09:08:30 watching for file changes...
+09:08:56 [200] / 338ms
+09:08:57 [200] /_image 283ms
+09:08:57 [200] /_image 327ms
+09:08:57 [200] /_image 455ms
