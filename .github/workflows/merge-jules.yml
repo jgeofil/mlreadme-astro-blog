@@ -1,4 +1,7 @@
 name: Merge Jules
+permissions:
+  contents: write
+  pull-requests: write
 on:
   workflow_dispatch:
   push:
@@ -8,37 +11,61 @@ on:
 jobs:
   merge-palette:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'palette' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'palette'))
+      }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
-      - uses: bobvanderlinden/combine-pull-requests@v4
+      - uses: bobvanderlinden/combine-pull-requests@86bb841267b2d5d8fb8513e9a0f0ce1fc4143a50
         with:
           label: palette
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   merge-sentinel:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'sentinel' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'sentinel'))
+      }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
-      - uses: bobvanderlinden/combine-pull-requests@v4
+      - uses: bobvanderlinden/combine-pull-requests@86bb841267b2d5d8fb8513e9a0f0ce1fc4143a50
         with:
           label: sentinel
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   merge-bolt:
       runs-on: ubuntu-latest
-      if: ${{ github.event_name == 'push' || github.event.label.name == 'bolt' }}
+      permissions:
+        contents: write
+        pull-requests: write
+      if: >-
+        ${{
+          github.event_name == 'push' ||
+          github.event_name == 'workflow_dispatch' ||
+          (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'bolt'))
+        }}
       steps:
-        - uses: actions/checkout@v2
+        - uses: actions/checkout@v4
           with:
             ref: main
             fetch-depth: 0
-        - uses: bobvanderlinden/combine-pull-requests@v4
+        - uses: bobvanderlinden/combine-pull-requests@86bb841267b2d5d8fb8513e9a0f0ce1fc4143a50
           with:
             label: bolt
             repo-token: ${{ secrets.GITHUB_TOKEN }}
