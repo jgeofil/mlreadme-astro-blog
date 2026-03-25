@@ -205,9 +205,10 @@ export async function getCachedSocials(): Promise<Socials[]> {
     return socialsPromise;
   }
 
-  socialsPromise = Promise.resolve(
-    supabase.from("socials").select().returns<Socials[]>(),
-  )
+  socialsPromise = supabase
+    .from("socials")
+    .select()
+    .returns<Socials[]>()
     .then(({ data, error }) => {
       if (error) throw error;
       const result = data || [];
