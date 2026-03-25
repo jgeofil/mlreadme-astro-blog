@@ -8,6 +8,6 @@ const { social } = Astro.props as Props
 import Icon from '@components/base/Icon.astro'
 ---
 
-<a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+<a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name || 'Social Link'}>
 	<Icon name={social.name} href={social.color} />
 </a>
