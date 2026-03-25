@@ -182,10 +182,10 @@ export async function getCachedSocials() {
 	}
 
 	// Fetch data and cache promise
-	socialsPromise = Promise.resolve(supabase
+	socialsPromise = supabase
 		.from("socials")
 		.select()
-		.returns<Socials[]>())
+		.returns<Socials[]>()
 		.then(({ data, error }) => {
 			if (data && !error) {
 				socialsCache = data;
