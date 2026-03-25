@@ -1,4 +1,7 @@
 name: Merge Jules
+permissions:
+  contents: write
+  pull-requests: write
 on:
   workflow_dispatch:
   push:
@@ -11,7 +14,12 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'palette' }}
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'palette'))
+      }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,7 +34,12 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'sentinel' }}
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'sentinel'))
+      }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,7 +54,12 @@ jobs:
       permissions:
         contents: write
         pull-requests: write
-      if: ${{ github.event_name == 'push' || github.event.label.name == 'bolt' }}
+      if: >-
+        ${{
+          github.event_name == 'push' ||
+          github.event_name == 'workflow_dispatch' ||
+          (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'bolt'))
+        }}
       steps:
         - uses: actions/checkout@v4
           with:
