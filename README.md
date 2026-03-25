@@ -7,5 +7,5 @@ Whether you're a seasoned professional looking to refine your skills or a beginn
 
 At ML Readme, we believe in the power of knowledge sharing and community building. Join us as we demystify complex AI concepts, share practical tips and tricks, and help you unlock your full potential in the world of machine learning. Start exploring our blog today and let's grow together!
 
-## Astro blog 
+## Astro blog
 Source code for the website in the Astro framework.
