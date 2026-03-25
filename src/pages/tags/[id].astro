@@ -20,8 +20,8 @@ const posts = allPosts.filter((post) =>
 ---
 
 <General
-  title={"Tag | " + tag}
-  description={"List of blog posts with the tag " + tag}
+  title={"Tag | " + tag.data.name}
+  description={"List of blog posts with the tag " + tag.data.name}
 >
   <section>
     <h1>{tag.data.name}</h1>
