@@ -18,7 +18,7 @@ jobs:
         with:
           label: palette
           repo-token: ${{ secrets.GITHUB_TOKEN }}
- merge-sentinel:
+  merge-sentinel:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event.label.name == 'sentinel' }}
     steps:
@@ -30,15 +30,15 @@ jobs:
         with:
           label: sentinel
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-merge-bolt:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'bolt' }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: main
-          fetch-depth: 0
-      - uses: bobvanderlinden/combine-pull-requests@v4
-        with:
-          label: bolt
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+  merge-bolt:
+      runs-on: ubuntu-latest
+      if: ${{ github.event_name == 'push' || github.event.label.name == 'bolt' }}
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            ref: main
+            fetch-depth: 0
+        - uses: bobvanderlinden/combine-pull-requests@v4
+          with:
+            label: bolt
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
