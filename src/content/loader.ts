@@ -13,11 +13,11 @@ export function blogLoader(params: { pattern: string; base: string }): Loader {
 			await globLoader.load(loaderContext)
 
 			return loaderContext.store.entries().forEach(([id, entry]) => {
-   				if (entry.data.draft && production) {
-   					loaderContext.logger.info(`Skipping draft post ${id}`)
-   					loaderContext.store.delete(id)
-   				}
-   			});
+				if (entry.data.draft && production) {
+					loaderContext.logger.info(`Skipping draft post ${id}`)
+					loaderContext.store.delete(id)
+				}
+			});
 
 		}
 	}
