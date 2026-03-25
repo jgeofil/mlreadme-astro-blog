@@ -23,7 +23,7 @@ const linkClasses = "not-prose my-4 flex gap-10 rounded-lg border-[1px] border-b
 
 {
 	result ? (
-		<a href={result.url} target={isExternal ? "_blank" : null} rel={isExternal ? "noopener noreferrer" : null} class={linkClasses}>
+		<a href={result.url} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} class={linkClasses}>
 			<img class="hidden h-36 w-36 rounded-lg object-cover md:block" src={result.image ?? result.icon} alt={result.image} />
 			<div class="prose flex flex-col gap-y-2 overflow-hidden">
 				<strong class="">{result.title}</strong>
@@ -35,7 +35,7 @@ const linkClasses = "not-prose my-4 flex gap-10 rounded-lg border-[1px] border-b
 			</div>
 		</a>
 	) : (
-		<a href={url} target={isExternal ? "_blank" : null} rel={isExternal ? "noopener noreferrer" : null} class={linkClasses}>
+		<a href={url} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} class={linkClasses}>
 			<div class="prose flex flex-col gap-y-2 overflow-hidden">
 				<strong class="">{name ?? url}</strong>
 				<div class="text-sm underline">{url}</div>
