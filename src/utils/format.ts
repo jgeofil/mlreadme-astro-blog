@@ -7,9 +7,5 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 export const formatDate = function (date: Date) {
-	return date.toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
+	return dateFormatter.format(date);
 };

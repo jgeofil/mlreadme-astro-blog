@@ -30,14 +30,14 @@
 	"name": "@mlreadme/blog",
 	"private": true,
 	"scripts": {
-		"build": "bun clean  && astro build",
+		"build": "bun run clean && astro build",
 		"check": "bun run format && bun run lint",
 		"clean": "rm -rf .astro dist",
 		"dev": "astro dev",
 		"format": "prettier --write .",
 		"lint": "astro check",
 		"preview": "astro preview",
-		"start": "dev",
+		"start": "bun run dev",
 		"sync": "bun run clean && astro sync",
 		"test": "playwright test",
 		"test:ui": "playwright test --ui"
