@@ -17,7 +17,16 @@ try {
 }
 
 // Only apply new tab attributes to external links to maintain expected UX
-const isExternal = url.startsWith("http") && !url.includes("mlread.me");
+const href = result?.url ?? url;
+let isExternal = false;
+try {
+	const u = new URL(href);
+	isExternal = (u.protocol === "http:" || u.protocol === "https:") && u.hostname !== "mlread.me" && !u.hostname.endsWith(".mlread.me");
+} catch (e) {
+	// If URL construction fails, fallback to false
+	isExternal = false;
+}
+
 const linkClasses = "not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit";
 ---
 
