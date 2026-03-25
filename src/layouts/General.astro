@@ -25,25 +25,5 @@ const { title, description } = Astro.props
 			<slot />
 		</main>
 		<Footer />
-		<!-- Floating Button (Popup) -->
-		<!-- Add this script to your website. A floating feedback button will appear in the bottom-right corner. -->
-		<script is:inline>
-			;(function () {
-				var s = document.createElement('script')
-				s.src = 'https://test.productbridge.io/sdk/pb-widget.js'
-				s.async = true
-				s.onload = function () {
-					ProductBridge.init({
-						organizationId: '1a4674fd-f8ee-450f-9976-f9d6af4410eb',
-						position: 'bottom-right',
-						theme: 'auto',
-						defaultTab: 'feedback',
-						buttonColor: '#3B82F6',
-						buttonText: 'Feedback',
-					})
-				}
-				document.head.appendChild(s)
-			})()
-		</script>
 	</body>
 </html>
