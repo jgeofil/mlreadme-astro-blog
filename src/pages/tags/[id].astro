@@ -1,6 +1,6 @@
 ---
 export const prerender = true;
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import General from "../../layouts/General.astro";
 import PostCard from "@components/utilities/PostCard.astro";
 export async function getStaticPaths() {
@@ -15,7 +15,7 @@ const { tag } = Astro.props;
 
 const allPosts = await getCollection("blog");
 const posts = allPosts.filter((post) =>
-  post.data.tags.map((t: any) => t.id).includes(tag.id),
+  post.data.tags.map((t: CollectionEntry<"tags">) => t.id).includes(tag.id),
 );
 ---
 
