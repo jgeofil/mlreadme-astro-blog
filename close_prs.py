@@ -12,10 +12,10 @@ def get_token():
     try:
         with open(os.path.expanduser('~/.git-credentials')) as f:
             for line in f:
-                if 'github.com' in line:
+                if line.endswith('@github.com') or line.endswith('@github.com\n'):
                     # https://user:token@github.com
                     parts = line.strip().split('@')
-                    if len(parts) == 2:
+                    if len(parts) == 2 and parts[1] == 'github.com':
                         userpass = parts[0].split('//')[-1]
                         if ':' in userpass:
                             return userpass.split(':')[1]
