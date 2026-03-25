@@ -8,6 +8,8 @@ export const SITE_DESCRIPTION =
 export const TAGGIN_SERVER = 'https://server-side-tagging-iefkv43amq-uc.a.run.app'
 export const TYPEFACE = 'ML Readme'
 
+
+
 export default {
 	TAGGIN_SERVER,
 	SITE_URL,

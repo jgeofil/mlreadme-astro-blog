@@ -1,5 +1,6 @@
 name: Merge PR
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -7,7 +8,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event.label.name == 'experiment' }}
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'experiment'))
+      }}
     steps:
       - uses: actions/checkout@v2
         with:
