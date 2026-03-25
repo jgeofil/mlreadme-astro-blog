@@ -6,6 +6,4 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
 });
 
-export const formatDate = function (date: Date) {
-  return dateFormatter.format(date);
-};
+export const formatDate = (date: Date) => dateFormatter.format(date);
