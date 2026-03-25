@@ -162,7 +162,7 @@ export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
 
 // Cache variables for socials
-let socialsCache: Socials[] | null = null;
+let socialsCache: { data: Socials[] | null; error: any } | null = null;
 let socialsCacheTime = 0;
 let socialsPromise: Promise<{ data: Socials[] | null, error: any }> | null = null;
 const CACHE_TTL = 60 * 1000; // 1 minute TTL
@@ -175,7 +175,7 @@ const CACHE_TTL = 60 * 1000; // 1 minute TTL
  */
 export async function getCachedSocials() {
 	if (socialsCache && Date.now() - socialsCacheTime < CACHE_TTL) {
-		return { data: socialsCache, error: null };
+		return socialsCache;
 	}
 
 	if (socialsPromise) {
@@ -186,10 +186,8 @@ export async function getCachedSocials() {
 		supabase.from("socials").select().returns<Socials[]>()
 	)
 		.then((res) => {
-			if (res.data) {
-				socialsCache = res.data;
-				socialsCacheTime = Date.now();
-			}
+			socialsCache = res;
+			socialsCacheTime = Date.now();
 			return res as { data: Socials[] | null; error: any };
 		})
 		.finally(() => {
