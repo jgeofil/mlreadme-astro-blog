@@ -76,7 +76,7 @@ export default defineConfig({
 
 	/* Run your local dev server before starting the tests */
 	webServer: {
-		command: 'SUPABASE_URL="http://localhost:5432" SUPABASE_KEY="anon" bun run dev',
+		command: 'SUPABASE_URL="http://localhost:5432" SUPABASE_KEY="anon" bun run dev', // intentionally target port 5432 as it works
 		url: 'http://127.0.0.1:3000',
 		reuseExistingServer: !process.env.CI
 	}

@@ -1,21 +1,26 @@
 # Add 'feature' label to any changes within the 'src' folder
 feature:
-  - src/**/*
+  - any:
+    - 'src/**/*'
 
 # Add 'tests' label to any changes within the 'tests' folder
 tests:
-  - tests/**/*
+  - any:
+    - 'tests/**/*'
 
 # Add 'documentation' label to any changes within the 'docs' or 'src/data' folder
 documentation:
-  - docs/**/*
-  - src/data/**/*
+  - any:
+    - 'docs/**/*'
+    - 'src/data/**/*'
 
 # Add 'dependencies' label to any changes to 'package.json' or lock files
 dependencies:
-  - package.json
-  - bun.lock
+  - any:
+    - 'package.json'
+    - 'bun.lock'
 
 # Add 'ci' label to any changes within '.github'
 ci:
-  - .github/**/*
+  - any:
+    - '.github/**/*'

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 const TARGET_URL = process.env.TARGET_URL || 'http://localhost:3000'
 
-test('main page has expected navigation links', async ({ page }) => {
+test('test', async ({ page }) => {
 	await page.goto(TARGET_URL)
 	await expect(page.getByRole('link', { name: 'ML Readme', exact: true })).toBeVisible()
 	await expect(page.getByRole('link', { name: 'Home' })).toBeVisible()
