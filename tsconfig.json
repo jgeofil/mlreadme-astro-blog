@@ -1,17 +1,36 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@base/*": ["src/components/base/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@utils/*": ["src/utils/*"],
-      "@blocks/*": ["src/components/blocks/*"],
-      "@db/*": ["src/db/*"],
-      "@styles/*": ["src/styles/*"]
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@base/*": [
+        "src/components/base/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@blocks/*": [
+        "src/components/blocks/*"
+      ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
     },
     "allowJs": true,
     "verbatimModuleSyntax": false
