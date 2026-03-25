@@ -17,7 +17,7 @@ jobs:
         with:
           label: palette
           repo-token: ${{ secrets.GITHUB_TOKEN }}
- merge-palette:
+ merge-sentinel:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event.label.name == 'sentinel' }}
     steps:
@@ -29,7 +29,7 @@ jobs:
         with:
           label: sentinel
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-merge-palette:
+merge-bolt:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event.label.name == 'bolt' }}
     steps:
