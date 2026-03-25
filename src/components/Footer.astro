@@ -1,6 +1,6 @@
 ---
 import Icon from "./base/Icon.astro";
-import { getCachedSocials, type Socials } from "@db/supabase";
+import { supabase, type Socials } from "@db/supabase";
 import Social from "./utilities/Social.astro";
 const today = new Date();
 
@@ -18,7 +18,10 @@ const {
 	],
 } = Astro.props;
 
-const { data, error } = await getCachedSocials();
+const { data, error } = await supabase
+	.from("socials")
+	.select()
+	.returns<Socials[]>();
 ---
 
 <footer class="w-full h-full bg-neutral-100">
@@ -29,17 +32,13 @@ const { data, error } = await getCachedSocials();
 			<div class="float-left col-span-2 pb-2 h-34">
 				<h4>Subscribe to our newsletter</h4>
 				<form>
-					<label for="newsletter-email" class="sr-only">Email address</label>
 					<input
-						id="newsletter-email"
-						class="p-2 m-2 border border-blue-300 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+						class="p-2 m-2 border border-blue-300 rounded-md shadow"
 						type="email"
-						aria-label="Email address for newsletter"
-						placeholder="Your email address"
-						required
+						required="true"
 					/>
 					<button
-						class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+						class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl"
 						>Subscribe</button
 					>
 				</form>
