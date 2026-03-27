@@ -26,8 +26,8 @@ const posts = allPosts.filter((post) => post.data.tags.map((t) => t.id).includes
 				<section>
 					<h2>Posts in this section</h2>
 					<ul class="grid grid-cols-2 gap-2">
-						{posts.map((post) => (
-							<PostCard {...post} class="col-span-1" />
+						{posts.map((post, index) => (
+							<PostCard {...post} class="col-span-1" eagerLoad={index < 2} />
 						))}
 					</ul>
 				</section>

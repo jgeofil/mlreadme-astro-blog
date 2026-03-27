@@ -8,6 +8,6 @@ const posts = (await getCollection('blog')).sort((a, b) => a.data.pubDate.valueO
 
 <General title="Blog" description="Blog post index">
 	<div class="my-5 grid grid-cols-2 gap-4">
-		{posts.map((post) => <PostCard {...post} />)}
+		{posts.map((post, index) => <PostCard {...post} eagerLoad={index < 2} />)}
 	</div>
 </General>

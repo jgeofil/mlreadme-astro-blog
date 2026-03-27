@@ -36,8 +36,8 @@ const sectionPosts = allPosts.filter((post) => post.data.sections.id === section
 				<section>
 					<h2>Posts in this section</h2>
 					<ul class="grid grid-cols-2 gap-2">
-						{sectionPosts.map((post) => (
-							<PostCard {...post} class="col-span-1" />
+						{sectionPosts.map((post, index) => (
+							<PostCard {...post} class="col-span-1" eagerLoad={index < 2} />
 						))}
 					</ul>
 				</section>
