@@ -1,13 +1,13 @@
 ---
-import { type Socials } from '@db/supabase'
+import { type Socials } from "@db/supabase";
 
 interface Props {
-	social: Socials
+  social: Socials;
 }
-const { social } = Astro.props as Props
-import Icon from '@components/base/Icon.astro'
+const { social } = Astro.props as Props;
+import Icon from "@components/base/Icon.astro";
 ---
 
-<a href={social.url}>
-	<Icon name={social.name} href={social.color} />
+<a href={social.url} target="_blank" rel="noopener noreferrer">
+  <Icon name={social.name} href={social.color} />
 </a>
