@@ -11,3 +11,7 @@
 ## 2026-03-26 - Adding Eager Loading to Above-The-Fold Images
 **Learning:** Astro's `Image` component natively supports `loading="eager"` and `fetchpriority="high"`, but this is frequently forgotten on main entry points and list elements like article cards or the top image in a list. When images represent Largest Contentful Paint (LCP) and are displayed immediately, failing to add these attributes can have a big impact on LCP scores.
 **Action:** Always check components containing `Image` elements, particularly hero banners, avatars, or lists of cards, to see if they can benefit from `loading="eager"` and `fetchpriority="high"` for the initial/first items to improve the critical rendering path.
+
+## 2025-01-20 - Unbounded DOM growth from Astro collections in list views
+**Learning:** When fetching content collections (like `getCollection('blog')`) for simple list components (like a "recent posts" widget on the home page), iterating over the entire sorted collection causes O(N) rendering time and unbounded DOM size growth as the site content scales.
+**Action:** Always slice or limit the array immediately after sorting (e.g., `.slice(0, 4)`) when displaying small lists of content from large collections to keep rendering at O(1).
