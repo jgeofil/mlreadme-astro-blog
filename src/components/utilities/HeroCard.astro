@@ -2,9 +2,11 @@
 import { getCollection } from "astro:content";
 import { formatDate } from "@utils/format";
 import { Image } from "astro:assets";
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// ⚡ Bolt Optimization: Slicing the sorted collection limits the array to 4 items immediately
+// preventing O(N) operations and unbounded DOM growth as the blog collection scales.
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
 ---
 
 <section class="pt-6">
