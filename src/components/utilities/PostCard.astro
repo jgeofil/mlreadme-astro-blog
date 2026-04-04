@@ -15,8 +15,11 @@ interface Props {
 
 const { id, data, eager = false } = Astro.props;
 
-const postTags = await getEntries<"tags">(data.tags);
-const section = await getEntry("sections", data.sections.id);
+// ⚡ Bolt Optimization: Parallelize independent async data fetching to reduce waterfall latency
+const [postTags, section] = await Promise.all([
+  getEntries<"tags">(data.tags),
+  getEntry("sections", data.sections.id),
+]);
 ---
 
 <div class="max-w-2xl overflow-hidden rounded-lg bg-white shadow-md">
