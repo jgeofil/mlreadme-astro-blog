@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
 import banner from "public/images/banner.png";
 ---
 
-<General title={SITE_TITLE} , description={SITE_DESCRIPTION}>
+<General title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <!-- ⚡ Bolt Optimization: Eager load banner image for faster LCP -->
   <!-- Removed `quality="max"` to allow Astro to apply default compression and significantly reduce image payload size -->
   <Image
