@@ -15,3 +15,7 @@
 ## 2024-04-02 - Prefer .some() over .map().includes() for array matching
 **Learning:** Checking for inclusion in an array of objects by mapping properties first (e.g., `arr.map(x => x.id).includes(target)`) causes unnecessary memory allocations by creating an intermediate array and iterates through elements twice (first for mapping, then for checking inclusion). This is inefficient, especially when scaling up data.
 **Action:** Always prefer `.some()` (e.g., `arr.some(x => x.id === target)`) over `.map().includes()`. It stops execution early once a match is found and avoids allocating memory for a new intermediate array, ensuring both better speed and lower memory usage.
+
+## 2026-03-26 - Avoid quality="max" on large LCP images
+**Learning:** Using `quality="max"` on Astro `<Image>` components forces lossless or extremely high-quality rendering, which can result in massive payload sizes (e.g., 2.2MB for a banner) and significantly degrade the Largest Contentful Paint (LCP) performance.
+**Action:** Omit the `quality` attribute on large `<Image>` components to allow Astro's built-in image optimization pipeline to apply sensible default web compression, drastically reducing payload size without noticeable visual loss.
