@@ -7,11 +7,22 @@ interface Props {
 const { social } = Astro.props as Props;
 import Icon from "@components/base/Icon.astro";
 
-const safeUrl = social.url && (social.url.startsWith('http://') || social.url.startsWith('https://') || social.url.startsWith('/'))
-  ? social.url
-  : '#';
+const safeUrl =
+  social.url &&
+  (social.url.startsWith("http://") ||
+    social.url.startsWith("https://") ||
+    social.url.startsWith("/"))
+    ? social.url
+    : "#";
 ---
 
-<a href={safeUrl} target="_blank" rel="noopener noreferrer">
+<a
+  href={safeUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={social.name}
+  title={social.name}
+  class="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+>
   <Icon name={social.name} href={social.color} />
 </a>
