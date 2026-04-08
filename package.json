@@ -24,7 +24,7 @@
 		"@astrojs/sitemap": "^3.7.0",
 		"@astrojs/tailwind": "^5.1.5",
 		"@astrojs/ts-plugin": "^1.10.6",
-		"@astrojs/vercel": "^8.2.11",
+		"@astrojs/vercel": "^10.0.2",
 		"@flags-sdk/statsig": "^0.2.5",
 		"@supabase/supabase-js": "^2.98.0",
 		"@types/fetch-meta-tags": "^1.1.0",
