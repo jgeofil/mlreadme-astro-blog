@@ -6,6 +6,5 @@ const col = color ? '/' + String(color) : ''
 ---
 
 <div class="p-2 rounded-full">
-	{/* 🛡️ Sentinel: Fixed XSS vulnerability by using standard Astro JSX syntax to properly escape attributes */}
-	<Image height={height} width={width} src={`https://cdn.simpleicons.org/${name}${col}`} alt={`Icon ${name}`} />
+	<Image height={height} width={width} src=`https://cdn.simpleicons.org/${name}${col}` alt=`Icon ${name}` />
 </div>

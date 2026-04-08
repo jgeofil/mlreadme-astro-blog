@@ -15,16 +15,12 @@ export async function getStaticPaths() {
 
 const { section } = Astro.props;
 
-// ⚡ Bolt Optimization: Parallelize independent collection fetching to avoid waterfall delays
-const [allSections, allPosts] = await Promise.all([
-  getCollection("sections"),
-  getCollection("blog"),
-]);
-
 // Get child sections
+const allSections = await getCollection("sections");
 const childSections = allSections.filter((s) => s.data.parent === section.id);
 
 // Get blog posts for this section
+const allPosts = await getCollection("blog");
 const sectionPosts = allPosts
   .filter((post) => post.data.sections.id === section.id)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());

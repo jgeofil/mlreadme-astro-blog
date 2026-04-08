@@ -15,16 +15,12 @@ try {
 } catch (e) {
   console.warn(`[Bookmark] Failed to fetch metadata for ${url}:`, e);
 }
-
-const isSafeUrl = (u: string | null | undefined) => u && (u.startsWith('http://') || u.startsWith('https://') || u.startsWith('/'));
-const safeResultUrl = result && isSafeUrl(result.url) ? result.url : '#';
-const safePropUrl = isSafeUrl(url) ? url : '#';
 ---
 
 {
   result ? (
     <a
-      href={safeResultUrl}
+      href={result.url}
       target="_blank"
       rel="noopener noreferrer"
       class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit"
@@ -51,7 +47,7 @@ const safePropUrl = isSafeUrl(url) ? url : '#';
     </a>
   ) : (
     <a
-      href={safePropUrl}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit"

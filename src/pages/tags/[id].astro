@@ -15,8 +15,7 @@ const { tag } = Astro.props;
 
 const allPosts = await getCollection("blog");
 const posts = allPosts.filter((post) =>
-  // ⚡ Bolt Optimization: Use .some() instead of .map().includes() to prevent intermediate array allocation and allow for early exit
-  post.data.tags.some((t: { id: string }) => t.id === tag.id),
+  post.data.tags.map((t) => t.id).includes(tag.id),
 );
 ---
 

@@ -1,64 +1,43 @@
 ---
-export const prerender = false;
-import { getEntry } from "astro:content";
-import Tag from "@components/base/Tag.astro";
-import { formatDate } from "@utils/format";
-import { getEntries } from "astro:content";
+export const prerender = false
+import { getEntry } from 'astro:content'
+import Tag from '@components/base/Tag.astro'
+import { formatDate } from '@utils/format'
+import { getEntries } from 'astro:content'
 
-const { title, tags, sections, pubDate, dateUpdated, foreword } = Astro.props;
-
-// ⚡ Bolt Optimization: Parallelize independent async data fetching to reduce waterfall latency
-const [postTags, sectionData] = await Promise.all([
-  getEntries<"tags">(tags),
-  getEntry("sections", sections.id),
-]);
+const { title, tags, sections, pubDate, dateUpdated, foreword } = Astro.props
+const postTags = await getEntries<'tags'>(tags)
+const sectionData = await getEntry('sections', sections.id)
 ---
 
 <div class="radient2 mx-auto mb-6 h-auto w-screen">
-  <div class="mx-auto px-6 py-8 md:container md:max-w-5xl">
-    <h1>{title}</h1>
-    <div class="contents text-xs">
-      <div class="block">{formatDate(pubDate)}</div>{
-        dateUpdated && (
-          <div class="block">{"Updated: " + formatDate(dateUpdated)}</div>
-        )
-      }
-    </div>
-    <div class="block py-2">{sectionData.data.name}</div>
-  </div>
+	<div class="mx-auto px-6 py-8 md:container md:max-w-5xl">
+		<h1>{title}</h1>
+		<div class="contents text-xs">
+			<div class="block">{formatDate(pubDate)}</div>{dateUpdated && <div class="block">{'Updated: ' + formatDate(dateUpdated)}</div>}
+		</div>
+		<div class="block py-2">{sectionData.data.name}</div>
+	</div>
 </div>
 <div class="mx-auto my-6 px-6 py-2 md:container md:max-w-5xl">
-  <div class="flex flex-col">
-    <p class="text-lg font-light">{foreword}</p>
-  </div>
-  <div class="flex flex-col">
-    <div class="block">
-      {postTags.map((tag) => <Tag class={tag.data.color} {...tag.data} />)}
-    </div>
-  </div>
+	<div class="flex flex-col">
+		<p class="text-lg font-light">{foreword}</p>
+	</div>
+	<div class="flex flex-col">
+		<div class="block">
+			{postTags.map((tag) => <Tag class={tag.data.color} {...tag.data} />)}
+		</div>
+	</div>
 </div>
 
 <style lang="scss">
-  @use "sass:math";
-  .radient {
-    background-image:
-      url(https://grainy-gradients.vercel.app/noise.svg),
-      radial-gradient(
-        at left top,
-        rgb(50, 100, math.random(255)),
-        rgb(50, 200, math.random(255)),
-        rgb(50, 150, math.random(255))
-      );
-  }
-  .radient2 {
-    /* Gradient in Hex */
-    background-image: radial-gradient(
-      at right bottom,
-      #013668 0%,
-      30%,
-      #789a8a 60%,
-      80%,
-      #ffffff 100%
-    );
-  }
+	@use 'sass:math';
+	.radient {
+		background-image: url(https://grainy-gradients.vercel.app/noise.svg),
+			radial-gradient(at left top, rgb(50, 100, math.random(255)), rgb(50, 200, math.random(255)), rgb(50, 150, math.random(255)));
+	}
+	.radient2 {
+		/* Gradient in Hex */
+		background-image: radial-gradient(at right bottom, #013668 0%, 30%, #789a8a 60%, 80%, #ffffff 100%);
+	}
 </style>
