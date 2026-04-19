@@ -6,28 +6,33 @@ import Section from "../../components/base/Section.astro";
 import PostCard from "@components/utilities/PostCard.astro";
 
 export async function getStaticPaths() {
-  const sections = await getCollection("sections");
-  return sections.map((section) => ({
-    params: { id: section.id },
-    props: { section },
-  }));
+  // ⚡ Bolt Optimization: Move collection fetching and filtering into getStaticPaths.
+  // This changes build complexity from O(N^2) to O(N) by fetching the entire collection
+  // only once per build rather than once per generated page.
+  const [allSections, allPosts] = await Promise.all([
+    getCollection("sections"),
+    getCollection("blog"),
+  ]);
+
+  return allSections.map((section) => {
+    // Get child sections
+    const childSections = allSections.filter(
+      (s) => s.data.parent === section.id,
+    );
+
+    // Get blog posts for this section
+    const sectionPosts = allPosts
+      .filter((post) => post.data.sections.id === section.id)
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return {
+      params: { id: section.id },
+      props: { section, childSections, sectionPosts },
+    };
+  });
 }
 
-const { section } = Astro.props;
-
-// ⚡ Bolt Optimization: Parallelize independent collection fetching to avoid waterfall delays
-const [allSections, allPosts] = await Promise.all([
-  getCollection("sections"),
-  getCollection("blog"),
-]);
-
-// Get child sections
-const childSections = allSections.filter((s) => s.data.parent === section.id);
-
-// Get blog posts for this section
-const sectionPosts = allPosts
-  .filter((post) => post.data.sections.id === section.id)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const { section, childSections, sectionPosts } = Astro.props;
 ---
 
 <General
