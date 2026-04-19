@@ -29,3 +29,8 @@
 
 **Learning:** Sequential `await` calls for independent data fetching operations (like `getEntry`, `getEntries`, and `getCollection`) in Astro components cause unnecessary waterfall latency and delay the First Byte response.
 **Action:** Always parallelize independent asynchronous data fetching using `Promise.all()` to ensure they run concurrently, reducing overall rendering time without changing the component's output.
+
+## 2025-01-20 - Fetch Collections in getStaticPaths for SSG Build Optimization
+
+**Learning:** When generating multiple static pages using `getStaticPaths` (like `/tags/[id]` or `/sections/[id]`), calling `getCollection()` in the component body fetches and filters the entire collection for *every single generated page*. This changes build time complexity to O(N²), slowing down the build significantly as data scales.
+**Action:** Always fetch the entire required collections inside `getStaticPaths()` exactly once, perform any necessary iteration or filtering there, and pass the specific subsets or related items to the Astro component via `props`. This reduces the build complexity to O(N).
