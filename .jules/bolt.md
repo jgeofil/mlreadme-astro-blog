@@ -29,3 +29,8 @@
 
 **Learning:** Checking for inclusion in an array of objects by mapping properties first (e.g., `arr.map(x => x.id).includes(target)`) causes unnecessary memory allocations by creating an intermediate array and iterates through elements twice (first for mapping, then for checking inclusion). This is inefficient, especially when scaling up data.
 **Action:** Always prefer `.some()` (e.g., `arr.some(x => x.id === target)`) over `.map().includes()`. It stops execution early once a match is found and avoids allocating memory for a new intermediate array, ensuring both better speed and lower memory usage.
+
+## 2025-01-20 - Fetch Collections in getStaticPaths for SSG Build Optimization
+
+**Learning:** When generating multiple static pages using `getStaticPaths` (like `/tags/[id]` or `/sections/[id]`), calling `getCollection()` in the component body fetches and filters the entire collection for *every single generated page*. This changes build time complexity to O(N²), slowing down the build significantly as data scales.
+**Action:** Always fetch the entire required collections inside `getStaticPaths()` exactly once, perform any necessary iteration or filtering there, and pass the specific subsets or related items to the Astro component via `props`. This reduces the build complexity to O(N).
