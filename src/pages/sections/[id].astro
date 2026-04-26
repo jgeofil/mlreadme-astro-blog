@@ -14,16 +14,34 @@ export async function getStaticPaths() {
     getCollection("blog"),
   ]);
 
+  // ⚡ Bolt Optimization: Replace O(N^2) nested loops with O(N) hash map lookups
+  const postsBySection = new Map();
+  for (const post of allPosts) {
+    const secId = post.data.sections.id;
+    if (!postsBySection.has(secId)) postsBySection.set(secId, []);
+    postsBySection.get(secId).push(post);
+  }
+
+  for (const posts of postsBySection.values()) {
+    posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  }
+
+  const childrenByParent = new Map();
+  for (const section of allSections) {
+    const parentId = section.data.parent?.id;
+    if (parentId) {
+      if (!childrenByParent.has(parentId))
+        childrenByParent.set(parentId, []);
+      childrenByParent.get(parentId).push(section);
+    }
+  }
+
   return allSections.map((section) => {
     // Get child sections
-    const childSections = allSections.filter(
-      (s) => s.data.parent?.id === section.id,
-    );
+    const childSections = childrenByParent.get(section.id) || [];
 
     // Get blog posts for this section
-    const sectionPosts = allPosts
-      .filter((post) => post.data.sections.id === section.id)
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    const sectionPosts = postsBySection.get(section.id) || [];
 
     return {
       params: { id: section.id },
