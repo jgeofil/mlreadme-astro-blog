@@ -1,23 +1,64 @@
 ---
-export const prerender = true
-import fetchMeta from 'fetch-meta-tags'
+import fetchMeta from "fetch-meta-tags";
 
 interface Props {
-	url: string
+  url: string;
+  name?: string;
 }
 
-const { url } = Astro.props
-const result = await fetchMeta(url)
+const { url, name } = Astro.props;
+
+let result: Awaited<ReturnType<typeof fetchMeta>> | null = null;
+try {
+  result = await fetchMeta(url);
+} catch (e) {
+  console.warn(`[Bookmark] Failed to fetch metadata for ${url}:`, e);
+}
+
+const isSafeUrl = (u: string | null | undefined) => u && (u.startsWith('http://') || u.startsWith('https://') || u.startsWith('/'));
+const safeResultUrl = result && isSafeUrl(result.url) ? result.url : '#';
+const safePropUrl = isSafeUrl(url) ? url : '#';
 ---
 
-<a href={result.url} class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit">
-	<img class="hidden h-36 w-36 rounded-lg object-cover md:block" src={result.image ?? result.icon} alt={result.image} />
-	<div class="prose flex flex-col gap-y-2 overflow-hidden">
-		<strong class="">{result.title}</strong>
-		<p class="h-10 overflow-hidden text-ellipsis text-sm">{result.description}</p>
-		<div class="flex items-center gap-2">
-			<img class="h-4 w-4 rounded object-cover" src={result.icon} alt={result.icon} />
-			<div class="text-sm underline">{result.url}</div>
-		</div>
-	</div>
-</a>
+{
+  result ? (
+    <a
+      href={safeResultUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit"
+    >
+      <img
+        class="hidden h-36 w-36 rounded-lg object-cover md:block"
+        src={result.image ?? result.icon}
+        alt={result.image}
+      />
+      <div class="prose flex flex-col gap-y-2 overflow-hidden">
+        <strong class="">{result.title}</strong>
+        <p class="h-10 overflow-hidden text-ellipsis text-sm">
+          {result.description}
+        </p>
+        <div class="flex items-center gap-2">
+          <img
+            class="h-4 w-4 rounded object-cover"
+            src={result.icon}
+            alt={result.icon}
+          />
+          <div class="text-sm underline">{result.url}</div>
+        </div>
+      </div>
+    </a>
+  ) : (
+    <a
+      href={safePropUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit"
+    >
+      <div class="prose flex flex-col gap-y-2 overflow-hidden">
+        <strong class="">{name ?? url}</strong>
+        <div class="text-sm underline">{url}</div>
+      </div>
+    </a>
+  )
+}
