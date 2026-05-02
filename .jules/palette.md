@@ -1,3 +1,4 @@
 ## 2024-04-22 - Established Navigation Link Focus & Screen Reader Pattern
+
 **Learning:** Found that the main header navigation link component `HeaderLink.astro` was missing critical accessibility enhancements: screen reader indication of active links and visible focus styles for keyboard navigation. Discovered the repository pattern for focus styles uses `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md` (as seen in `Social.astro` and `Footer.astro`). Discovered that using `aria-current={isActive ? "page" : undefined}` successfully omits the attribute from unselected Astro components.
 **Action:** Going forward, always pair `aria-current="page"` for active navigation, and ensure interactive elements have a clear, distinct `focus-visible` ring style that matches the repository-specific styling conventions (`ring-blue-500`).

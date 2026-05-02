@@ -1,25 +1,25 @@
 name: Merge PR
 on:
-    workflow_dispatch:
-    push:
-        branches: [main]
-    pull_request:
-        types: [opened, labeled, unlabeled]
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, labeled, unlabeled]
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        if: >-
-            ${{
-              github.event_name == 'push' ||
-              github.event_name == 'workflow_dispatch' ||
-              (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'experiment'))
-            }}
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  ref: main
-                  fetch-depth: 0
-            - uses: bobvanderlinden/combine-pull-requests@v4
-              with:
-                  label: merge
-                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'experiment'))
+      }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: bobvanderlinden/combine-pull-requests@v4
+        with:
+          label: merge
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

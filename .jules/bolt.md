@@ -32,10 +32,10 @@
 
 ## 2025-01-20 - Fetch Collections in getStaticPaths for SSG Build Optimization
 
-**Learning:** When generating multiple static pages using `getStaticPaths` (like `/tags/[id]` or `/sections/[id]`), calling `getCollection()` in the component body fetches and filters the entire collection for *every single generated page*. This changes build time complexity to O(N²), slowing down the build significantly as data scales.
+**Learning:** When generating multiple static pages using `getStaticPaths` (like `/tags/[id]` or `/sections/[id]`), calling `getCollection()` in the component body fetches and filters the entire collection for _every single generated page_. This changes build time complexity to O(N²), slowing down the build significantly as data scales.
 **Action:** Always fetch the entire required collections inside `getStaticPaths()` exactly once, perform any necessary iteration or filtering there, and pass the specific subsets or related items to the Astro component via `props`. This reduces the build complexity to O(N).
 
 ## 2025-01-20 - Replace O(N²) nested filtering with O(N) Hash Map lookups in SSG paths
 
 **Learning:** When using `getStaticPaths` to generate pages from content collections (like tags or categories), using `.filter()` inside the `.map()` loop creates an O(N²) complexity bottleneck that exponentially increases build times as content scales.
-**Action:** Always pre-process collections into a `Map` (Hash Map) *before* mapping over the paths. This allows for an O(1) lookup during the path generation loop, effectively reducing the time complexity from O(N²) to O(N).
+**Action:** Always pre-process collections into a `Map` (Hash Map) _before_ mapping over the paths. This allows for an O(1) lookup during the path generation loop, effectively reducing the time complexity from O(N²) to O(N).

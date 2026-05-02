@@ -1,6 +1,6 @@
 ---
 export const prerender = true;
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import General from "../../layouts/General.astro";
 import Section from "../../components/base/Section.astro";
 import PostCard from "@components/utilities/PostCard.astro";
@@ -15,24 +15,24 @@ export async function getStaticPaths() {
   ]);
 
   // ⚡ Bolt Optimization: Replace O(N^2) nested loops with O(N) hash map lookups
-  const postsBySection = new Map();
+  const postsBySection = new Map<string, CollectionEntry<"blog">[]>();
   for (const post of allPosts) {
     const secId = post.data.sections.id;
     if (!postsBySection.has(secId)) postsBySection.set(secId, []);
-    postsBySection.get(secId).push(post);
+    postsBySection.get(secId)!.push(post);
   }
 
   for (const posts of postsBySection.values()) {
-    posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    posts.sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   }
 
-  const childrenByParent = new Map();
+  const childrenByParent = new Map<string, CollectionEntry<"sections">[]>();
   for (const section of allSections) {
     const parentId = section.data.parent?.id;
     if (parentId) {
       if (!childrenByParent.has(parentId))
         childrenByParent.set(parentId, []);
-      childrenByParent.get(parentId).push(section);
+      childrenByParent.get(parentId)!.push(section);
     }
   }
 
@@ -68,7 +68,7 @@ const { section, childSections, sectionPosts } = Astro.props;
         <section>
           <h2>Posts in this section</h2>
           <ul class="grid grid-cols-2 gap-2">
-            {sectionPosts.map((post, index) => (
+            {sectionPosts.map((post: CollectionEntry<"blog">, index: number) => (
               <PostCard {...post} class="col-span-1" eager={index < 2} />
             ))}
           </ul>
@@ -81,7 +81,7 @@ const { section, childSections, sectionPosts } = Astro.props;
         <div>
           <h2 class="mb-4 text-2xl font-bold">Subsections</h2>
           <div class="space-y-6">
-            {childSections.map((childSection) => (
+            {childSections.map((childSection: CollectionEntry<"sections">) => (
               <Section {...childSection.data} />
             ))}
           </div>
