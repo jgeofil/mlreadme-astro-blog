@@ -1,9 +1,10 @@
-import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.SUPABASE_URL
-const supabaseKey = import.meta.env.SUPABASE_ANON_KEY
+import { createClient } from "@supabase/supabase-js";
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = import.meta.env.SUPABASE_URL;
+const supabaseKey = import.meta.env.SUPABASE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
@@ -157,4 +158,41 @@ export type CompositeTypes<
 		? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
 		: never
 
+export type Categories = Tables<'categories'>
 export type Socials = Tables<'socials'>
+
+// Cache variables for socials
+let socialsCache: { data: Socials[] | null; error: any } | null = null;
+let socialsCacheTime = 0;
+let socialsPromise: Promise<{ data: Socials[] | null, error: any }> | null = null;
+const CACHE_TTL = 60 * 1000; // 1 minute TTL
+
+/**
+ * Fetches socials with in-memory caching and promise deduplication.
+ * This prevents 'stampeding herd' issues where concurrent requests spawn
+ * multiple identical database queries before the first one resolves,
+ * particularly on SSR pages where shared components (like Footer) query on every request.
+ */
+export async function getCachedSocials() {
+	if (socialsCache && Date.now() - socialsCacheTime < CACHE_TTL) {
+		return socialsCache;
+	}
+
+	if (socialsPromise) {
+		return socialsPromise;
+	}
+
+	socialsPromise = Promise.resolve(
+		supabase.from("socials").select().returns<Socials[]>()
+	)
+		.then((res) => {
+			socialsCache = res;
+			socialsCacheTime = Date.now();
+			return res as { data: Socials[] | null; error: any };
+		})
+		.finally(() => {
+			socialsPromise = null;
+		});
+
+	return socialsPromise;
+}

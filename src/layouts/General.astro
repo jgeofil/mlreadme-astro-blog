@@ -3,6 +3,7 @@ import BaseHead from '@components/BaseHead.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import GTM from '@blocks/GTM.astro'
+import PostHogLayout from '../layouts/PostHogLayout.astro'
 interface Props {
 	title: string
 	description: string
@@ -11,6 +12,7 @@ interface Props {
 const { title, description } = Astro.props
 ---
 
+<PostHogLayout>
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
@@ -27,3 +29,4 @@ const { title, description } = Astro.props
 		<Footer />
 	</body>
 </html>
+</PostHogLayout>
