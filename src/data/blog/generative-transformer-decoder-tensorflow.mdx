@@ -19,6 +19,7 @@ foreword:
 ---
 
 import Bookmark from '../../components/Bookmark.astro'
+import posEncoding from './images/pos-encoding.png'
 
 ## Data pre-processing
 
@@ -93,7 +94,7 @@ into the input representations, which helps the model understand the sequence's 
 
 The original paper uses the following formula for calculating the positional encoding:
 
-<img src="./images/pos-encoding.png" />
+<img src={posEncoding.src} alt="Positional encoding formula" width={posEncoding.width} height={posEncoding.height} />
 
 This implementation uses sinusoids with varying wavelengths to represent positional information. The different depths `i` create different frequencies of sine and cosine waves,
 giving the model a richer way to "understand" the relative positions of tokens.

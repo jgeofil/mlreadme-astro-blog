@@ -17,6 +17,7 @@ foreword: "In this post we'll show how to train a custom Byte-Pair Encoding toke
 ---
 
 import Bookmark from '../../components/Bookmark.astro'
+import bpeGraph from './images/bpe-graph.png'
 
 ## What is Byte-Pair Encoding?
 
@@ -99,7 +100,7 @@ g = sns.histplot(df['length'], bins=30)
 g.set_xlabel('Domain Length')
 ```
 
-<img src="./images/bpe-graph.png" />
+<img src={bpeGraph.src} alt="Distribution of domain name lengths" width={bpeGraph.width} height={bpeGraph.height} />
 
 To manage the special tokens of our vocabulary in a practical and structured way, we can define the class `SpecialTokens`. For our purposes, we will use [PAD], [STA], [END] and
 [UNK]. Here's why these are important:

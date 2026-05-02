@@ -1,6 +1,6 @@
 ---
 export const prerender = true;
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import General from "../../layouts/General.astro";
 import PostCard from "@components/utilities/PostCard.astro";
 
@@ -47,7 +47,7 @@ const { tag, posts } = Astro.props;
         <section>
           <h2>Posts in this section</h2>
           <ul class="grid grid-cols-2 gap-2">
-            {posts.map((post, index) => (
+            {posts.map((post: CollectionEntry<"blog">, index: number) => (
               <PostCard {...post} class="col-span-1" eager={index < 2} />
             ))}
           </ul>
