@@ -1,18 +1,18 @@
 ---
-id: 'bpe'
-title: 'Training a Custom Byte-Pair Encoding (BPE) Tokenizer using Hugging Face'
+id: "bpe"
+title: "Training a Custom Byte-Pair Encoding (BPE) Tokenizer using Hugging Face"
 description:
   "Learn how to train a custom Byte-Pair Encoding (BPE) tokenizer on a dataset of domain names using the Hugging Face library. Improve your NLP models' performance with this
   efficient tokenization technique."
-pubDate: 'Feb 15 2024'
-updatedDate: 'Feb 20 2024'
-sections: 'natural-language-processing'
+pubDate: "Feb 15 2024"
+updatedDate: "Feb 20 2024"
+sections: "natural-language-processing"
 tags:
   - tokenization
   - huggingface
 cover:
-  src: './images/bpe-cover.png'
-  alt: 'placeholder'
+  src: "./images/bpe-cover.png"
+  alt: "placeholder"
 foreword: "In this post we'll show how to train a custom Byte-Pair Encoding tokenizer on a dataset of domain names using the Hugging Face library"
 ---
 
@@ -40,7 +40,10 @@ BPE seeks the best of both worlds, creating a vocabulary of subword units that b
 BPE works by iteratively merging frequent pairs of characters or character sequences. You can find a step-by-step example of how to implement the algorithm from scratch in the
 Hugging Face NLP course.
 
-<Bookmark name="Byte-Pair Encoding tokenization - Hugging Face NLP Course" url="https://huggingface.co/learn/nlp-course/en/chapter6/5" />
+<Bookmark
+  name="Byte-Pair Encoding tokenization - Hugging Face NLP Course"
+  url="https://huggingface.co/learn/nlp-course/en/chapter6/5"
+/>
 
 Here's a quick summary of the process:
 
@@ -205,6 +208,12 @@ ds = ds.map(lambda x: {
 
 You can find a notebook with all the code in this post here:
 
-<Bookmark name="preprocess.ipynb at main · jgeofil/transformers" url="https://github.com/jgeofil/transformers/blob/main/projects/domains/preprocess.ipynb" />
-<Bookmark name="Hugging Face Tokenizer Documentation" url="https://huggingface.co/docs/tokenizers/index" />
+<Bookmark
+  name="preprocess.ipynb at main · jgeofil/transformers"
+  url="https://github.com/jgeofil/transformers/blob/main/projects/domains/preprocess.ipynb"
+/>
+<Bookmark
+  name="Hugging Face Tokenizer Documentation"
+  url="https://huggingface.co/docs/tokenizers/index"
+/>
 <Bookmark name="Hugging Face Datasets" url="https://huggingface.co/datasets" />
