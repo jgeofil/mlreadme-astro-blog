@@ -1,10 +1,19 @@
 ---
-const { href, class: className, ...props } = Astro.props
-const { pathname } = Astro.url
-const subpath = pathname.match(/[^\/]+/g)
-const isActive = href === pathname || href === '/' + subpath?.[0]
+const { href, class: className, ...props } = Astro.props;
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+const isActive = href === pathname || href === "/" + subpath?.[0];
 ---
 
-<a href={href} class:list={[className, { 'border-b-4': isActive }, 'active: inline-block border-solid border-black p-4']} {...props}>
-	<slot />
+<a
+  href={href}
+  class:list={[
+    className,
+    { "border-b-4": isActive },
+    "active: inline-block border-solid border-black p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md",
+  ]}
+  aria-current={isActive ? "page" : undefined}
+  {...props}
+>
+  <slot />
 </a>

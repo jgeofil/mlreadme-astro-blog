@@ -36,3 +36,4 @@ hyperui/**
 /playwright/.cache/
 .vercel/project.json
 .env*.local
+.envrc

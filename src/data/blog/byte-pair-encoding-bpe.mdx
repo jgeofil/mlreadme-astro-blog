@@ -11,7 +11,7 @@ tags:
   - tokenization
   - huggingface
 cover:
-  src: 'public/images/posts/bpe-cover.png'
+  src: './images/bpe-cover.png'
   alt: 'placeholder'
 foreword: "In this post we'll show how to train a custom Byte-Pair Encoding tokenizer on a dataset of domain names using the Hugging Face library"
 ---
@@ -99,7 +99,7 @@ g = sns.histplot(df['length'], bins=30)
 g.set_xlabel('Domain Length')
 ```
 
-<img src="/images/posts/bpe-graph.png" />
+<img src="./images/bpe-graph.png" />
 
 To manage the special tokens of our vocabulary in a practical and structured way, we can define the class `SpecialTokens`. For our purposes, we will use [PAD], [STA], [END] and
 [UNK]. Here's why these are important:

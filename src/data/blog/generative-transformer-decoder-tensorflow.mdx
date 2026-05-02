@@ -11,7 +11,7 @@ tags:
   - 'generative'
   - 'decoder'
 cover:
-  src: 'public/images/posts/gpt-cover.jpg'
+  src: './images/gpt-cover.jpg'
   alt: 'placeholder'
 foreword:
   'This post documents my process implementing a generative transformer decoder model in TensorFlow in an effort to learn more about this architecture. We will be using a dataset
@@ -93,7 +93,7 @@ into the input representations, which helps the model understand the sequence's 
 
 The original paper uses the following formula for calculating the positional encoding:
 
-<img src="/images/posts/pos-encoding.png" />
+<img src="./images/pos-encoding.png" />
 
 This implementation uses sinusoids with varying wavelengths to represent positional information. The different depths `i` create different frequencies of sine and cosine waves,
 giving the model a richer way to "understand" the relative positions of tokens.
