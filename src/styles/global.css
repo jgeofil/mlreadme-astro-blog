@@ -6,13 +6,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;700&family=IBM+Plex+Sans&display=swap&subset=latin,latin-ext');
 
-@import 'tailwindcss/base';
-@import '@styles/custom-base-styles.css';
-
-@import 'tailwindcss/components';
-@import '@styles/custom-components.css';
-
-@import 'tailwindcss/utilities';
-@import '@styles/custom-utilities.css';
-
+@import "tailwindcss";
 @config "../../config/tailwind.config.js";
+
+@import '@styles/custom-base-styles.css';
+@import '@styles/custom-components.css';
+@import '@styles/custom-utilities.css';
