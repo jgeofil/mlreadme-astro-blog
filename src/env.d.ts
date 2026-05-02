@@ -7,8 +7,6 @@ interface ImportMetaEnv {
 	readonly PUBLIC_TAGGIN_SERVER?: string // your example
 	readonly SUPABASE_URL: string
 	readonly SUPABASE_KEY: string
-	readonly SUPABASE_DB_URL: string
-	readonly SUPABASE_ANON_KEY: string
 	readonly SENTRY_AUTH_TOKEN: string
 	readonly SENTRY_DSN: string
 	readonly VERCEL: string
