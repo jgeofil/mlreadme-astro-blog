@@ -1,11 +1,18 @@
 ---
-import { getEntries, getEntry } from 'astro:content'
-import { formatDate } from '@utils/format'
-import Avatar from '@components/base/Avatar.astro'
 import Tag from '@components/base/Tag.astro'
+import { formatDate } from '@utils/format'
 import { Image } from 'astro:assets'
+import { getEntries, getEntry } from 'astro:content'
 
-const { id, data } = Astro.props
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+	id: string;
+	data: CollectionEntry<'blog'>['data'];
+	class?: string;
+}
+
+const { id, data } = Astro.props as Props
 
 const postTags = await getEntries<'tags'>(data.tags)
 const section = await getEntry('sections', data.sections.id)
@@ -16,8 +23,8 @@ const section = await getEntry('sections', data.sections.id)
 
 	<div class="p-6">
 		<div>
-			<a href=`/sections/${section.id}`>
-				<span class="text-xs font-light uppercase text-blue-600">{section.data.name}</span>
+			<a href=`/sections/${section?.id}`>
+				<span class="text-xs font-light uppercase text-blue-600">{section?.data.name}</span>
 			</a>
 			<a
 				href={`/blog/${id}/`}

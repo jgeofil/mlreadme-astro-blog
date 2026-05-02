@@ -1,54 +1,52 @@
 {
-	"dependencies": {
-		"@astrojs/check": "^0.9.9",
-		"@astrojs/mdx": "^5.0.4",
-		"@astrojs/rss": "^4.0.18",
-		"@astrojs/sitemap": "^3.7.2",
-		"@astrojs/ts-plugin": "^1.10.7",
-		"@astrojs/vercel": "^10.0.6",
-		"@supabase/supabase-js": "^2.105.1",
-		"astro": "^6.2.1",
-		"lightningcss": "^1.32.0",
-		"lodash": "^4.18.1",
-		"sharp": "^0.34.5",
-		"tailwindcss": "^4.2.4"
-	},
-	"devDependencies": {
-		"@playwright/test": "^1.59.1",
-		"@tailwindcss/vite": "^4.2.4",
-		"@types/bun": "^1.3.13",
-		"@types/lodash": "^4.17.24",
-		"autoprefixer": "^10.5.0",
-		"checkly": "^7.12.1",
-		"cssnano": "^7.1.7",
-		"postcss-import": "^16.1.1",
-		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "0.8.0",
-		"sass-embedded": "^1.99.0",
-		"ts-node": "^10.9.2",
-		"typescript": "^6.0.3"
-	},
-	"name": "@mlreadme/blog",
-	"private": true,
-	"scripts": {
-		"build": "bun clean  && astro build",
-		"build:css": "NODE_ENV=production tailwindcss -o src/tailwind.css -m",
-		"check": "format && lint",
-		"clean": "rm -rf .astro dist",
-		"dev": "astro dev",
-		"format": "prettier --write .",
-		"lint": "astro check",
-		"preview": "astro preview",
-		"start": "dev",
-		"sync": "bun run clean && astro sync",
-		"test": "playwright test",
-		"test:ui": "playwright test --ui"
-	},
-	"trustedDependencies": [
-		"@parcel/watcher",
-		"esbuild",
-		"sharp"
-	],
-	"type": "module",
-	"version": "0.9.0"
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/ts-plugin": "^1.10.7",
+    "@astrojs/vercel": "^10.0.6",
+    "@supabase/supabase-js": "^2.105.1",
+    "astro": "^6.2.1",
+    "lightningcss": "^1.32.0",
+    "lodash": "^4.18.1",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/bun": "^1.3.13",
+    "@types/lodash": "^4.17.24",
+    "autoprefixer": "^10.5.0",
+    "checkly": "^7.12.1",
+    "cssnano": "^7.1.7",
+    "postcss-import": "^16.1.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "0.8.0",
+    "sass-embedded": "^1.99.0",
+    "typescript": "^6.0.3"
+  },
+  "name": "@mlreadme/blog",
+  "private": true,
+  "scripts": {
+    "build": "bun clean  && astro build",
+    "check": "bun run format && bun run lint",
+    "clean": "rm -rf .astro dist",
+    "dev": "astro dev",
+    "format": "prettier --write .",
+    "lint": "astro check",
+    "preview": "astro preview",
+    "start": "dev",
+    "sync": "bun run clean && astro sync",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "esbuild",
+    "sharp"
+  ],
+  "type": "module",
+  "version": "0.9.0"
 }

@@ -17,7 +17,7 @@ const { section } = Astro.props
 
 // Get child sections
 const allSections = await getCollection('sections')
-const childSections = allSections.filter((s) => s.data.parent === section.id)
+const childSections = allSections.filter((s) => s.data.parent?.id === section.id)
 
 // Get blog posts for this section
 const allPosts = await getCollection('blog')

@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { tag } = Astro.props
 
 const allPosts = await getCollection('blog')
-const posts = allPosts.filter((post) => post.data.tags.map((t) => t.id).includes(tag.id))
+const posts = allPosts.filter((post) => post.data.tags.map((t: any) => t.id).includes(tag.id))
 ---
 
 <General title={'Tag | ' + tag} description={'List of blog posts with the tag ' + tag}>

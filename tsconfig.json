@@ -1,73 +1,24 @@
 {
-	"extends": "astro/tsconfigs/base",
-	"include": [
-		".astro/types.d.ts",
-		"**/*"
-	],
-	"exclude": [
-		"dist"
-	],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@components/*": [
-				"src/components/*"
-			],
-			"@base/*": [
-				"src/components/base/*"
-			],
-			"@layouts/*": [
-				"src/layouts/*"
-			],
-			"@utils/*": [
-				"src/utils/*"
-			],
-			"@blocks/*": [
-				"src/components/blocks/*"
-			],
-			"@db/*": [
-				"src/db/*"
-			],
-			"@styles/*": [
-				"src/styles/*"
-			],
-		},
-		"allowJs": true,
-		"verbatimModuleSyntax": false
-	},
-	"plugins": [
-		{
-			"name": "@astrojs/ts-plugin"
-		},
-		{
-			"name": "@posthog/plugin-astro"
-		},
-		{
-			"name": "@posthog/wizard"
-		},
-		{
-			"name": "@astrojs/tailwind"
-		},
-		{
-			"name": "@astrojs/mdx"
-		},
-		{
-			"name": "@astrojs/sitemap"
-		},
-		{
-			"name": "@astrojs/prefetch"
-		},
-		{
-			"name": "@astrojs/vercel"
-		},
-		{
-			"name": "@astrojs/rss"
-		},
-		{
-			"name": "@astrojs/check"
-		},
-		{
-			"name": "@astrojs/react"
-		}
-	]
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@base/*": ["src/components/base/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@utils/*": ["src/utils/*"],
+      "@blocks/*": ["src/components/blocks/*"],
+      "@db/*": ["src/db/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "allowJs": true,
+    "verbatimModuleSyntax": false
+  },
+  "plugins": [
+    {
+      "name": "@astrojs/ts-plugin"
+    }
+  ]
 }
