@@ -17,13 +17,12 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ["astro"],
+    },
     build: {
       cssMinify: true,
       minify: true,
-    },
-    css: {
-      //devSourcemap: true,
-      transformer: "postcss",
     },
   },
 });
