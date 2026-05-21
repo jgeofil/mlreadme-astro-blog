@@ -1,10 +1,11 @@
 ---
-import { getCollection } from "astro:content";
 import { formatDate } from "@utils/format";
 import { Image } from "astro:assets";
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import { getCachedSortedBlogPosts } from "@utils/blog";
+
+// ⚡ Bolt Optimization: Accept posts as a prop or use cached sorted posts
+// This avoids redundant file system reads and array sorting on every SSR request.
+const { posts = await getCachedSortedBlogPosts() } = Astro.props;
 ---
 
 <section class="pt-6">

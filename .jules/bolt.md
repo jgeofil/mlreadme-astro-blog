@@ -39,3 +39,6 @@
 
 **Learning:** When using `getStaticPaths` to generate pages from content collections (like tags or categories), using `.filter()` inside the `.map()` loop creates an O(N²) complexity bottleneck that exponentially increases build times as content scales.
 **Action:** Always pre-process collections into a `Map` (Hash Map) *before* mapping over the paths. This allows for an O(1) lookup during the path generation loop, effectively reducing the time complexity from O(N²) to O(N).
+## 2026-05-21 - Cache getCollection in SSR
+**Learning:** In Astro 5 with `output: 'static'`, pages with `export const prerender = false;` are Server-Side Rendered (SSR). Any `getCollection()` calls within these pages or their shared components (like `HeroCard.astro`) will read from the file system and process data on *every single request*. This creates a massive performance bottleneck.
+**Action:** Always implement an in-memory caching layer with promise deduplication and a TTL (e.g., in a `src/utils/blog.ts` utility) for `getCollection()` calls used on SSR pages. Additionally, refactor shared components to accept the collection as an optional prop (with the cached fetch as a default fallback) so parent pages can pass data down and avoid redundant calls.
