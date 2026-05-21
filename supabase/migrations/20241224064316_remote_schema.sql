@@ -1095,7 +1095,6 @@ _filename text;
 BEGIN
 	select string_to_array(name, '/') into _parts;
 	select _parts[array_length(_parts,1)] into _filename;
-	-- @todo return the last part instead of 2
 	return reverse(split_part(reverse(_filename), '.', 1));
 END
 $function$
