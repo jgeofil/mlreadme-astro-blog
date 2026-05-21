@@ -37,3 +37,5 @@ hyperui/**
 .vercel/project.json
 .env*.local
 .envrc
+
+package-lock.json
