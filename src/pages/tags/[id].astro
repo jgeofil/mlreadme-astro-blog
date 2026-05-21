@@ -12,11 +12,17 @@ export async function getStaticPaths() {
     getCollection("blog"),
   ]);
 
+  // ⚡ Bolt Optimization: Replace O(N^2) nested loop with O(N) hash map lookup
+  const postsByTag = new Map();
+  for (const post of allPosts) {
+    for (const t of post.data.tags) {
+      if (!postsByTag.has(t.id)) postsByTag.set(t.id, []);
+      postsByTag.get(t.id).push(post);
+    }
+  }
+
   return tags.map((tag) => {
-    const posts = allPosts.filter((post) =>
-      // ⚡ Bolt Optimization: Use .some() instead of .map().includes() to prevent intermediate array allocation and allow for early exit
-      post.data.tags.some((t: { id: string }) => t.id === tag.id),
-    );
+    const posts = postsByTag.get(tag.id) || [];
 
     return {
       params: { id: tag.id },
