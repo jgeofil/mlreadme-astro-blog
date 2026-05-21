@@ -39,3 +39,18 @@
 
 **Learning:** When using `getStaticPaths` to generate pages from content collections (like tags or categories), using `.filter()` inside the `.map()` loop creates an O(N²) complexity bottleneck that exponentially increases build times as content scales.
 **Action:** Always pre-process collections into a `Map` (Hash Map) *before* mapping over the paths. This allows for an O(1) lookup during the path generation loop, effectively reducing the time complexity from O(N²) to O(N).
+
+## 2025-01-20 - Global Caching in Astro Components
+
+**Learning:** Variables defined in the component script block (`---` frontmatter) of an Astro component are isolated and scoped exclusively to that single render instance. Defining a cache map directly inside an Astro component fails to provide global caching across multiple instances of that component on the same page.
+**Action:** To correctly implement in-memory caching or promise deduplication shared across multiple Astro component instances (e.g., to prevent redundant external HTTP calls), define the cache objects and logic in a separate `.ts`/`.js` module and import them into the `.astro` component.
+
+## 2025-01-20 - Global Caching in Astro Components
+
+**Learning:** Variables defined in the component script block (`---` frontmatter) of an Astro component are isolated and scoped exclusively to that single render instance. Defining a cache map directly inside an Astro component fails to provide global caching across multiple instances of that component on the same page.
+**Action:** To correctly implement in-memory caching or promise deduplication shared across multiple Astro component instances (e.g., to prevent redundant external HTTP calls), define the cache objects and logic in a separate `.ts`/`.js` module and import them into the `.astro` component.
+
+## 2025-01-20 - Global Caching in Astro Components
+
+**Learning:** Variables defined in the component script block (`---` frontmatter) of an Astro component are isolated and scoped exclusively to that single render instance. Defining a cache map directly inside an Astro component fails to provide global caching across multiple instances of that component on the same page.
+**Action:** To correctly implement in-memory caching or promise deduplication shared across multiple Astro component instances (e.g., to prevent redundant external HTTP calls), define the cache objects and logic in a separate `.ts`/`.js` module and import them into the `.astro` component.

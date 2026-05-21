@@ -1,5 +1,6 @@
 ---
 import fetchMeta from "fetch-meta-tags";
+import { getCachedMeta } from "../utils/bookmarkCache";
 
 interface Props {
   url: string;
@@ -8,16 +9,14 @@ interface Props {
 
 const { url, name } = Astro.props;
 
-let result: Awaited<ReturnType<typeof fetchMeta>> | null = null;
-try {
-  result = await fetchMeta(url);
-} catch (e) {
-  console.warn(`[Bookmark] Failed to fetch metadata for ${url}:`, e);
-}
+let result: Awaited<ReturnType<typeof fetchMeta>> | null =
+  await getCachedMeta(url);
 
-const isSafeUrl = (u: string | null | undefined) => u && (u.startsWith('http://') || u.startsWith('https://') || u.startsWith('/'));
-const safeResultUrl = result && isSafeUrl(result.url) ? result.url : '#';
-const safePropUrl = isSafeUrl(url) ? url : '#';
+const isSafeUrl = (u: string | null | undefined) =>
+  u &&
+  (u.startsWith("http://") || u.startsWith("https://") || u.startsWith("/"));
+const safeResultUrl = result && isSafeUrl(result.url) ? result.url : "#";
+const safePropUrl = isSafeUrl(url) ? url : "#";
 ---
 
 {
