@@ -18,5 +18,5 @@
 
 ## 2024-10-25 - XSS Vulnerability in PostCard.astro via Unescaped String Literal Attributes
 **Vulnerability:** A Cross-Site Scripting (XSS) vulnerability was found in `PostCard.astro` where a string literal was used for a component attribute (`href=\`/sections/${section.id}\``).
-**Learning:** In `.astro` templates, directly using unescaped string literals inside attribute definitions can bypass HTML escaping if the attribute is not correctly parsed as an expression by the Astro compiler.
+**Learning:** In .astro templates, directly using unescaped string literals inside attribute definitions can bypass HTML escaping if the attribute is not correctly parsed as an expression by the Astro compiler. This allows attackers to inject arbitrary attributes, including event handlers like onload, if the input controls part of the string.
 **Prevention:** Always use standard Astro expressions wrapped in curly braces (`href={...}`) for dynamic attributes. Avoid string interpolation directly within the attribute declaration unless the entire interpolation is wrapped in the expression block.
