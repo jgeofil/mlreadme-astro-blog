@@ -39,3 +39,8 @@
 
 **Learning:** When using `getStaticPaths` to generate pages from content collections (like tags or categories), using `.filter()` inside the `.map()` loop creates an O(N²) complexity bottleneck that exponentially increases build times as content scales.
 **Action:** Always pre-process collections into a `Map` (Hash Map) *before* mapping over the paths. This allows for an O(1) lookup during the path generation loop, effectively reducing the time complexity from O(N²) to O(N).
+
+## 2025-01-20 - Lazy load native <img> tags for external images
+
+**Learning:** While Astro's `<Image>` component automatically applies `loading="lazy"` and `decoding="async"`, native HTML `<img>` tags do not. When these tags are used to load external images below the fold (such as in markdown components or avatars), they block the `load` event and hurt performance.
+**Action:** Always verify if native `<img>` tags (especially those fetching 3rd party assets) appear below the fold. If they do, explicitly add `loading="lazy"` and `decoding="async"` attributes to defer their loading and improve initial page render speed.

@@ -34,6 +34,8 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
         class="hidden h-36 w-36 rounded-lg object-cover md:block"
         src={result.image ?? result.icon}
         alt={result.image}
+        loading="lazy"
+        decoding="async"
       />
       <div class="prose flex flex-col gap-y-2 overflow-hidden">
         <strong class="">{result.title}</strong>
@@ -45,6 +47,8 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
             class="h-4 w-4 rounded object-cover"
             src={result.icon}
             alt={result.icon}
+            loading="lazy"
+            decoding="async"
           />
           <div class="text-sm underline">{result.url}</div>
         </div>
