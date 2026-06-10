@@ -1,6 +1,3 @@
-## 2024-04-22 - Established Navigation Link Focus & Screen Reader Pattern
-**Learning:** Found that the main header navigation link component `HeaderLink.astro` was missing critical accessibility enhancements: screen reader indication of active links and visible focus styles for keyboard navigation. Discovered the repository pattern for focus styles uses `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md` (as seen in `Social.astro` and `Footer.astro`). Discovered that using `aria-current={isActive ? "page" : undefined}` successfully omits the attribute from unselected Astro components.
-**Action:** Going forward, always pair `aria-current="page"` for active navigation, and ensure interactive elements have a clear, distinct `focus-visible` ring style that matches the repository-specific styling conventions (`ring-blue-500`).
-## 2024-05-27 - Added "Skip to content" link in General layout
-**Learning:** The application was missing a skip link, a critical accessibility feature.
-**Action:** Added a visually hidden "Skip to content" link in `General.astro` that becomes visible on keyboard focus and links directly to the `<main>` element, bypassing repetitive navigation content. This improves the experience for keyboard and screen reader users across all pages utilizing the layout.
+## 2024-06-10 - Tags Keyboard Accessibility
+**Learning:** Custom tag components often have rich tooltips revealed on hover (`group-hover`), but miss out on key keyboard-driven accessibility since focus isn't styled to trigger tooltips. This excludes keyboard-only users from context.
+**Action:** Always add `group-focus-visible` classes matching `group-hover` when implementing tooltips on interactive elements to ensure feature parity for keyboard users, while applying a focus ring.
