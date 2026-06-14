@@ -30,10 +30,13 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
       rel="noopener noreferrer"
       class="not-prose my-4 flex gap-10 rounded-lg border-[1px] border-black/20 px-4 py-4 text-inherit"
     >
+      {/* ⚡ Bolt Optimization: Add lazy loading to external image to prevent render blocking */}
       <img
         class="hidden h-36 w-36 rounded-lg object-cover md:block"
         src={result.image ?? result.icon}
         alt={result.image}
+        loading="lazy"
+        decoding="async"
       />
       <div class="prose flex flex-col gap-y-2 overflow-hidden">
         <strong class="">{result.title}</strong>
@@ -41,10 +44,13 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
           {result.description}
         </p>
         <div class="flex items-center gap-2">
+          {/* ⚡ Bolt Optimization: Add lazy loading to external image to prevent render blocking */}
           <img
             class="h-4 w-4 rounded object-cover"
             src={result.icon}
             alt={result.icon}
+            loading="lazy"
+            decoding="async"
           />
           <div class="text-sm underline">{result.url}</div>
         </div>
