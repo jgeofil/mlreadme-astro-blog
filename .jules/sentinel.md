@@ -15,7 +15,3 @@
 **Vulnerability:** A Cross-Site Scripting (XSS) vulnerability was found in `Icon.astro` where string literals were used for component attributes (e.g., `src={`/icons/${name}.svg`}`).
 **Learning:** In `.astro` templates, directly using unescaped string literals inside attribute definitions (e.g., `<Image src={`/icons/${name}.svg`} />`) can bypass HTML escaping if the attribute is not correctly parsed as an expression by the Astro compiler. Attackers can inject arbitrary attributes, including event handlers like `onload`, if the input controls part of the string.
 **Prevention:** Always use standard Astro expressions wrapped in curly braces (`src={...}`) for dynamic attributes. Avoid string interpolation directly within the attribute declaration unless the entire interpolation is wrapped in the expression block.
-## 2023-10-27 - [Defense in Depth: Clickjacking Protection]
-**Vulnerability:** Legacy clickjacking protection.
-**Learning:** While X-Frame-Options is present, adding frame-ancestors to the Content-Security-Policy provides a more robust, standards-based defense against clickjacking in modern browsers.
-**Prevention:** Always include frame-ancestors in the CSP alongside X-Frame-Options.
