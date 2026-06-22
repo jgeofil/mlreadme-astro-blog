@@ -1,14 +1,30 @@
 ---
 interface HeroImage {
-	src: string
-	alt: string
-	width?: number
-	height?: number
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  eager?: boolean;
 }
 
-const { src, alt, width = 1020, height = 510 } = Astro.props
+const { src, alt, width = 1020, height = 510, eager = true } = Astro.props;
 ---
 
 <div class="hero-image">
-	{src && <img width={width} height={height} src={src} alt={alt} />}
+  {
+    /* ⚡ Bolt Optimization: Conditionally lazy-load image unless eager prop is true */
+  }
+  {
+    src && (
+      <img
+        width={width}
+        height={height}
+        src={src}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding={eager ? "sync" : "async"}
+        fetchpriority={eager ? "high" : "auto"}
+      />
+    )
+  }
 </div>
