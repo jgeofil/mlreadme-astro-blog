@@ -3,12 +3,15 @@ const { id, name, description, color } = Astro.props
 const src = '/tags/' + id
 ---
 
-<a class="invisible-link group" href={src}>
+<a
+	class="invisible-link group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+	href={src}
+>
 	<p class="tag-colored inline-flex items-start rounded-md px-2 py-0.5 text-xs">
 		{name}
 	</p>
 	<div
-		class="tag-colored invisible absolute mt-2 w-48 rounded-lg border border-gray-300 bg-white py-2 text-gray-800 opacity-0 shadow-lg group-hover:visible group-hover:opacity-100"
+		class="tag-colored invisible absolute mt-2 w-48 rounded-lg border border-gray-300 bg-white py-2 text-gray-800 opacity-0 shadow-lg group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100"
 	>
 		<p class="px-4 py-2">{description}</p>
 	</div>
