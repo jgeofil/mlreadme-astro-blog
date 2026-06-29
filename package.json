@@ -23,7 +23,7 @@
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
 		"@astrojs/tailwind": "^5.1.5",
-		"@astrojs/ts-plugin": "^1.10.6",
+		"@astrojs/ts-plugin": "^1.10.9",
 		"@astrojs/vercel": "^8.2.11",
 		"@flags-sdk/statsig": "^0.2.5",
 		"@supabase/supabase-js": "^2.98.0",
