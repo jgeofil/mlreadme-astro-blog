@@ -22,7 +22,7 @@
 		"@astrojs/mdx": "^5.0.4",
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
-		"@astrojs/tailwind": "^5.1.5",
+		"@astrojs/tailwind": "^6.0.2",
 		"@astrojs/ts-plugin": "^1.10.6",
 		"@astrojs/vercel": "^8.2.11",
 		"@flags-sdk/statsig": "^0.2.5",
