@@ -4,3 +4,6 @@
 ## 2024-05-27 - Added "Skip to content" link in General layout
 **Learning:** The application was missing a skip link, a critical accessibility feature.
 **Action:** Added a visually hidden "Skip to content" link in `General.astro` that becomes visible on keyboard focus and links directly to the `<main>` element, bypassing repetitive navigation content. This improves the experience for keyboard and screen reader users across all pages utilizing the layout.
+## 2024-07-01 - Tooltips and Keyboard Accessibility
+**Learning:** Found that when using Tailwind's `group-hover` utilities to display hidden elements like tooltips on hover (e.g., in `Tag.astro`), the content remains inaccessible to keyboard users because `group-focus-visible` states were omitted. The focusable parent element (`<a>`) also lacked visual focus indicators.
+**Action:** When implementing `group-hover` for hidden content, always pair it with equivalent `group-focus-visible` classes (e.g., `group-focus-visible:visible group-focus-visible:opacity-100`). Additionally, ensure the focusable parent has a distinct visual focus ring (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md`).
