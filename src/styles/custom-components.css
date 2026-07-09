@@ -1,13 +1,13 @@
 @layer components {
-	a {
-		color: theme('colors.neutral.dark');
-		&:hover {
-			color: theme('colors.accent');
-		}
-	}
+  a {
+    color: theme("colors.neutral.dark");
+    &:hover {
+      color: theme("colors.accent");
+    }
+  }
 
-	a.invisible-link {
-		color: unset !important;
-		font-family: theme('fontFamily.body');
-	}
+  a.invisible-link {
+    color: unset !important;
+    font-family: theme("fontFamily.body");
+  }
 }
