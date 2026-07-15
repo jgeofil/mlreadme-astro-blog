@@ -4,3 +4,6 @@
 ## 2024-05-27 - Added "Skip to content" link in General layout
 **Learning:** The application was missing a skip link, a critical accessibility feature.
 **Action:** Added a visually hidden "Skip to content" link in `General.astro` that becomes visible on keyboard focus and links directly to the `<main>` element, bypassing repetitive navigation content. This improves the experience for keyboard and screen reader users across all pages utilizing the layout.
+## 2024-05-28 - Tooltip Keyboard Accessibility Pattern
+**Learning:** Tooltips revealed exclusively via `group-hover` utilities are inaccessible to keyboard users, creating a frustrating experience where they can focus an element but cannot see its associated description. Discovered in `Tag.astro`.
+**Action:** Always pair `group-hover:visible group-hover:opacity-100` classes with equivalent `group-focus-visible:visible group-focus-visible:opacity-100` classes to ensure feature parity for keyboard navigation.
