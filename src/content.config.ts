@@ -4,7 +4,7 @@ import { file } from 'astro/loaders'
 
 import { parse as parseToml } from 'toml'
 import _ from 'lodash'
-import { blogLoader } from './loader'
+import { blogLoader } from './content/loader'
 
 const blog = defineCollection({
 	loader: blogLoader({ pattern: '**/*.mdx', base: './src/data/blog' }),
