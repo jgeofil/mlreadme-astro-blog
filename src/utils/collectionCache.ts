@@ -9,7 +9,7 @@ const CACHE_TTL = 60 * 1000; // 1 minute TTL
  * ⚡ Bolt Optimization: In-memory caching for Astro collections on SSR pages.
  * Prevents expensive file system reads and sorting on every request to index.astro.
  */
-export async function getCachedSortedBlogPosts() {
+export const getCachedSortedBlogPosts = async () => {
   if (blogPostsCache && Date.now() - blogPostsCacheTime < CACHE_TTL) {
     return blogPostsCache;
   }

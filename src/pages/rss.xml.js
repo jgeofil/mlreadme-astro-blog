@@ -1,9 +1,9 @@
 import rss from '@astrojs/rss'
-import { getCollection } from 'astro:content'
+import { getCachedSortedBlogPosts } from '../utils/collectionCache'
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from '../consts'
 
 export async function GET(context) {
-	const posts = await getCollection('blog')
+	const posts = await getCachedSortedBlogPosts()
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
