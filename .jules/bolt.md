@@ -44,3 +44,7 @@
 
 **Learning:** While Astro's `<Image>` component automatically applies `loading="lazy"` and `decoding="async"`, native HTML `<img>` tags do not. Failing to explicitly add these attributes to below-the-fold or external images (like avatars or external bookmarks) can block rendering and hurt performance.
 **Action:** Always explicitly add `loading="lazy"` and `decoding="async"` to native `<img>` tags used for non-critical, below-the-fold content.
+
+## 2026-08-15 - [Astro Collections Cache]
+**Learning:** `getCollection()` in Astro is expensive when called on every request (SSR), and sorting it repeatedly adds to the overhead.
+**Action:** Created `getCachedSortedBlogPosts()` with a TTL memory cache and promise deduplication, and used it across `index.astro` and `rss.xml.js` to avoid redundant file system reads and sorting.
