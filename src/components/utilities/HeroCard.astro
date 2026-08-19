@@ -10,7 +10,7 @@ const posts = await getCachedSortedBlogPosts();
     {
       posts.map((post, index) => (
         <li class="list-none first:col-span-2">
-          <a href={`/blog/${post.id}/`}>
+          <a href={`/blog/${post.id}/`} class="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
             {/* ⚡ Bolt Optimization: Eager load first post image for faster LCP */}
             <Image
               class="mx-auto rounded-xl drop-shadow-xl"
