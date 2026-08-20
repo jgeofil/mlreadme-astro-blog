@@ -28,7 +28,7 @@ const [postTags, section] = await Promise.all([
 
   <div class="p-6">
     <div>
-      <a href={`/sections/${section.id}`}>
+      <a href={`/sections/${section.id}`} class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
         <span class="text-xs font-light uppercase text-blue-600"
           >{section.data.name}</span
         >
@@ -37,7 +37,7 @@ const [postTags, section] = await Promise.all([
         href={`/blog/${id}/`}
         class:list={[
           "mt-2 block text-xl font-semibold text-gray-800 transition-colors",
-          "transform duration-300 hover:text-gray-600 hover:underline",
+          "transform duration-300 hover:text-gray-600 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
         ]}
         tabindex="0"
         role="link">{data.title}</a

@@ -3,7 +3,7 @@ const { id, name, description, parent = false } = Astro.props
 const src = '/sections/' + id
 ---
 
-<a href={src}>
+<a href={src} class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
 	<span class:list={[{ 'font-semibold': parent }]}>
 		{name}
 	</span>
