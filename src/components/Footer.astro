@@ -60,7 +60,7 @@ const { data, error } = await getCachedSocials();
                   (link: Link) =>
                     !link.off && (
                       <li class="list-none">
-                        <a class="neutral-link" href={link.href}>
+                        <a class="neutral-link rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" href={link.href}>
                           {link.name}
                         </a>
                       </li>
@@ -74,7 +74,7 @@ const { data, error } = await getCachedSocials();
       <div class="h-16 p-3 text-sm text-gray-400 lg:col-span-4">
         <p>
           &copy; {today.getFullYear()}
-          <a href="https://mlread.me" target="_blank" rel="noopener noreferrer"
+          <a class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" href="https://mlread.me" target="_blank" rel="noopener noreferrer"
             >ML Readme Blog Posts</a
           > by
           <a
@@ -83,7 +83,7 @@ const { data, error } = await getCachedSocials();
             rel="noopener noreferrer">Jeremy Georges-Filteau</a
           > is licensed under
           <a
-            class="text-xs"
+            class="text-xs rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
             target="_blank"
             rel="license noopener noreferrer"
