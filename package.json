@@ -37,7 +37,7 @@
     "tailwindcss": "^3.4.19",
     "toml": "^5.0.0",
     "utf-8-validate": "^6.0.6",
-    "vercel": "^58.4.4"
+    "vercel": "^59.3.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
