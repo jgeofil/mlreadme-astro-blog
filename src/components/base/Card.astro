@@ -8,11 +8,11 @@ interface Props {
 const { href, title, body } = Astro.props
 ---
 
-<li class="link-card">
+<li class="link-card group">
 	<a href={href} class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg">
 		<h2>
 			{title}
-			<span>&rarr;</span>
+			<span class="inline-block transition-transform duration-300 group-hover:translate-x-1 group-focus-within:translate-x-1" aria-hidden="true">&rarr;</span>
 		</h2>
 		<p>
 			{body}
