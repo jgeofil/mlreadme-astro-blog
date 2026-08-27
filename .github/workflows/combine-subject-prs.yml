@@ -1,0 +1,112 @@
+name: Combine Subject PRs
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Subject to combine (e.g. Cleanup, Performance, Security, Code Health, Testing)'
+        required: true
+        type: choice
+        options:
+          - Cleanup
+          - Performance
+          - Security
+          - Code Health
+          - Testing
+          - All
+
+jobs:
+  combine-prs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Combine PRs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch open PRs
+          echo "Fetching open pull requests..."
+          PR_DATA=$(gh pr list --state open --limit 100 --json number,title,headRefName)
+
+          if [ "${{ github.event.inputs.subject }}" == "All" ]; then
+            subjects=("Cleanup" "Performance" "Security" "Code Health" "Testing")
+          else
+            subjects=("${{ github.event.inputs.subject }}")
+          fi
+
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          for subject in "${subjects[@]}"; do
+            # Find PRs matching the subject in the title (case insensitive)
+            MATCHING_PRS=$(echo "$PR_DATA" | jq -r --arg subject "$subject" '.[] | select(.title | test($subject; "i")) | .number')
+
+            # Count matching PRs
+            COUNT=$(echo "$MATCHING_PRS" | wc -w)
+
+            if [ "$COUNT" -gt 0 ]; then
+              echo "Found $COUNT PRs for subject: $subject. Combining..."
+
+              # Format branch name
+              SUBJECT_LOWER=$(echo "$subject" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+              BRANCH_NAME="combined-${SUBJECT_LOWER}-$(date +%s)"
+
+              # Ensure working tree is clean and on main
+              git checkout main
+              git fetch origin main
+              git reset --hard origin/main
+              git checkout -b "$BRANCH_NAME"
+
+              # Keep track of successfully applied PRs to close them later
+              APPLIED_PRS=()
+
+              # Apply patches from PRs
+              for PR_NUM in $MATCHING_PRS; do
+                echo "Applying patch for PR #$PR_NUM"
+                gh pr diff "$PR_NUM" > "${PR_NUM}.patch"
+                if git apply "${PR_NUM}.patch"; then
+                  echo "Successfully applied PR #$PR_NUM"
+                  APPLIED_PRS+=("$PR_NUM")
+                  rm "${PR_NUM}.patch"
+                else
+                  echo "Failed to apply PR $PR_NUM. Skipping..."
+                  rm "${PR_NUM}.patch"
+                fi
+              done
+
+              # Check if any changes were successfully applied
+              if [ -n "$(git status --porcelain)" ]; then
+                # Commit changes
+                git add .
+                git commit -m "chore: Combined $subject PRs"
+
+                # Push the new branch
+                git push origin "$BRANCH_NAME"
+
+                # Create the combined PR
+                gh pr create --title "chore: Combined $subject PRs" --body "This PR combines previous PRs related to $subject." --base main --head "$BRANCH_NAME"
+
+                echo "Successfully created combined PR for $subject"
+
+                # Close original PRs ONLY after successfully creating the combined PR
+                for PR_NUM in "${APPLIED_PRS[@]}"; do
+                  echo "Closing PR #$PR_NUM"
+                  gh pr close "$PR_NUM" -c "Closed in favor of combined PR for $subject"
+                done
+              else
+                echo "No changes could be applied for $subject."
+                git checkout main
+                git branch -D "$BRANCH_NAME"
+              fi
+            else
+              echo "No PRs found for subject '$subject'."
+            fi
+          done
