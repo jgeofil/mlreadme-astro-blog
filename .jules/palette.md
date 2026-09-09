@@ -7,3 +7,6 @@
 ## 2025-02-23 - Accessible Tooltips
 **Learning:** Tailwind's `group-hover` utilities to display hidden elements (such as tooltips) must be paired with equivalent `group-focus-visible` classes to ensure keyboard accessibility. Also, the focusable parent element needs a visual focus indicator.
 **Action:** Always add `group-focus-visible:visible group-focus-visible:opacity-100` alongside `group-hover` visibility classes, and ensure the parent link has focus states like `focus-visible:ring-2`.
+## 2025-02-23 - Decorative Characters Inside Actionable Links
+**Learning:** Found that a purely decorative right arrow (`&rarr;`) inside a link `<a>` element in `Card.astro` was lacking the `aria-hidden="true"` attribute. This causes screen readers to redundantly read out "rightwards arrow" alongside the card's title, degrading the auditory experience.
+**Action:** When adding decorative text elements or characters (like arrows) inside actionable links or buttons, always apply `aria-hidden="true"` to prevent them from being read aloud by screen readers.
