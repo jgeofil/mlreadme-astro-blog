@@ -7,3 +7,6 @@
 ## 2025-02-23 - Accessible Tooltips
 **Learning:** Tailwind's `group-hover` utilities to display hidden elements (such as tooltips) must be paired with equivalent `group-focus-visible` classes to ensure keyboard accessibility. Also, the focusable parent element needs a visual focus indicator.
 **Action:** Always add `group-focus-visible:visible group-focus-visible:opacity-100` alongside `group-hover` visibility classes, and ensure the parent link has focus states like `focus-visible:ring-2`.
+## 2024-05-13 - [Screen Reader Arrow and Missing Form Label]
+**Learning:** Found an arrow `&rarr;` within a semantic element used for decoration that screen readers were reading aloud (like "rightwards arrow"). Also noticed a missing aria label in a button.
+**Action:** Applied `aria-hidden="true"` to the decorative text element, and `aria-label` to the form button to ensure clean screen reader output.

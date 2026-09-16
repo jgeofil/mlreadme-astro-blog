@@ -38,7 +38,7 @@ const { data, error } = await getCachedSocials();
           />
           <button
             class="p-2 m-2 border border-blue-300 rounded-md shadow fill-blue-200 hover:border-blue-700 hover:drop-shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            >Subscribe</button
+            aria-label="Subscribe to newsletter">Subscribe</button
           >
         </form>
       </div>
@@ -60,7 +60,10 @@ const { data, error } = await getCachedSocials();
                   (link: Link) =>
                     !link.off && (
                       <li class="list-none">
-                        <a class="neutral-link rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" href={link.href}>
+                        <a
+                          class="neutral-link rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                          href={link.href}
+                        >
                           {link.name}
                         </a>
                       </li>
@@ -74,8 +77,11 @@ const { data, error } = await getCachedSocials();
       <div class="h-16 p-3 text-sm text-gray-400 lg:col-span-4">
         <p>
           &copy; {today.getFullYear()}
-          <a class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" href="https://mlread.me" target="_blank" rel="noopener noreferrer"
-            >ML Readme Blog Posts</a
+          <a
+            class="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            href="https://mlread.me"
+            target="_blank"
+            rel="noopener noreferrer">ML Readme Blog Posts</a
           > by
           <a
             href="https://jeremygf.com"
