@@ -44,3 +44,7 @@
 
 **Learning:** While Astro's `<Image>` component automatically applies `loading="lazy"` and `decoding="async"`, native HTML `<img>` tags do not. Failing to explicitly add these attributes to below-the-fold or external images (like avatars or external bookmarks) can block rendering and hurt performance.
 **Action:** Always explicitly add `loading="lazy"` and `decoding="async"` to native `<img>` tags used for non-critical, below-the-fold content.
+## 2026-09-20 - Ensure the file being imported is staged
+
+**Learning:** When using a custom optimization script or file, like `collectionCache.ts` in this project, if the script isn't added to the commit, a regression will happen with the module not being found.
+**Action:** When working on file replacements or updates, verify that newly created or custom files are appropriately staged along with modified files, preventing critical errors.
