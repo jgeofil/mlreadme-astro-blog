@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import { getCollection } from "astro:content";
+import { getCachedSortedBlogPosts } from "@utils/collectionCache";
 import General from "../../layouts/General.astro";
 import Section from "../../components/base/Section.astro";
 import PostCard from "@components/utilities/PostCard.astro";
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
   // only once per build rather than once per generated page.
   const [allSections, allPosts] = await Promise.all([
     getCollection("sections"),
-    getCollection("blog"),
+    getCachedSortedBlogPosts(),
   ]);
 
   // ⚡ Bolt Optimization: Replace O(N^2) nested loops with O(N) hash map lookups
@@ -22,9 +23,7 @@ export async function getStaticPaths() {
     postsBySection.get(secId).push(post);
   }
 
-  for (const posts of postsBySection.values()) {
-    posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  }
+
 
   const childrenByParent = new Map();
   for (const section of allSections) {
