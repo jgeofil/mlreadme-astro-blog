@@ -1,11 +1,11 @@
 ---
 import PostCard from "@components/utilities/PostCard.astro";
 import General from "@layouts/General.astro";
-import { getCollection } from "astro:content";
+import { getCachedSortedBlogPosts } from "@utils/collectionCache";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-);
+// ⚡ Bolt Optimization: Replace getCollection with getCachedSortedBlogPosts to use in-memory caching
+// This avoids expensive file system reads and sorting on every request to the blog index page, reducing TTFB.
+const posts = await getCachedSortedBlogPosts();
 ---
 
 <General title="Blog" description="Blog post index">
