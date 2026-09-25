@@ -1,12 +1,12 @@
 ---
 export const prerender = true
-import { getCollection } from 'astro:content'
+import { getCachedSortedBlogPosts } from '@utils/collectionCache'
 import { render } from 'astro:content'
 import General from '@layouts/General.astro'
 import PostMetadata from '@components/PostMetadata.astro'
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog')
+	const posts = await getCachedSortedBlogPosts()
 
 	return posts.map((post) => ({
 		params: { slug: post.id },

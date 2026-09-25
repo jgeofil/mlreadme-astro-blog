@@ -15,3 +15,7 @@
 **Vulnerability:** A Cross-Site Scripting (XSS) vulnerability was found in `Icon.astro` where string literals were used for component attributes (e.g., `src={`/icons/${name}.svg`}`).
 **Learning:** In `.astro` templates, directly using unescaped string literals inside attribute definitions (e.g., `<Image src={`/icons/${name}.svg`} />`) can bypass HTML escaping if the attribute is not correctly parsed as an expression by the Astro compiler. Attackers can inject arbitrary attributes, including event handlers like `onload`, if the input controls part of the string.
 **Prevention:** Always use standard Astro expressions wrapped in curly braces (`src={...}`) for dynamic attributes. Avoid string interpolation directly within the attribute declaration unless the entire interpolation is wrapped in the expression block.
+## 2024-05-18 - [Add maxlength to email input]
+**Vulnerability:** Missing input length limit on email newsletter form
+**Learning:** Even dummy forms without explicit submit handlers should have basic security constraints like maxlength to prevent potential DoS or browser performance issues if long strings are pasted.
+**Prevention:** Always add maxlength to text/email inputs.
