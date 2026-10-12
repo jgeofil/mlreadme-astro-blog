@@ -19,3 +19,7 @@
 **Vulnerability:** Missing input length limit on email newsletter form
 **Learning:** Even dummy forms without explicit submit handlers should have basic security constraints like maxlength to prevent potential DoS or browser performance issues if long strings are pasted.
 **Prevention:** Always add maxlength to text/email inputs.
+## 2024-10-25 - Information Disclosure via Astro HTML Comments
+**Vulnerability:** Security vulnerability details and internal rationale were exposed in the client DOM through standard HTML comments (`<!-- -->`) within an `.astro` component.
+**Learning:** While Astro automatically strips JS-style JSX comments (`{/* */}`) during the build and server-side rendering process, it explicitly preserves and outputs standard HTML comments into the final HTML markup. Using HTML comments for security annotations inadvertently leaks sensitive information to end-users.
+**Prevention:** Always use server-side JSX comments (`{/* */}`) for security-related annotations, rationale, or internal logic within `.astro` components to ensure they are strictly stripped before reaching the client.
