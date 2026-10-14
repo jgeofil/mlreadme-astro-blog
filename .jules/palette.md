@@ -7,3 +7,6 @@
 ## 2025-02-23 - Accessible Tooltips
 **Learning:** Tailwind's `group-hover` utilities to display hidden elements (such as tooltips) must be paired with equivalent `group-focus-visible` classes to ensure keyboard accessibility. Also, the focusable parent element needs a visual focus indicator.
 **Action:** Always add `group-focus-visible:visible group-focus-visible:opacity-100` alongside `group-hover` visibility classes, and ensure the parent link has focus states like `focus-visible:ring-2`.
+## 2025-02-23 - Empty alt text for decorative images inside links
+**Learning:** In the `Bookmark.astro` component, images used URLs for their `alt` text. Because the images are inside a link that already contains textual content (title, description), giving them an explicit URL as alt text results in screen readers reading out the full unhelpful URL, causing a poor experience.
+**Action:** When an image is inside a link that already has descriptive text, and the image itself doesn't add any new information, always use `alt="" aria-hidden="true"` to hide it from assistive technologies.
