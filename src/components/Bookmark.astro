@@ -34,7 +34,8 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
       <img
         class="hidden h-36 w-36 rounded-lg object-cover md:block"
         src={result.image ?? result.icon}
-        alt={result.image}
+        alt=""
+        aria-hidden="true"
         loading="lazy"
         decoding="async"
       />
@@ -48,7 +49,8 @@ const safePropUrl = isSafeUrl(url) ? url : "#";
           <img
             class="h-4 w-4 rounded object-cover"
             src={result.icon}
-            alt={result.icon}
+            alt=""
+            aria-hidden="true"
             loading="lazy"
             decoding="async"
           />
