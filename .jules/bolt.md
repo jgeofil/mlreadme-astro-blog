@@ -48,3 +48,8 @@
 
 **Learning:** When using a custom optimization script or file, like `collectionCache.ts` in this project, if the script isn't added to the commit, a regression will happen with the module not being found.
 **Action:** When working on file replacements or updates, verify that newly created or custom files are appropriately staged along with modified files, preventing critical errors.
+
+## 2026-10-18 - Limit unbound DOM elements on lists
+
+**Learning:** When mapping over items dynamically without slicing them, such as `posts.map(...)` on `src/components/utilities/HeroCard.astro` "Latest blog posts" component, the application grows without bound in the DOM which affects memory, time-to-interactive, and visual performance (Cumulative Layout Shift, long scrolling).
+**Action:** Always slice lists of posts rendered to a specific boundary limit using `.slice(0, N)` when iterating, especially for homepage sections, to avoid unbounded DOM growth.
