@@ -14,22 +14,22 @@ const { title, description, image = "/blog-placeholder-2.jpg" } = Astro.props;
 const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 ---
 
-{/* Global Metadata */}
+<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
-{/* Canonical URL */}
+<!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-{/* Primary Meta Tags */}
+<!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <SpeedInsights />
-{/* Open Graph / Facebook */}
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
@@ -37,22 +37,22 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
-{/* Twitter */}
+<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-{/* Alpine JS */}
+<!--Alpine JS -->
 
-{/* <script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script> */}
+<!--- <script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>-->
 
-{/* Start cookieyes banner */}
+<!-- Start cookieyes banner -->
 <link rel="preload" href="https://cdn-cookieyes.com/client_data/7c9d346cba70d365f135759e/script.js" as="script" />
-{/* End cookieyes banner */}
+<!-- End cookieyes banner -->
 
-{/* Google Tag Manager */}
+<!-- Google Tag Manager -->
 <script is:inline define:vars={{ TAGGIN_SERVER }}>
 	(function (w, d, s, l, i) {
 		w[l] = w[l] || [];
@@ -65,4 +65,4 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 		f.parentNode.insertBefore(j, f);
 	})(window, document, "script", "dataLayer", "GTM-W3Z34DZF");
 </script>
-{/* End Google Tag Manager */}
+<!-- End Google Tag Manager -->
