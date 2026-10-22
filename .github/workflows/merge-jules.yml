@@ -50,22 +50,22 @@ jobs:
           label: sentinel
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   merge-bolt:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-        pull-requests: write
-      if: >-
-        ${{
-          github.event_name == 'push' ||
-          github.event_name == 'workflow_dispatch' ||
-          (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'bolt'))
-        }}
-      steps:
-        - uses: actions/checkout@v4
-          with:
-            ref: main
-            fetch-depth: 0
-        - uses: bobvanderlinden/combine-pull-requests@86bb841267b2d5d8fb8513e9a0f0ce1fc4143a50
-          with:
-            label: bolt
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    if: >-
+      ${{
+        github.event_name == 'push' ||
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'bolt'))
+      }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: bobvanderlinden/combine-pull-requests@86bb841267b2d5d8fb8513e9a0f0ce1fc4143a50
+        with:
+          label: bolt
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
