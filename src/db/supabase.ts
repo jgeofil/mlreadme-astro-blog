@@ -1,8 +1,9 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseKey = import.meta.env.SUPABASE_KEY;
+const supabaseUrl =
+	import.meta.env.SUPABASE_URL || "https://placeholder.supabase.co";
+const supabaseKey = import.meta.env.SUPABASE_KEY || "placeholder";
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -176,6 +177,10 @@ const CACHE_TTL = 60 * 1000; // 1 minute TTL
 export async function getCachedSocials() {
 	if (socialsCache && Date.now() - socialsCacheTime < CACHE_TTL) {
 		return socialsCache;
+	}
+
+	if (!import.meta.env.SUPABASE_URL || !import.meta.env.SUPABASE_KEY) {
+		return { data: null, error: null };
 	}
 
 	if (socialsPromise) {
