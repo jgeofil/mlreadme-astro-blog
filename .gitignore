@@ -39,3 +39,5 @@ hyperui/**
 .envrc
 
 package-lock.json
+.vinext/
+.cloudflare/

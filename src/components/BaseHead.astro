@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import SpeedInsights from "@vercel/speed-insights/astro";
 //import mixpanel from 'mixpanel-browser'
 
 interface Props {
@@ -28,7 +27,6 @@ const TAGGIN_SERVER = "https://server-side-tagging-iefkv43amq-uc.a.run.app";
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<SpeedInsights />
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />

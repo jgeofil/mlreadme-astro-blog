@@ -1,10 +1,9 @@
 import {
   defineCollection,
   reference,
-  z,
   type CollectionEntry,
 } from "astro:content";
-
+import { z } from "astro/zod";
 import { file } from "astro/loaders";
 
 import { parse as parseToml } from "toml";
