@@ -38,4 +38,4 @@ parent = "machine-learning"
 [[sections]]
 id = "large-language-models"
 description = "A large language model (LLM) is a type of artificial intelligence (AI) program that can recognize and generate text, among other tasks."
-parent = "nlp"
+parent = "natural-language-processing"
